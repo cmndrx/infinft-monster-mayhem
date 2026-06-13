@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "infinft-card-game"
-  }
+  },
+  "targets": {
+    "infinft-card-game": {
+      "hosting": {
+        "dev": [
+          "monster-mayhem-dev"
+        ],
+        "prod": [
+          "monster-mayhem"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
