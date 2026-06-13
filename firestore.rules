@@ -1,0 +1,46 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+  
+      // Allow open read/write access to testLeaderboards
+    match /testLeaderboards/{docId} {
+      allow read, write: if true;
+    }
+
+  
+    // Helper function to check if user is authenticated
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    match /{col}/{cardId} {
+      allow read: if col in ["Character cards", "Infinity cards"] || isSignedIn();
+      // allow write, create: if isSignedIn();
+    }
+    
+    match /{document=**} {
+      allow read, write, create: if isSignedIn();
+    }
+    
+    match /users/{userId} {
+    allow read, write:  if true; //if isSignedIn(); //&& request.auth.uid == userId;
+
+    match /mail/{threadId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      match /messages/{messageId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+  }
+   match /collections_onboarding/{collectionId} {
+    allow read, write:  if true; 
+    }
+    
+    //   match /{document=**} {
+    //   allow read, write, create: if true;
+    // }
+  }
+}

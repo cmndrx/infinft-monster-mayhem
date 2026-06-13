@@ -1,0 +1,71 @@
+{
+  "rules": {
+    "presence": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "rooms": {
+      ".read": "auth != null",
+      "$roomId": {
+        ".write": "auth != null"
+      }
+    },
+    "roulette": {
+      ".read": "auth != null",
+
+      "jackpot": {
+        // Only allow server-side functions (or admins) to update jackpot.
+        // Regular users can read but not write directly.
+        ".write": "auth != null"
+      },
+
+      "sessions": {
+        "$uid": {
+          // Each user can only write to their own session
+          ".write": "auth != null"
+        }
+      }
+    },
+     "partyChats": {
+      "$partyId": {
+        ".read": true,
+        ".write": true,
+
+        "messages": {
+          ".indexOn": ["ts"],
+
+          "$messageId": {
+            "reactions": {
+              "$reactionKey": {
+                ".read": true,
+                ".write": true
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "lobbyChats": {
+      "$roomId": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+
+        "messages": {
+          ".indexOn": ["ts"],
+
+          "$messageId": {
+            "reactions": {
+              "$reactionKey": {
+                ".read": "auth != null",
+                ".write": "auth != null"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
