@@ -87,4 +87,4 @@ npm start
 ## 📄 License
 
 Do whatever you want with it. Bash responsibly.
-# infinft-monster-mayhem
+# infinft-infinft-monster-mayhem

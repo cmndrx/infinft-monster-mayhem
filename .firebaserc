@@ -6,10 +6,10 @@
     "infinft-card-game": {
       "hosting": {
         "dev": [
-          "monster-mayhem-dev"
+          "infinft-monster-mayhem-dev"
         ],
         "prod": [
-          "monster-mayhem"
+          "infinft-monster-mayhem"
         ]
       }
     }
