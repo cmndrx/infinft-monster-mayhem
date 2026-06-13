@@ -1,0 +1,10 @@
+# Local dev tooling (not needed to play the game)
+.claude/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
