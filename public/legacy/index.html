@@ -21,29 +21,55 @@
 
   /* ---------- HUD ---------- */
   #hud{position:absolute;inset:0;display:none}
-  #xpbarWrap{position:absolute;top:0;left:0;right:0;height:16px;background:#000a;border-bottom:2px solid #0008}
-  #xpbar{height:100%;width:0%;background:linear-gradient(90deg,#37c4ff,#7dff6a);box-shadow:0 0 12px #5be0ff88}
-  #lvlBadge{position:absolute;top:-2px;left:50%;transform:translateX(-50%);color:#fff;font-family:var(--display);font-size:15px;letter-spacing:1px;text-shadow:0 2px 0 #000}
-  #timer{position:absolute;top:26px;left:50%;transform:translateX(-50%);color:#fff;font-family:var(--display);font-size:40px;text-shadow:0 3px 0 #0009,0 0 24px #0006;letter-spacing:2px}
-  #stats{position:absolute;top:34px;right:16px;text-align:right;color:#fff;font-size:17px;font-weight:800;text-shadow:0 2px 0 #000;line-height:1.7}
-  #accountHud{position:absolute;top:112px;right:16px;max-width:240px;padding:10px 12px;border-radius:12px;background:linear-gradient(180deg,#000a,#0007);border:1px solid #ffffff22;color:#fff7df;font-size:12px;font-weight:800;line-height:1.55;text-align:right;text-shadow:0 1px 0 #000;backdrop-filter:blur(4px)}
-  #accountHud .name{display:block;color:#fff2aa;font-family:var(--display);font-size:15px;letter-spacing:1px}
-  #accountHud .metaLine{display:block;color:#fff7df}
-  #accountHud .syncNote{display:block;color:#ffd98d;font-size:11px}
-  #hpWrap{position:absolute;left:16px;bottom:16px;width:280px}
-  #hpOuter{height:26px;background:#000c;border:3px solid #000;border-radius:13px;overflow:hidden;box-shadow:0 4px 12px #0008}
-  #hpFill{height:100%;width:100%;background:linear-gradient(180deg,#ff8a76,#e8312a 60%,#b81f1a);border-radius:9px}
-  #hpText{color:#fff;font-family:var(--display);font-size:14px;text-shadow:0 2px 0 #000;margin-top:4px;letter-spacing:1px}
-  #weaponTray{position:absolute;left:16px;top:32px;display:flex;flex-direction:column;gap:5px}
-  .wslot{color:#fff;font-size:13px;font-weight:800;text-shadow:0 1px 0 #000;background:linear-gradient(180deg,#0009,#0006);padding:4px 10px;border-radius:8px;border:1px solid #ffffff26;backdrop-filter:blur(4px)}
-  .wslot .lvpips{color:var(--ui-yellow);letter-spacing:1px}
-  .ptray{display:flex;flex-wrap:wrap;gap:4px;max-width:250px;margin-top:2px}
-  .pchip{background:linear-gradient(180deg,#0009,#0006);border:1px solid #ffffff26;border-radius:8px;padding:2px 7px;color:#fff;font-size:14px;font-weight:800;text-shadow:0 1px 0 #000;backdrop-filter:blur(4px)}
-  #bossWrap{position:absolute;top:80px;left:50%;transform:translateX(-50%);width:440px;display:none}
-  #bossName{color:#ffb0b0;text-align:center;font-family:var(--display);font-size:16px;letter-spacing:3px;text-shadow:0 2px 0 #000;margin-bottom:3px}
-  #bossOuter{height:14px;background:#000c;border:2px solid #000;border-radius:7px;overflow:hidden}
-  #bossFill{height:100%;width:100%;background:linear-gradient(180deg,#ff5a6e,#c4102a);border-radius:5px}
-  #hint{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);color:#fffa;font-size:13px;font-weight:700;text-shadow:0 1px 2px #000}
+  #weaponHero{position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:14px;min-width:300px;max-width:360px;padding:12px 18px 12px 12px;border-radius:28px;background:linear-gradient(180deg,rgba(23,24,29,.94),rgba(17,17,22,.88));border:2px solid rgba(255,217,102,.58);box-shadow:0 14px 28px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(10px)}
+  #weaponHeroIcon{width:82px;height:82px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8d5bff,#4a2367 60%,#211226 100%);border:3px solid rgba(255,220,123,.78);box-shadow:0 0 0 4px rgba(255,255,255,.08),0 12px 20px rgba(0,0,0,.35);font-size:44px}
+  #weaponHeroBody{display:flex;flex-direction:column;gap:8px;min-width:0}
+  #weaponHeroName{color:#fff9ec;font-family:var(--body);font-size:20px;font-weight:900;line-height:1.05;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+  #weaponHeroPips{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .weaponPip{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.16);box-shadow:inset 0 2px 4px rgba(0,0,0,.35)}
+  .weaponPip.on{background:radial-gradient(circle at 30% 30%,#ffe88c,#ffbf22 70%,#e39208 100%);border-color:rgba(255,220,123,.9)}
+  .weaponHeroMeta{color:#cabff2;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+  #xpbarWrap{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:min(540px,44vw);height:18px;border-radius:999px;background:rgba(17,16,28,.84);border:2px solid rgba(255,224,133,.42);overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,.24),inset 0 2px 5px rgba(0,0,0,.34)}
+  #xpbar{height:100%;width:0%;background:linear-gradient(90deg,#8efc86,#49d45b 55%,#d0ff9d);box-shadow:0 0 14px rgba(142,252,134,.45)}
+  #lvlBadge{position:absolute;top:10px;left:50%;transform:translateX(-50%);padding:0 16px;min-width:84px;text-align:center;color:#fffaf0;font-family:var(--display);font-size:17px;letter-spacing:1px;text-shadow:0 2px 6px rgba(0,0,0,.5);z-index:1}
+  #timer{position:absolute;top:44px;left:50%;transform:translateX(-50%);min-width:236px;padding:10px 18px 12px;text-align:center;color:#fff;font-family:var(--display);font-size:58px;line-height:1;letter-spacing:2px;text-shadow:0 0 18px rgba(186,149,255,.45),0 3px 10px rgba(0,0,0,.56)}
+  #timer::before{content:'';position:absolute;inset:0;border-radius:28px;background:linear-gradient(180deg,rgba(22,22,31,.95),rgba(12,12,18,.88));border:2px solid rgba(255,221,110,.72);box-shadow:0 18px 30px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08);z-index:-1}
+  #timer::after{content:'✦';position:absolute;top:-18px;right:26px;color:#ffe799;font-size:14px;text-shadow:0 0 10px rgba(255,231,153,.65)}
+  #stats{position:absolute;top:18px;right:18px;display:grid;grid-template-columns:repeat(3,minmax(112px,1fr));gap:0;min-width:396px;padding:10px 14px;border-radius:24px;background:linear-gradient(180deg,rgba(28,29,33,.94),rgba(18,18,22,.88));border:2px solid rgba(255,255,255,.14);box-shadow:0 14px 28px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.06);backdrop-filter:blur(10px)}
+  .hudStat{display:flex;align-items:center;gap:10px;padding:4px 14px;border-right:1px solid rgba(255,255,255,.14)}
+  .hudStat:last-child{border-right:none}
+  .hudStatIcon{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;font-size:24px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+  .hudStatBody{display:flex;flex-direction:column;align-items:flex-start}
+  .hudStatLabel{color:#d8d1eb;font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+  .hudStatValue{color:#fff;font-family:var(--display);font-size:26px;line-height:1}
+  #accountHud{position:absolute;top:100px;right:18px;max-width:396px;padding:8px 14px;border-radius:16px;background:linear-gradient(180deg,rgba(28,29,33,.82),rgba(18,18,22,.72));border:1px solid rgba(255,255,255,.1);color:#f7f2e8;font-size:11px;font-weight:800;line-height:1.5;text-align:right;text-shadow:0 1px 0 rgba(0,0,0,.5);backdrop-filter:blur(8px)}
+  #accountHud .name{display:block;color:#fff0b4;font-family:var(--display);font-size:14px;letter-spacing:1px}
+  #accountHud .metaLine{display:block;color:#f5efe3}
+  #accountHud .syncNote{display:block;color:#c8f1a0;font-size:10px;text-transform:uppercase;letter-spacing:.8px}
+  #hpWrap{position:absolute;left:18px;bottom:22px;width:368px;padding:14px 16px;border-radius:28px;background:linear-gradient(180deg,rgba(21,22,28,.94),rgba(14,14,18,.88));border:2px solid rgba(255,219,102,.64);box-shadow:0 16px 28px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08)}
+  #hpOuter{position:relative;height:36px;background:rgba(16,16,22,.82);border:2px solid rgba(255,219,102,.2);border-radius:999px;overflow:hidden;box-shadow:inset 0 2px 5px rgba(0,0,0,.4)}
+  #hpFill{height:100%;width:100%;background:linear-gradient(180deg,#ff7d7d,#ff4f5d 58%,#d61d37);border-radius:999px;box-shadow:0 0 18px rgba(255,79,93,.38)}
+  #hpText{position:absolute;left:50%;top:18px;transform:translate(-50%,-50%);color:#fff;font-family:var(--display);font-size:19px;text-shadow:0 2px 7px rgba(0,0,0,.6);letter-spacing:1px;z-index:1}
+  #stamWrap{display:flex;align-items:center;gap:12px;margin-top:12px}
+  #stamWrap::before{content:'⚡';width:42px;height:42px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;background:linear-gradient(180deg,#302210,#1b160b);border:2px solid rgba(255,219,102,.38);color:#ffd54a;font-size:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+  #stamOuter{position:relative;height:22px;background:rgba(16,16,22,.82);border:2px solid rgba(255,219,102,.18);border-radius:999px;overflow:hidden;width:100%;box-shadow:inset 0 2px 5px rgba(0,0,0,.4)}
+  #stamFill{height:100%;width:100%;background:linear-gradient(180deg,#ffe47e,#ffc82f 58%,#e59f05);border-radius:999px;box-shadow:0 0 16px rgba(255,200,47,.34)}
+  #stamOuter.winded #stamFill{background:linear-gradient(180deg,#ff9f70,#ff6a42 58%,#de3b24)}
+  #weaponTray{position:absolute;right:18px;bottom:20px;display:grid;grid-template-columns:repeat(3,88px);gap:12px}
+  .wslot{position:relative;width:88px;height:108px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:linear-gradient(180deg,rgba(25,25,31,.94),rgba(17,17,22,.88));border:2px solid rgba(255,255,255,.12);box-shadow:0 12px 24px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.06);color:#fff;overflow:hidden}
+  .wslot.active{border-color:rgba(255,219,102,.9);box-shadow:0 0 0 3px rgba(164,102,255,.24),0 16px 28px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.08)}
+  .wslot.empty{opacity:.68}
+  .wslot.empty .slotIcon{color:rgba(255,255,255,.5)}
+  .slotIcon{font-size:42px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.34))}
+  .slotLevel{position:absolute;right:10px;bottom:10px;color:#fff;font-family:var(--display);font-size:20px;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+  .slotIndex{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);min-width:26px;padding:2px 8px;border-radius:8px;background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.12);color:#fffef5;font-size:14px;font-weight:900;line-height:1}
+  .ptray{display:none}
+  .pchip{display:none}
+  #bossWrap{position:absolute;top:128px;left:50%;transform:translateX(-50%);width:420px;display:none}
+  #bossName{color:#ffd8dc;text-align:center;font-family:var(--display);font-size:18px;letter-spacing:2px;text-shadow:0 2px 6px rgba(0,0,0,.55);margin-bottom:6px}
+  #bossOuter{height:16px;background:rgba(20,17,30,.84);border:2px solid rgba(255,132,150,.28);border-radius:999px;overflow:hidden;box-shadow:inset 0 2px 5px rgba(0,0,0,.4)}
+  #bossFill{height:100%;width:100%;background:linear-gradient(180deg,#ff8397,#e63857 60%,#ba1738);border-radius:999px;box-shadow:0 0 16px rgba(255,104,131,.32)}
+  #hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:16px;background:linear-gradient(180deg,rgba(22,26,22,.84),rgba(16,18,14,.82));border:1px solid rgba(255,255,255,.14);color:#fff7e7;font-size:13px;font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,.4);box-shadow:0 10px 18px rgba(0,0,0,.22);backdrop-filter:blur(8px)}
 
   /* ---------- damage numbers ---------- */
   .dmg{position:absolute;z-index:5;color:#fff;font-family:var(--display);font-size:17px;text-shadow:0 0 4px #000,0 2px 0 #000;pointer-events:none;will-change:transform,opacity;letter-spacing:1px}
@@ -86,22 +112,55 @@
   .upTag{margin-top:auto;font-size:11px;font-weight:900;color:#8a6e49;letter-spacing:3px}
 
   /* ---------- end screens ---------- */
-  .endTitle{font-family:var(--display);font-size:64px;letter-spacing:4px;text-shadow:0 4px 0 rgba(118,68,20,.32),0 12px 26px rgba(85,47,14,.22);margin-bottom:12px}
-  #deadTitle{color:var(--ui-red)}
-  #winTitle{color:var(--ui-green);transform:rotate(-2deg)}
-  .endStats{color:#fff6df;font-size:17px;font-weight:700;line-height:2.05;text-align:center;margin-bottom:32px;text-shadow:0 2px 8px rgba(85,47,14,.16)}
+  #deadScr,#winScr{
+    background:
+      radial-gradient(circle at 50% 22%, rgba(255,182,88,.38), rgba(255,182,88,0) 20%),
+      linear-gradient(180deg, rgba(21,14,52,.86), rgba(44,24,58,.78) 42%, rgba(35,20,36,.72) 100%),
+      url('./assets/dashboard-bg.png') center center / cover no-repeat;
+  }
+  .endShell{width:min(1180px,94vw);display:flex;flex-direction:column;align-items:center;gap:18px}
+  .endHero{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+  .endKicker{font-family:var(--display);font-size:18px;letter-spacing:4px;color:#ffd67d;text-shadow:0 2px 8px rgba(0,0,0,.32)}
+  .endTitle{font-family:var(--display);font-size:124px;line-height:.84;letter-spacing:3px;color:#ffbf2d;text-shadow:0 4px 0 #ff7e1e,0 10px 0 #b14410,0 26px 38px rgba(25,7,19,.3);margin:0}
+  .endSubtitle{font-family:var(--display);font-size:58px;line-height:.92;letter-spacing:2px;color:#f4ddff;text-shadow:0 4px 0 #7f44d0,0 12px 22px rgba(0,0,0,.3)}
+  .endStats{width:min(1050px,92vw);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:18px 26px;border-radius:24px;background:linear-gradient(180deg,rgba(38,21,68,.94),rgba(26,16,42,.92));border:1px solid rgba(255,255,255,.14);box-shadow:0 22px 40px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.06)}
   .endStats b{color:#fff}
+  .endSummaryItem{display:flex;align-items:center;gap:14px;padding:4px 20px;border-right:1px solid rgba(255,255,255,.12)}
+  .endSummaryItem:last-child{border-right:none}
+  .endSummaryIcon{font-size:52px;line-height:1;filter:drop-shadow(0 6px 10px rgba(0,0,0,.24))}
+  .endSummaryBody{display:flex;flex-direction:column;align-items:flex-start}
+  .endSummaryLabel{font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#efe8ff}
+  .endSummaryValue{font-family:var(--display);font-size:30px;line-height:1.05;color:#ffcf42}
+  .endSummaryValue.alt{color:#f0ddff}
+  .endSummaryValue.positive{color:#ffc53a}
+  .accountMeta.endMeta{width:min(860px,86vw);display:grid;grid-template-columns:122px minmax(200px,1fr) repeat(3,auto);gap:18px;align-items:center;margin:0;padding:18px 24px;border-radius:28px;background:linear-gradient(180deg,rgba(255,248,238,.98),rgba(248,236,216,.94));border:2px solid rgba(255,216,128,.58);box-shadow:0 22px 40px rgba(0,0,0,.2);color:#6a3811}
+  .endProfileAvatar{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#9f5cff,#6028aa 60%,#35154e 100%);border:4px solid #ffcb52;box-shadow:0 8px 18px rgba(0,0,0,.18);font-size:56px}
+  .endProfileMain{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .endProfileName{font-family:var(--display);font-size:42px;line-height:1;color:#8a4e11}
+  .endProfileSub{font-size:15px;font-weight:900;letter-spacing:.4px;color:#87592c}
+  .endProfileMetric{display:flex;flex-direction:column;gap:4px;padding-left:18px;border-left:1px solid rgba(106,56,17,.16)}
+  .endProfileMetricLabel{font-size:13px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#95653a}
+  .endProfileMetricValue{font-family:var(--display);font-size:24px;line-height:1;color:#6a3811}
+  .endSyncGood{color:#4c8b22}
+  .endProgressPanel{width:min(960px,88vw);display:grid;grid-template-columns:1fr 1fr;gap:0;padding:22px 26px;border-radius:28px;background:linear-gradient(180deg,rgba(38,21,68,.94),rgba(26,16,42,.92));border:1px solid rgba(255,255,255,.14);box-shadow:0 22px 40px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.06)}
+  .endProgressBlock{display:flex;align-items:flex-start;gap:18px;padding:4px 22px}
+  .endProgressBlock + .endProgressBlock{border-left:1px solid rgba(255,255,255,.12)}
+  .endProgressIcon{width:72px;height:72px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(180deg,#8c46d8,#6326a7);border:2px solid rgba(255,218,125,.56);box-shadow:0 12px 22px rgba(0,0,0,.18);font-size:36px;color:#fff5d8}
+  .endProgressText{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}
+  .endProgressLabel{font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#f0e8ff}
+  .endProgressValue{font-family:var(--display);font-size:40px;line-height:1;color:#ffca34}
+  .endProgressValue.alt{color:#a65cff}
+  .endProgressTrack{margin-top:8px;height:16px;border-radius:999px;background:rgba(15,11,26,.74);border:1px solid rgba(255,255,255,.14);overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.3)}
+  .endProgressFill{height:100%;width:0%;background:linear-gradient(90deg,#a144ff,#7d31ff 60%,#d590ff);border-radius:999px;box-shadow:0 0 14px rgba(161,68,255,.38)}
+  .endProgressMeta{display:flex;justify-content:space-between;gap:16px;font-size:14px;font-weight:900;color:#efe4ff}
+  .endActions{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;width:min(1060px,92vw)}
+  .endActions .bigBtn,.endActions .bigBtn.secondary{flex:1 1 0;min-width:240px;text-align:center}
   #pauseScr .endTitle{color:#fef0b7}
   #vignette{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 180px #a0000088,inset 0 0 80px #60000066;opacity:0;transition:opacity .25s}
 
   /* ---------- stamina ---------- */
-  #stamWrap{margin-top:6px}
-  #stamOuter{height:12px;background:#000c;border:2px solid #000;border-radius:7px;overflow:hidden;width:230px}
-  #stamFill{height:100%;width:100%;background:linear-gradient(180deg,#ffe87a,#f5b50b);border-radius:5px}
-  #stamOuter.winded #stamFill{background:linear-gradient(180deg,#ff8a76,#d8312a)}
-
   /* ---------- combo counter ---------- */
-  #combo{position:absolute;top:96px;right:18px;font-family:var(--display);font-size:32px;color:#ffd23e;text-shadow:0 3px 0 #000,0 0 18px #ffd23e55;display:none;transition:transform .1s;z-index:2}
+  #combo{position:absolute;top:122px;right:24px;font-family:var(--display);font-size:28px;color:#ffd23e;text-shadow:0 3px 0 #000,0 0 18px #ffd23e55;display:none;transition:transform .1s;z-index:2;text-align:right}
 
   /* ---------- boss / elite banner ---------- */
   #banner{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%) scale(0);font-family:var(--display);font-size:56px;color:#ff5a5a;text-shadow:0 4px 0 #4a0000,0 10px 30px #000;letter-spacing:8px;opacity:0;pointer-events:none;z-index:25;white-space:nowrap}
@@ -443,6 +502,14 @@
   <div id="vignette"></div>
 
   <div id="hud">
+    <div id="weaponHero">
+      <div id="weaponHeroIcon">🪃</div>
+      <div id="weaponHeroBody">
+        <div id="weaponHeroName">Boomerang</div>
+        <div id="weaponHeroPips"></div>
+        <div class="weaponHeroMeta">Primary weapon</div>
+      </div>
+    </div>
     <div id="xpbarWrap"><div id="xpbar"></div></div>
     <div id="lvlBadge">LV 1</div>
     <div id="timer">0:00</div>
@@ -564,25 +631,38 @@
   </div>
 
   <div class="screen" id="deadScr">
-    <div class="endTitle" id="deadTitle">MAYHEM WINS THIS ROUND</div>
-    <div class="endStats" id="deadStats"></div>
-    <div class="accountMeta endMeta" id="deadMeta"></div>
-    <div class="accountActions"><button class="logoutBtn" id="deadLogoutBtn" type="button">LOG OUT</button></div>
-    <div class="btnRow">
-      <button class="bigBtn" id="retryBtn">TRY AGAIN</button>
-      <button class="bigBtn secondary" id="deadShopBtn">UPGRADES</button>
-      <button class="bigBtn secondary" id="deadMenuBtn">RETURN TO DASHBOARD</button>
+      <div class="endShell">
+      <div class="endHero">
+        <div class="endKicker">INFINFT MONSTER MAYHEM</div>
+        <div class="endTitle">MAYHEM</div>
+        <div class="endSubtitle" id="deadTitle">WINS THIS ROUND</div>
+      </div>
+      <div class="endStats" id="deadStats"></div>
+      <div class="accountMeta endMeta" id="deadMeta"></div>
+      <div class="endProgressPanel" id="deadProgress"></div>
+      <div class="endActions">
+        <button class="bigBtn" id="retryBtn">TRY AGAIN</button>
+        <button class="bigBtn secondary" id="deadShopBtn">UPGRADES</button>
+        <button class="bigBtn secondary" id="deadMenuBtn">RETURN TO DASHBOARD</button>
+      </div>
     </div>
   </div>
 
   <div class="screen" id="winScr">
-    <div class="endTitle" id="winTitle">MONSTER MAYHEM CONQUERED</div>
-    <div class="endStats" id="winStats"></div>
-    <div class="accountMeta endMeta" id="winMeta"></div>
-    <div class="accountActions"><button class="logoutBtn" id="winLogoutBtn" type="button">LOG OUT</button></div>
-    <div class="btnRow">
-      <button class="bigBtn" id="winBtn">ONE MORE RUN</button>
-      <button class="bigBtn secondary" id="winShopBtn">UPGRADES</button>
+    <div class="endShell">
+      <div class="endHero">
+        <div class="endKicker">INFINFT MONSTER MAYHEM</div>
+        <div class="endTitle">MONSTER</div>
+        <div class="endSubtitle" id="winTitle">MAYHEM CONQUERED</div>
+      </div>
+      <div class="endStats" id="winStats"></div>
+      <div class="accountMeta endMeta" id="winMeta"></div>
+      <div class="endProgressPanel" id="winProgress"></div>
+      <div class="endActions">
+        <button class="bigBtn" id="winBtn">ONE MORE RUN</button>
+        <button class="bigBtn secondary" id="winShopBtn">UPGRADES</button>
+        <button class="bigBtn secondary" id="winLogoutBtn" type="button">LOG OUT</button>
+      </div>
     </div>
   </div>
 
@@ -896,6 +976,10 @@ function buildAccountMetaHtml() {
 
   return {
     name: getAccountUsername(),
+    totalRuns,
+    totalKills,
+    totalWins,
+    bestRunLabel,
     statsLineOne: `Runs ${totalRuns} · Kills ${totalKills}`,
     statsLineTwo: `Wins ${totalWins} · Best ${bestRunLabel}`,
     syncNote: !cloudState.user
@@ -904,6 +988,95 @@ function buildAccountMetaHtml() {
         ? `${pendingRuns} run${pendingRuns === 1 ? '' : 's'} pending sync`
         : 'Cloud sync ready',
   };
+}
+
+function getMayhemRankData() {
+  const totalKills = Number(cloudState.profile?.totalKills || 0);
+  const totalWins = Number(cloudState.profile?.totalWins || 0);
+  const rp = totalKills + totalWins * 120;
+  const tiers = [
+    { name: 'Rookie I', goal: 300 },
+    { name: 'Rookie II', goal: 900 },
+    { name: 'Brawler I', goal: 1800 },
+    { name: 'Brawler II', goal: 3200 },
+    { name: 'Slayer I', goal: 5200 },
+    { name: 'Slayer II', goal: 7800 },
+    { name: 'Legend', goal: 12000 },
+  ];
+  let current = tiers[0];
+  let previousGoal = 0;
+  for (const tier of tiers) {
+    if (rp >= tier.goal) {
+      previousGoal = tier.goal;
+      current = tier;
+      continue;
+    }
+    current = tier;
+    break;
+  }
+  const activeIndex = tiers.findIndex(t => t.name === current.name);
+  const threshold = current.goal;
+  const base = activeIndex > 0 ? tiers[activeIndex - 1].goal : 0;
+  const pct = threshold > base ? Math.max(0, Math.min(100, ((rp - base) / (threshold - base)) * 100)) : 100;
+  return { name: current.name, rp, threshold, pct };
+}
+
+function buildEndProgressHtml() {
+  const totalKills = Number(cloudState.profile?.totalKills || 0);
+  const totalWins = Number(cloudState.profile?.totalWins || 0);
+  const dashboardLevel = Math.max(1, Math.floor(totalKills / 120) + totalWins + 1);
+  const levelBase = Math.max(0, (dashboardLevel - 1) * 120);
+  const xpInLevel = Math.max(0, totalKills - levelBase);
+  const xpGoal = 120;
+  const xpPct = Math.max(0, Math.min(100, xpInLevel / xpGoal * 100));
+  const rank = getMayhemRankData();
+  return `
+    <div class="endProgressBlock">
+      <div class="endProgressIcon">⭐</div>
+      <div class="endProgressText">
+        <div class="endProgressLabel">XP Earned</div>
+        <div class="endProgressValue">+${Math.max(60, Math.round(G.kills + G.t * 2))} XP</div>
+        <div class="endProgressTrack"><div class="endProgressFill" style="width:${xpPct}%"></div></div>
+        <div class="endProgressMeta"><span>Level ${dashboardLevel}</span><span>${xpInLevel} / ${xpGoal} XP</span></div>
+      </div>
+    </div>
+    <div class="endProgressBlock">
+      <div class="endProgressIcon">👑</div>
+      <div class="endProgressText">
+        <div class="endProgressLabel">Mayhem Rank</div>
+        <div class="endProgressValue alt">${rank.name}</div>
+        <div class="endProgressTrack"><div class="endProgressFill" style="width:${rank.pct}%"></div></div>
+        <div class="endProgressMeta"><span>Rank progress</span><span>${rank.rp} / ${rank.threshold} RP</span></div>
+      </div>
+    </div>
+  `;
+}
+
+function renderEndMetaCard(targetId) {
+  const el = document.getElementById(targetId);
+  if (!el) return;
+  const meta = buildAccountMetaHtml();
+  const avatarEmoji = CHARACTERS[chosenChar]?.emoji || '👾';
+  const syncClass = meta.syncNote.toLowerCase().includes('ready') ? 'endSyncGood' : '';
+  el.innerHTML = `
+    <div class="endProfileAvatar">${avatarEmoji}</div>
+    <div class="endProfileMain">
+      <div class="endProfileName">${meta.name}</div>
+      <div class="endProfileSub">${meta.statsLineTwo}</div>
+    </div>
+    <div class="endProfileMetric">
+      <div class="endProfileMetricLabel">Runs</div>
+      <div class="endProfileMetricValue">${meta.totalRuns}</div>
+    </div>
+    <div class="endProfileMetric">
+      <div class="endProfileMetricLabel">Kills</div>
+      <div class="endProfileMetricValue">${meta.totalKills}</div>
+    </div>
+    <div class="endProfileMetric">
+      <div class="endProfileMetricLabel">Sync</div>
+      <div class="endProfileMetricValue ${syncClass}">${meta.syncNote}</div>
+    </div>
+  `;
 }
 
 function renderAccountUi() {
@@ -931,13 +1104,15 @@ function renderAccountUi() {
 
   const accountHud = document.getElementById('accountHud');
   const menuProfile = document.getElementById('menuProfile');
-  const deadMeta = document.getElementById('deadMeta');
-  const winMeta = document.getElementById('winMeta');
+  const deadProgress = document.getElementById('deadProgress');
+  const winProgress = document.getElementById('winProgress');
 
   if (accountHud) accountHud.innerHTML = compactMarkup;
   if (menuProfile) menuProfile.innerHTML = compactMarkup;
-  if (deadMeta) deadMeta.innerHTML = compactMarkup;
-  if (winMeta) winMeta.innerHTML = compactMarkup;
+  renderEndMetaCard('deadMeta');
+  renderEndMetaCard('winMeta');
+  if (deadProgress) deadProgress.innerHTML = buildEndProgressHtml();
+  if (winProgress) winProgress.innerHTML = buildEndProgressHtml();
 
   const topProfileName = document.getElementById('topProfileName');
   const topProfileLevel = document.getElementById('topProfileLevel');
@@ -3246,26 +3421,57 @@ function pickCard() {
 function refreshWeaponTray() {
   const tray = document.getElementById('weaponTray');
   tray.innerHTML = '';
-  for (const id in P.weapons) {
-    const lvl = P.weapons[id], max = WEAPONS[id].max;
-    const d = document.createElement('div');
-    d.className = 'wslot';
-    d.innerHTML = `${WEAPONS[id].emoji} ${WEAPONS[id].name} <span class="lvpips">${'●'.repeat(lvl)}${'○'.repeat(max - lvl)}</span>`;
-    tray.appendChild(d);
-  }
-  const ids = Object.keys(P.passives);
-  if (ids.length) {
-    const row = document.createElement('div');
-    row.className = 'ptray';
-    for (const id of ids) {
-      const ps = PASSIVES.find(p => p.id === id);
-      const chip = document.createElement('div');
-      chip.className = 'pchip';
-      chip.textContent = ps.emoji + (P.passives[id] > 1 ? '×' + P.passives[id] : '');
-      chip.title = ps.name + ' — ' + ps.desc;
-      row.appendChild(chip);
+  const weaponIds = Object.keys(P.weapons);
+  const passiveIds = Object.keys(P.passives);
+  const featuredId = weaponIds[0] || null;
+  const heroIcon = document.getElementById('weaponHeroIcon');
+  const heroName = document.getElementById('weaponHeroName');
+  const heroPips = document.getElementById('weaponHeroPips');
+  if (featuredId) {
+    const featuredWeapon = WEAPONS[featuredId];
+    const featuredLevel = P.weapons[featuredId];
+    heroIcon.textContent = featuredWeapon.emoji;
+    heroName.textContent = featuredWeapon.name;
+    heroPips.innerHTML = '';
+    for (let i = 0; i < featuredWeapon.max; i++) {
+      const pip = document.createElement('span');
+      pip.className = 'weaponPip' + (i < featuredLevel ? ' on' : '');
+      heroPips.appendChild(pip);
     }
-    tray.appendChild(row);
+  } else {
+    heroIcon.textContent = '❔';
+    heroName.textContent = 'No weapon';
+    heroPips.innerHTML = '';
+  }
+
+  const slots = [];
+  for (const id of weaponIds) {
+    slots.push({
+      emoji: WEAPONS[id].emoji,
+      level: P.weapons[id],
+      title: `${WEAPONS[id].name} Lv ${P.weapons[id]}`,
+      active: id === featuredId,
+    });
+  }
+  for (const id of passiveIds) {
+    const ps = PASSIVES.find(p => p.id === id);
+    slots.push({
+      emoji: ps?.emoji || '✨',
+      level: P.passives[id],
+      title: `${ps?.name || id} x${P.passives[id]}`,
+      active: false,
+    });
+  }
+
+  for (let i = 0; i < 3; i++) {
+    const slot = slots[i];
+    const d = document.createElement('div');
+    d.className = 'wslot' + (slot ? (slot.active ? ' active' : '') : ' empty');
+    d.title = slot ? slot.title : 'Locked slot';
+    d.innerHTML = slot
+      ? `<span class="slotIcon">${slot.emoji}</span><span class="slotLevel">x${slot.level}</span><span class="slotIndex">${i + 1}</span>`
+      : `<span class="slotIcon">🔒</span><span class="slotIndex">${i + 1}</span>`;
+    tray.appendChild(d);
   }
   emitHudState(true);
 }
@@ -3692,9 +3898,35 @@ function fmtTime(t) {
 }
 
 function endStatsHTML() {
-  return `survived <b>${fmtTime(G.t)}</b> · level <b>${P.level}</b><br>` +
-         `cubes bashed: <b>${G.kills}</b> · gems eaten: <b>${G.gemsBank}</b><br>` +
-         `🪙 banked <b>+${G.earned}</b> coins · total <b>${save.coins}</b>`;
+  return `
+    <div class="endSummaryItem">
+      <div class="endSummaryIcon">⏱️</div>
+      <div class="endSummaryBody">
+        <div class="endSummaryLabel">Survived</div>
+        <div class="endSummaryValue">${fmtTime(G.t)}</div>
+      </div>
+    </div>
+    <div class="endSummaryItem">
+      <div class="endSummaryIcon">🛡️</div>
+      <div class="endSummaryBody">
+        <div class="endSummaryLabel">Level</div>
+        <div class="endSummaryValue alt">${P.level}</div>
+      </div>
+    </div>
+    <div class="endSummaryItem">
+      <div class="endSummaryIcon">🧱</div>
+      <div class="endSummaryBody">
+        <div class="endSummaryLabel">Cubes Bashed</div>
+        <div class="endSummaryValue alt">${G.kills}</div>
+      </div>
+    </div>
+    <div class="endSummaryItem">
+      <div class="endSummaryIcon">🪙</div>
+      <div class="endSummaryBody">
+        <div class="endSummaryLabel">Coins</div>
+        <div class="endSummaryValue positive">+${G.earned}</div>
+      </div>
+    </div>`;
 }
 
 function bankCurrentRunRewards() {
@@ -3774,8 +4006,10 @@ function gameOver(won) {
   document.getElementById('retryBtn').onclick = startGame;
   document.getElementById('winBtn').onclick = startGame;
   document.getElementById('menuLogoutBtn').onclick = logoutToApp;
-  document.getElementById('deadLogoutBtn').onclick = logoutToApp;
-  document.getElementById('winLogoutBtn').onclick = logoutToApp;
+  const deadLogoutBtn = document.getElementById('deadLogoutBtn');
+  const winLogoutBtn = document.getElementById('winLogoutBtn');
+  if (deadLogoutBtn) deadLogoutBtn.onclick = logoutToApp;
+  if (winLogoutBtn) winLogoutBtn.onclick = logoutToApp;
   setStartButtonsDisabled(true, 'LOADING AVATAR...');
   initializeCloudProgress();
   emitHudState(true);
@@ -4132,9 +4366,31 @@ function tick(now) {
     /* --- HUD (DOM writes only on change) --- */
     const tSec = Math.floor(G.t);
     if (tSec !== G._lastSec) { G._lastSec = tSec; hudTimer.textContent = fmtTime(G.t); }
-    if (G.kills !== G._lastKills || G.gold !== G._lastGold) {
+    if (G.kills !== G._lastKills || G.gold !== G._lastGold || tSec !== G._lastStatsSec) {
       G._lastKills = G.kills; G._lastGold = G.gold;
-      hudStats.innerHTML = `☠️ ${G.kills}<br>💰 ${G.gold}`;
+      G._lastStatsSec = tSec;
+      hudStats.innerHTML = `
+        <div class="hudStat">
+          <div class="hudStatIcon">☠️</div>
+          <div class="hudStatBody">
+            <div class="hudStatLabel">Kills</div>
+            <div class="hudStatValue">${G.kills}</div>
+          </div>
+        </div>
+        <div class="hudStat">
+          <div class="hudStatIcon">🪙</div>
+          <div class="hudStatBody">
+            <div class="hudStatLabel">Coins</div>
+            <div class="hudStatValue">${G.gold}</div>
+          </div>
+        </div>
+        <div class="hudStat">
+          <div class="hudStatIcon">🔥</div>
+          <div class="hudStatBody">
+            <div class="hudStatLabel">Survived</div>
+            <div class="hudStatValue">${fmtTime(G.t)}</div>
+          </div>
+        </div>`;
     }
     hudXp.style.width = (P.xp / P.xpNext * 100) + '%';
     if (P.level !== G._lastLvl) { G._lastLvl = P.level; hudLvl.textContent = 'LV ' + P.level; }
