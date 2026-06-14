@@ -191,7 +191,7 @@
   .syncCardTitle{font-family:var(--display);font-size:22px;color:#fff7e8}
   .syncCardStatus{font-size:15px;font-weight:900;color:#96ea67}
   .syncCardIcon{font-size:28px}
-  .menuHeroWrap{grid-column:2;grid-row:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;align-self:end;justify-self:center;width:min(100%,980px);position:relative;z-index:1}
+  .menuHeroWrap{grid-column:1 / span 2;grid-row:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;align-self:end;justify-self:center;width:min(100%,980px);position:relative;z-index:1}
   .heroEyebrow{font-family:var(--display);font-size:34px;letter-spacing:3px;color:#fff8dd;text-shadow:0 6px 18px rgba(13,7,32,.5)}
   .heroEyebrow .gem{color:#d976ff;margin:0 12px}
   .title.dashboardTitle{margin:0;font-size:118px;line-height:.86;text-align:center;letter-spacing:3px;transform:none;animation:none;filter:drop-shadow(0 24px 26px rgba(22,8,4,.34))}
@@ -201,7 +201,7 @@
   .menuPrimaryAction:hover{transform:translateY(-2px) scale(1.01)}
   .menuPrimaryAction:disabled{opacity:.7;transform:none;cursor:default}
   .menuPrimaryCost{position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);padding:6px 16px;border-radius:999px;background:linear-gradient(180deg,#916230,#734314);color:#fff9e7;font-size:18px;letter-spacing:1px;box-shadow:0 6px 14px rgba(0,0,0,.2)}
-  .menuChooser{grid-column:2;grid-row:3;display:flex;flex-direction:column;align-items:center;justify-self:center;gap:16px;width:min(100%,980px);position:relative;z-index:1}
+  .menuChooser{grid-column:1 / span 2;grid-row:3;display:flex;flex-direction:column;align-items:center;justify-self:center;gap:16px;width:min(100%,980px);position:relative;z-index:1}
   .chooseLabel{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:32px;color:#fff8dd;letter-spacing:1px;text-shadow:0 6px 18px rgba(13,7,32,.5)}
   .chooseLabel .spark{color:#ffd34d}
   .charRow.dashboardRow{gap:16px;margin:0}
@@ -3768,7 +3768,7 @@ function gameOver(won) {
   });
   const locked = document.createElement('div');
   locked.className = 'charCard charCardWrap locked';
-  locked.innerHTML = `<div class="charBadge">🔒</div><div class="charEmoji">👤</div><div class="charName">SPIKE</div><div class="charDesc">Unlocked at Level 12.<br>High damage specialist.</div>`;
+  locked.innerHTML = `<div class="charBadge">🔒</div><div class="charEmoji">👤</div><div class="charName">CO-OP</div><div class="charDesc">Coming soon.<br>Team up for mayhem.</div>`;
   row.appendChild(locked);
   document.getElementById('startBtn').onclick = startGame;
   document.getElementById('retryBtn').onclick = startGame;
