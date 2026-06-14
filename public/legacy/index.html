@@ -262,6 +262,7 @@
   .menuPrimaryAction:disabled{opacity:.7;transform:none;cursor:default}
   .menuPrimaryCost{position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);padding:6px 16px;border-radius:999px;background:linear-gradient(180deg,#916230,#734314);color:#fff9e7;font-size:18px;letter-spacing:1px;box-shadow:0 6px 14px rgba(0,0,0,.2)}
   .menuChooser{grid-column:1 / span 2;grid-row:3;display:flex;flex-direction:column;align-items:center;justify-self:center;gap:16px;width:min(100%,980px);position:relative;z-index:1}
+  .menuChooser.selectorFocus{animation:selectorPulse 1s ease}
   .chooseLabel{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:32px;color:#fff8dd;letter-spacing:1px;text-shadow:0 6px 18px rgba(13,7,32,.5)}
   .chooseLabel .spark{color:#ffd34d}
   .charRow.dashboardRow{gap:16px;margin:0}
@@ -280,6 +281,11 @@
   .navBtn .navIcon{font-size:30px}
   .navBtn.active{background:linear-gradient(180deg,rgba(255,201,54,.22),rgba(255,178,34,.14));box-shadow:inset 0 0 0 2px rgba(255,214,89,.75)}
   .navBtn.disabled{opacity:.46;cursor:default}
+  @keyframes selectorPulse{
+    0%{transform:translateY(0);filter:drop-shadow(0 0 0 rgba(255,226,76,0))}
+    35%{transform:translateY(-3px);filter:drop-shadow(0 0 24px rgba(255,226,76,.55))}
+    100%{transform:translateY(0);filter:drop-shadow(0 0 0 rgba(255,226,76,0))}
+  }
 
   @media (max-width: 1200px){
     .menuShell{grid-template-columns:1fr;grid-template-rows:auto auto auto auto}
@@ -1047,7 +1053,7 @@
         </button>
       </section>
 
-      <section class="menuChooser">
+      <section class="menuChooser" id="menuChooser">
         <div class="chooseLabel"><span class="spark">✦</span> CHOOSE YOUR BASHER <span class="spark">✦</span></div>
         <div class="charRow dashboardRow" id="charRow"></div>
         <div class="mobileCharDots" aria-hidden="true"><span class="active"></span><span></span><span></span></div>
@@ -1056,7 +1062,7 @@
       <nav class="menuBottomNav">
         <button class="navBtn active" type="button" id="navHomeBtn"><span class="navIcon">🏠</span><span>HOME</span></button>
         <button class="navBtn" type="button" id="shopBtn"><span class="navIcon">⏫</span><span>UPGRADES</span></button>
-        <button class="navBtn disabled" type="button" id="loadoutBtn"><span class="navIcon">🛡️</span><span>LOADOUT</span></button>
+        <button class="navBtn" type="button" id="loadoutBtn"><span class="navIcon">🛡️</span><span>LOADOUT</span></button>
         <button class="navBtn" type="button" id="leaderboardBtn"><span class="navIcon">📊</span><span>LEADERBOARD</span></button>
         <button class="navBtn disabled" type="button" id="storeBtn"><span class="navIcon">🛒</span><span>STORE</span></button>
       </nav>
@@ -1140,12 +1146,14 @@
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+  "@pixiv/three-vrm": "https://cdn.jsdelivr.net/npm/@pixiv/three-vrm@3/lib/three-vrm.module.min.js"
 } }
 </script>
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { VRMLoaderPlugin } from '@pixiv/three-vrm';
 import { clone as cloneSkeleton } from 'three/addons/utils/SkeletonUtils.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -2410,16 +2418,88 @@ scene.add(motes);
 ============================================================ */
 const CHARACTERS = [
   { id:'zippy', emoji:'🪃', name:'ZIPPY',  desc:'Fast skirmisher.<br>Starts with Boomerang.',                 hp:90,  speed:10.0, weapon:'boomerang',
-    shirt:0x3aa8e8, pants:0x2c3e66, hair:0xf2e23e, band:0xff5577, build:0.9 },
+    shirt:0x3aa8e8, pants:0x2c3e66, hair:0xf2e23e, band:0xff5577, build:0.9, badge:'★', modelId:'duck' },
   { id:'chonk', emoji:'💀', name:'CHONK',  desc:'Durable bruiser.<br>Starts with Bash Orbs.',                hp:145, speed:7.8, weapon:'orbs',
-    shirt:0x8a93a8, pants:0x3a3f52, hair:0x2a2a33, band:0x7dff6a, build:1.18 },
+    shirt:0x8a93a8, pants:0x3a3f52, hair:0x2a2a33, band:0x7dff6a, build:1.18, modelId:'duck' },
+  { id:'banana', emoji:'🍌', name:'BANANA', desc:'Brainpunk striker.<br>Starts with Sky Zapper.',            hp:112, speed:9.1, weapon:'lightning',
+    shirt:0xcfe95a, pants:0x5a2767, hair:0x8e42ff, band:0x2af3d5, build:1.02, badge:'⚡', modelId:'banana' },
+  { id:'skelly', emoji:'💀', name:'SKELLY', desc:'VRM bone lord.<br>Starts with Cube Cannon.',               hp:104, speed:9.4, weapon:'rail',
+    shirt:0xd9e6ff, pants:0x56426f, hair:0x8ef3ff, band:0xff6a9d, build:1.0, badge:'☠', modelId:'skelly' },
 ];
 let chosenChar = 0;
-const PLAYER_MODEL_URL = './assets/Meshy_AI_Punk_Racer_Duck_biped/Meshy_AI_Punk_Racer_Duck_biped_Character_output.glb';
-const PLAYER_RUN_URL = './assets/Meshy_AI_Punk_Racer_Duck_biped/Meshy_AI_Punk_Racer_Duck_biped_Animation_Running_withSkin.glb';
+const CHARACTER_MODELS = {
+  duck: {
+    id: 'duck',
+    kind: 'gltf',
+    sceneUrl: './assets/Meshy_AI_Punk_Racer_Duck_biped/Meshy_AI_Punk_Racer_Duck_biped_Character_output.glb',
+    runUrl: './assets/Meshy_AI_Punk_Racer_Duck_biped/Meshy_AI_Punk_Racer_Duck_biped_Animation_Running_withSkin.glb',
+    targetHeight: 0.85,
+  },
+  banana: {
+    id: 'banana',
+    kind: 'gltf',
+    sceneUrl: './assets/Meshy_AI_Banana_Brainpunk_Drag_biped/Meshy_AI_Banana_Brainpunk_Drag_biped_Animation_Running_withSkin.glb',
+    runUrl: './assets/Meshy_AI_Banana_Brainpunk_Drag_biped/Meshy_AI_Banana_Brainpunk_Drag_biped_Animation_Running_withSkin.glb',
+    targetHeight: 0.9,
+  },
+  skelly: {
+    id: 'skelly',
+    kind: 'vrm',
+    sceneUrl: './assets/Skelly.vrm',
+    targetHeight: 0.94,
+    facingY: Math.PI,
+  },
+};
+const MODEL_BONE_NAMES = {
+  attack: ['RightHand', 'RightForeArm', 'RightArm'],
+  spine: ['Spine', 'Spine01', 'Spine02', 'Hips'],
+  head: ['Head', 'neck', 'headfront'],
+};
 const playerModelLoader = new GLTFLoader();
-let playerRigAssets = null;
-let playerModelPromise = null;
+const playerRigAssets = new Map();
+const playerModelPromises = new Map();
+
+function createCharacterLoader(modelConfig = null) {
+  const loader = new GLTFLoader();
+  if (modelConfig?.kind === 'vrm') {
+    loader.register(parser => new VRMLoaderPlugin(parser));
+  }
+  return loader;
+}
+
+function captureTransformState(obj) {
+  return {
+    rotation: obj.rotation.clone(),
+    position: obj.position.clone(),
+    scale: obj.scale.clone(),
+  };
+}
+
+function applyTransformState(obj, state) {
+  if (!obj || !state) return;
+  obj.rotation.copy(state.rotation);
+  obj.position.copy(state.position);
+  obj.scale.copy(state.scale);
+}
+
+function getCharacterModelConfig(character = CHARACTERS[chosenChar]) {
+  return character?.modelId ? (CHARACTER_MODELS[character.modelId] || null) : null;
+}
+
+function hasCharacterModelReady(character = CHARACTERS[chosenChar]) {
+  const modelConfig = getCharacterModelConfig(character);
+  return !modelConfig || playerRigAssets.has(modelConfig.id);
+}
+
+function getCharacterRigAssets(character = CHARACTERS[chosenChar]) {
+  const modelConfig = getCharacterModelConfig(character);
+  return modelConfig ? (playerRigAssets.get(modelConfig.id) || null) : null;
+}
+
+function updateCharacterModelReadyState() {
+  bootState.modelReady = hasCharacterModelReady();
+  refreshStartAvailability();
+}
 
 function refreshCharacterSelectionUI() {
   document.querySelectorAll('.charCard').forEach((el, index) => {
@@ -2431,6 +2511,14 @@ function setChosenCharacter(index, opts = {}) {
   if (index < 0 || index >= CHARACTERS.length) return;
   chosenChar = index;
   refreshCharacterSelectionUI();
+  renderAccountUi();
+  updateCharacterModelReadyState();
+  if (!bootState.modelReady) {
+    loadPlayerModel(CHARACTERS[chosenChar]).then(() => {
+      updateCharacterModelReadyState();
+      emitHudState(true);
+    });
+  }
   if (!opts.silent) queueCloudProfileSync('avatar-change');
   emitHudState(true);
 }
@@ -2452,6 +2540,16 @@ function setStartButtonsDisabled(disabled, label) {
   }
 }
 
+function focusCharacterSelector() {
+  const chooser = document.getElementById('menuChooser');
+  if (!chooser) return;
+  chooser.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  chooser.classList.remove('selectorFocus');
+  void chooser.offsetWidth;
+  chooser.classList.add('selectorFocus');
+  setTimeout(() => chooser.classList.remove('selectorFocus'), 1000);
+}
+
 function refreshStartAvailability() {
   if (!bootState.modelReady) {
     setStartButtonsDisabled(true, 'LOADING AVATAR...');
@@ -2466,50 +2564,72 @@ function refreshStartAvailability() {
   setStartButtonsDisabled(false);
 }
 
-function loadPlayerModel() {
-  if (playerRigAssets) return Promise.resolve(playerRigAssets);
-  if (playerModelPromise) return playerModelPromise;
+function loadPlayerModel(character = CHARACTERS[chosenChar]) {
+  const modelConfig = getCharacterModelConfig(character);
+  if (!modelConfig) return Promise.resolve(null);
+  if (playerRigAssets.has(modelConfig.id)) return Promise.resolve(playerRigAssets.get(modelConfig.id) || null);
+  if (playerModelPromises.has(modelConfig.id)) return playerModelPromises.get(modelConfig.id);
+  const loader = createCharacterLoader(modelConfig);
   const loadGltf = url => new Promise((resolve, reject) => {
-    playerModelLoader.load(url, resolve, undefined, reject);
+    loader.load(url, resolve, undefined, reject);
   });
-  playerModelPromise = Promise.all([
-    loadGltf(PLAYER_MODEL_URL),
-    loadGltf(PLAYER_RUN_URL),
-  ]).then(([baseGltf, runGltf]) => {
-    const character = baseGltf.scene;
-    character.traverse(obj => {
+  const urls = modelConfig.runUrl && modelConfig.runUrl !== modelConfig.sceneUrl
+    ? [modelConfig.sceneUrl, modelConfig.runUrl]
+    : [modelConfig.sceneUrl];
+  const playerModelPromise = Promise.all(urls.map(loadGltf)).then(gltfs => {
+    const baseGltf = gltfs[0];
+    const runGltf = gltfs[gltfs.length - 1];
+    const vrm = baseGltf.userData?.vrm || null;
+    const modelScene = vrm?.scene || baseGltf.scene;
+    modelScene.traverse(obj => {
       if (!obj.isMesh) return;
       obj.castShadow = true;
       obj.receiveShadow = true;
     });
-    playerRigAssets = {
-      scene: character,
-      runClip: runGltf.animations[0] || null,
+    const assets = {
+      kind: modelConfig.kind || 'gltf',
+      scene: modelScene,
+      runClip: runGltf.animations[0] || baseGltf.animations[0] || null,
+      vrm,
     };
-    return playerRigAssets;
+    playerRigAssets.set(modelConfig.id, assets);
+    return assets;
+  }).catch(err => {
+    console.error(`Failed to load character model "${modelConfig.id}":`, err);
+    playerRigAssets.set(modelConfig.id, null);
+    return null;
   });
+  playerModelPromises.set(modelConfig.id, playerModelPromise);
   return playerModelPromise;
 }
 
-function makeDuckPlayerMesh(ch) {
+function findCharacterBone(root, names) {
+  for (const name of names) {
+    const bone = root.getObjectByName(name);
+    if (bone) return bone;
+  }
+  return null;
+}
+
+function makeAnimatedPlayerMesh(ch, rigAssets, modelConfig = null) {
   const root = new THREE.Group();
   const rig = {};
-  const duck = cloneSkeleton(playerRigAssets.scene);
-  const duckBounds = new THREE.Box3().setFromObject(duck);
-  const duckSize = duckBounds.getSize(new THREE.Vector3());
-  const duckCenter = duckBounds.getCenter(new THREE.Vector3());
-  const duckScale = 0.85 / Math.max(duckSize.y, 0.001);
-  duck.position.set(
-    -duckCenter.x * duckScale,
-    -duckBounds.min.y * duckScale,
-    -duckCenter.z * duckScale
+  const avatar = cloneSkeleton(rigAssets.scene);
+  const avatarBounds = new THREE.Box3().setFromObject(avatar);
+  const avatarSize = avatarBounds.getSize(new THREE.Vector3());
+  const avatarCenter = avatarBounds.getCenter(new THREE.Vector3());
+  const avatarScale = (modelConfig?.targetHeight || 0.85) / Math.max(avatarSize.y, 0.001);
+  avatar.position.set(
+    -avatarCenter.x * avatarScale,
+    -avatarBounds.min.y * avatarScale,
+    -avatarCenter.z * avatarScale
   );
-  duck.scale.setScalar(duckScale);
-  duck.rotation.y = 0;
-  root.add(duck);
+  avatar.scale.setScalar(avatarScale);
+  avatar.rotation.y = 0;
+  root.add(avatar);
 
-  const mixer = new THREE.AnimationMixer(duck);
-  const runAction = playerRigAssets.runClip ? mixer.clipAction(playerRigAssets.runClip) : null;
+  const mixer = new THREE.AnimationMixer(avatar);
+  const runAction = rigAssets.runClip ? mixer.clipAction(rigAssets.runClip) : null;
   for (const action of [runAction]) {
     if (!action) continue;
     action.enabled = true;
@@ -2518,9 +2638,9 @@ function makeDuckPlayerMesh(ch) {
     action.play();
   }
 
-  const rightHand = duck.getObjectByName('RightHand') || duck.getObjectByName('RightForeArm') || duck.getObjectByName('RightArm');
-  const spine = duck.getObjectByName('Spine') || duck.getObjectByName('Spine01') || duck.getObjectByName('Hips');
-  const head = duck.getObjectByName('Head') || duck.getObjectByName('neck');
+  const rightHand = findCharacterBone(avatar, MODEL_BONE_NAMES.attack);
+  const spine = findCharacterBone(avatar, MODEL_BONE_NAMES.spine);
+  const head = findCharacterBone(avatar, MODEL_BONE_NAMES.head);
 
   const hammer = new THREE.Group();
   const handle = new THREE.Mesh(
@@ -2546,20 +2666,110 @@ function makeDuckPlayerMesh(ch) {
   root.scale.set(ch.build, 1, ch.build);
   root.userData.rig = {
     ...rig,
-    body: duck,
+    body: avatar,
     mixer,
     runAction,
     hammer,
-    attackBone: rightHand || duck,
-    spineBone: spine || duck,
-    headBone: head || duck,
+    attackBone: rightHand || avatar,
+    spineBone: spine || avatar,
+    headBone: head || avatar,
     animatedModel: true,
   };
   return root;
 }
 
+function getVrmBone(vrm, names) {
+  if (!vrm?.humanoid?.getNormalizedBoneNode) return null;
+  for (const name of names) {
+    const bone = vrm.humanoid.getNormalizedBoneNode(name);
+    if (bone) return bone;
+  }
+  return null;
+}
+
+function makeVrmPlayerMesh(ch, rigAssets, modelConfig = null) {
+  if (rigAssets.root) {
+    const rig = rigAssets.root.userData.rig;
+    rig.resetPose?.();
+    rigAssets.root.scale.set(ch.build, 1, ch.build);
+    return rigAssets.root;
+  }
+
+  const vrm = rigAssets.vrm;
+  const avatar = rigAssets.scene;
+  const root = new THREE.Group();
+  const avatarBounds = new THREE.Box3().setFromObject(avatar);
+  const avatarSize = avatarBounds.getSize(new THREE.Vector3());
+  const avatarCenter = avatarBounds.getCenter(new THREE.Vector3());
+  const avatarScale = (modelConfig?.targetHeight || 0.9) / Math.max(avatarSize.y, 0.001);
+  avatar.position.set(
+    -avatarCenter.x * avatarScale,
+    -avatarBounds.min.y * avatarScale,
+    -avatarCenter.z * avatarScale
+  );
+  avatar.scale.setScalar(avatarScale);
+  avatar.rotation.y = modelConfig?.facingY || 0;
+  root.add(avatar);
+
+  const rig = {
+    animatedModel: true,
+    humanoidProcedural: true,
+    vrm,
+    body: getVrmBone(vrm, ['hips']) || avatar,
+    hips: getVrmBone(vrm, ['hips']) || avatar,
+    spineBone: getVrmBone(vrm, ['chest', 'upperChest', 'spine']) || avatar,
+    headBone: getVrmBone(vrm, ['head', 'neck']) || avatar,
+    armL: getVrmBone(vrm, ['leftUpperArm', 'leftLowerArm']) || null,
+    armR: getVrmBone(vrm, ['rightUpperArm', 'rightLowerArm']) || null,
+    legL: getVrmBone(vrm, ['leftUpperLeg']) || null,
+    legR: getVrmBone(vrm, ['rightUpperLeg']) || null,
+    attackBone: getVrmBone(vrm, ['rightHand', 'rightLowerArm', 'rightUpperArm']) || avatar,
+    runAction: null,
+    mixer: null,
+  };
+
+  const hammer = new THREE.Group();
+  const handle = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.05, 0.062, 1.15, 7),
+    new THREE.MeshStandardMaterial({ color: 0x8a5a2b, roughness: 0.75, flatShading: true })
+  );
+  const hhead = new THREE.Mesh(
+    new THREE.BoxGeometry(0.6, 0.34, 0.38),
+    new THREE.MeshStandardMaterial({ color: 0x9aa4ba, roughness: 0.4, metalness: 0.5, flatShading: true })
+  );
+  const hband = new THREE.Mesh(
+    new THREE.BoxGeometry(0.62, 0.1, 0.4),
+    new THREE.MeshStandardMaterial({ color: 0xffd23e, emissive: 0xcf8a00, emissiveIntensity: 0.7 })
+  );
+  hhead.position.y = 0.56;
+  hband.position.y = 0.56;
+  hammer.add(handle, hhead, hband);
+  hammer.position.set(0.08, -0.02, 0.02);
+  hammer.rotation.set(0.7, 0.1, -0.95);
+  rig.attackBone.add(hammer);
+  rig.hammer = hammer;
+
+  const resetTargets = [root, avatar, rig.body, rig.hips, rig.spineBone, rig.headBone, rig.armL, rig.armR, rig.legL, rig.legR, rig.attackBone, hammer]
+    .filter(Boolean);
+  rig.basePose = new Map(resetTargets.map(obj => [obj, captureTransformState(obj)]));
+  rig.resetPose = () => {
+    if (typeof vrm?.humanoid?.resetNormalizedPose === 'function') vrm.humanoid.resetNormalizedPose();
+    for (const [obj, state] of rig.basePose.entries()) applyTransformState(obj, state);
+    root.scale.set(ch.build, 1, ch.build);
+  };
+
+  root.scale.set(ch.build, 1, ch.build);
+  root.userData.rig = rig;
+  rigAssets.root = root;
+  rig.resetPose();
+  return root;
+}
+
 function makePlayerMesh(ch) {
-  if (playerRigAssets) return makeDuckPlayerMesh(ch);
+  const modelConfig = getCharacterModelConfig(ch);
+  const rigAssets = getCharacterRigAssets(ch);
+  if (rigAssets?.kind === 'vrm') return makeVrmPlayerMesh(ch, rigAssets, modelConfig);
+  if (rigAssets) return makeAnimatedPlayerMesh(ch, rigAssets, modelConfig);
   const skin = 0xf2c89b;
   const mat = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.75, flatShading: true });
   const root = new THREE.Group();
@@ -2699,6 +2909,28 @@ function animatePlayer(dt, moving) {
       rig.attackBone.rotation.z = damp(rig.attackBone.rotation.z, 0, 12, dt);
     }
 
+    if (rig.humanoidProcedural) {
+      if (!P.onGround) {
+        if (rig.legL) rig.legL.rotation.x = damp(rig.legL.rotation.x, -1.05, 12, dt);
+        if (rig.legR) rig.legR.rotation.x = damp(rig.legR.rotation.x, -0.52, 12, dt);
+        if (rig.armL) rig.armL.rotation.x = damp(rig.armL.rotation.x, -1.9, 10, dt);
+        if (rig.armR && P.attackT <= 0) rig.armR.rotation.x = damp(rig.armR.rotation.x, -1.8, 10, dt);
+      } else if (moving) {
+        P.animT += dt * 8.8 * Math.max(0.85, speedRatio);
+        const s = Math.sin(P.animT);
+        if (rig.legL) rig.legL.rotation.x = damp(rig.legL.rotation.x, s * 0.85, 12, dt);
+        if (rig.legR) rig.legR.rotation.x = damp(rig.legR.rotation.x, -s * 0.85, 12, dt);
+        if (rig.armL) rig.armL.rotation.x = damp(rig.armL.rotation.x, -s * 0.72, 11, dt);
+        if (rig.armR && P.attackT <= 0) rig.armR.rotation.x = damp(rig.armR.rotation.x, s * 0.6, 11, dt);
+      } else {
+        const t = performance.now() / 1000;
+        if (rig.legL) rig.legL.rotation.x = damp(rig.legL.rotation.x, 0, 10, dt);
+        if (rig.legR) rig.legR.rotation.x = damp(rig.legR.rotation.x, 0, 10, dt);
+        if (rig.armL) rig.armL.rotation.x = damp(rig.armL.rotation.x, Math.sin(t * 2) * 0.05, 8, dt);
+        if (rig.armR && P.attackT <= 0) rig.armR.rotation.x = damp(rig.armR.rotation.x, Math.sin(t * 2 + 0.4) * 0.05, 8, dt);
+      }
+    }
+
     const t = performance.now() / 1000;
     let spinePitch = !P.onGround ? -0.24 : moving ? 0.09 + 0.05 * speedRatio : Math.sin(t * 2.2) * 0.03;
     let bodyRoll = moving ? Math.sin(t * 10 * Math.max(0.8, speedRatio)) * 0.05 : Math.sin(t * 1.6) * 0.012;
@@ -2749,6 +2981,7 @@ function animatePlayer(dt, moving) {
     const xz = (1 + P.squash * 0.22 - airStretch * 0.5) * CHARACTERS[chosenChar].build;
     P.mesh.scale.x = xz;
     P.mesh.scale.z = xz;
+    rig.vrm?.update(dt);
     return;
   }
   const speedRatio = playerSpeed() * (P.sprinting ? P.sprintMult : 1) / 8;
@@ -4010,9 +4243,7 @@ window.addEventListener('message', event => {
     resumePause();
   }
   else if (action === 'selectCharacter' && typeof payload?.index === 'number' && CHARACTERS[payload.index]) {
-    chosenChar = payload.index;
-    document.querySelectorAll('.charCard').forEach((el, index) => el.classList.toggle('sel', index === chosenChar));
-    emitHudState(true);
+    setChosenCharacter(payload.index);
   }
   else if (action === 'openShop') {
     if (overlayScreen === 'menu') openShop('menu');
@@ -4489,11 +4720,10 @@ function gameOver(won) {
   CHARACTERS.forEach((c, i) => {
     const d = document.createElement('div');
     d.className = 'charCard charCardWrap' + (i === 0 ? ' sel' : '');
-    d.innerHTML = `${i === 0 ? '<div class="charBadge">★</div>' : ''}<div class="charEmoji">${c.emoji}</div><div class="charName">${c.name}</div><div class="charDesc">${c.desc}</div>`;
+    d.innerHTML = `${c.badge ? `<div class="charBadge">${c.badge}</div>` : ''}<div class="charEmoji">${c.emoji}</div><div class="charName">${c.name}</div><div class="charDesc">${c.desc}</div>`;
     d.onclick = () => {
       setChosenCharacter(i);
       Sfx.pick();
-      renderAccountUi();
     };
     row.appendChild(d);
   });
@@ -4504,6 +4734,7 @@ function gameOver(won) {
   document.getElementById('startBtn').onclick = startGame;
   document.getElementById('retryBtn').onclick = startGame;
   document.getElementById('winBtn').onclick = startGame;
+  document.getElementById('loadoutBtn').onclick = focusCharacterSelector;
   document.getElementById('menuLogoutBtn').onclick = logoutToApp;
   const deadLogoutBtn = document.getElementById('deadLogoutBtn');
   const winLogoutBtn = document.getElementById('winLogoutBtn');
@@ -4512,18 +4743,10 @@ function gameOver(won) {
   setStartButtonsDisabled(true, 'LOADING AVATAR...');
   initializeCloudProgress();
   emitHudState(true);
-  loadPlayerModel()
-    .then(() => {
-      bootState.modelReady = true;
-      refreshStartAvailability();
-      emitHudState(true);
-    })
-    .catch(err => {
-      console.error('Failed to load duck player model:', err);
-      bootState.modelReady = true;
-      refreshStartAvailability();
-      emitHudState(true);
-    });
+  loadPlayerModel(CHARACTERS[chosenChar]).then(() => {
+    updateCharacterModelReadyState();
+    emitHudState(true);
+  });
 }
 
 /* ============================================================
