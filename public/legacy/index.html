@@ -125,6 +125,19 @@
   #shopTitle{font-family:var(--display);font-size:52px;color:#fff2bf;text-shadow:0 4px 0 #7d6221,0 10px 24px rgba(85,47,14,.18);letter-spacing:4px;margin-bottom:6px;transform:rotate(-1.5deg)}
   #shopCoins{color:#fff6ca;font-family:var(--display);font-size:24px;text-shadow:0 2px 8px rgba(85,47,14,.18);margin-bottom:22px}
   #shopGrid{display:grid;grid-template-columns:repeat(4,180px);gap:14px;margin-bottom:24px}
+  #leaderboardTitle{font-family:var(--display);font-size:52px;color:#fff2bf;text-shadow:0 4px 0 #7d6221,0 10px 24px rgba(85,47,14,.18);letter-spacing:4px;margin-bottom:8px;transform:rotate(-1.5deg)}
+  #leaderboardSubtitle{color:#fff6ca;font-size:15px;font-weight:800;text-shadow:0 2px 8px rgba(85,47,14,.18);margin-bottom:22px;text-align:center}
+  .leaderboardTabs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+  .leaderboardTab{pointer-events:auto;border:none;border-radius:999px;padding:11px 18px;background:linear-gradient(180deg,#fff6e5,#f0ddae);color:#6b441e;font-family:var(--display);font-size:14px;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 0 rgba(138,96,36,.42),0 10px 18px rgba(85,47,14,.12)}
+  .leaderboardTab.active{background:linear-gradient(180deg,#9770e1,#6f50c8 70%,#5334ad);color:#fff6eb;box-shadow:0 4px 0 #5233a7,0 10px 18px rgba(85,47,14,.14)}
+  #leaderboardList{width:min(860px,92vw);display:grid;gap:10px;margin-bottom:24px}
+  .leaderboardRow{display:grid;grid-template-columns:72px minmax(150px,1.4fr) repeat(4,minmax(90px,1fr));gap:12px;align-items:center;padding:14px 18px;border-radius:18px;background:linear-gradient(180deg,rgba(255,251,241,.96),rgba(244,235,201,.92));border:3px solid rgba(138,111,60,.16);box-shadow:0 16px 28px rgba(85,47,14,.12);color:var(--ink)}
+  .leaderboardRow.top3{border-color:#ffcd57;box-shadow:0 0 0 3px rgba(255,205,87,.16),0 18px 32px rgba(85,47,14,.14)}
+  .leaderboardCell.rank{font-family:var(--display);font-size:24px;color:#8a4e11;text-align:center}
+  .leaderboardCell.name{font-family:var(--display);font-size:20px;letter-spacing:1px;color:#6f3f12}
+  .leaderboardStatLabel{display:block;font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#8b6c45}
+  .leaderboardStatValue{display:block;font-size:14px;font-weight:900;color:var(--inkSoft)}
+  .leaderboardEmpty{padding:28px 20px;border-radius:20px;background:linear-gradient(180deg,rgba(255,251,241,.96),rgba(244,235,201,.92));border:3px solid rgba(138,111,60,.16);text-align:center;color:var(--inkSoft);font-weight:800}
   .metaCard{background:linear-gradient(180deg,rgba(255,251,241,.96),rgba(244,235,201,.92));border:3px solid rgba(138,111,60,.16);border-radius:20px;padding:14px 12px;text-align:center;box-shadow:0 16px 28px rgba(85,47,14,.12)}
   .metaCard .upEmoji{font-size:34px;margin:2px 0 6px}
   .metaCard .upName{font-size:16px}
@@ -135,6 +148,294 @@
   .buyBtn:hover{transform:scale(1.05)}
   .buyBtn:disabled{background:#cfcaaf;color:#9a8f70;box-shadow:none;cursor:default;transform:none}
   #resetSave{margin-top:10px;color:#6f6047;font-size:12px;cursor:pointer;text-decoration:underline}
+
+  /* ---------- dashboard menu ---------- */
+  #menu{
+    background:
+      radial-gradient(circle at 68% 42%, rgba(255,232,144,.55), rgba(255,232,144,0) 22%),
+      linear-gradient(180deg, rgba(20,18,42,.18), rgba(13,17,34,.48)),
+      url('./assets/dashboard-bg.png') center center / cover no-repeat;
+  }
+  .menuShell{position:relative;width:100%;height:100%;padding:24px 34px 30px;display:grid;grid-template-columns:320px 1fr;grid-template-rows:auto auto auto auto;gap:18px;align-items:start}
+  .menuBrand{grid-column:1;grid-row:1;display:flex;flex-direction:column;align-items:flex-start;gap:0;line-height:.88}
+  .menuBrandTop{font-family:var(--display);font-size:28px;letter-spacing:2px;color:#fff6d3;text-shadow:0 4px 12px rgba(13,7,32,.5)}
+  .menuBrandBottom{font-family:var(--display);font-size:52px;letter-spacing:1px;color:#ffc936;text-shadow:0 5px 0 #8b4105,0 10px 28px rgba(13,7,32,.58)}
+  .menuTopbar{grid-column:2;grid-row:1;justify-self:end;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .topChip,.profileChip{pointer-events:auto;display:flex;align-items:center;gap:10px;min-height:58px;padding:10px 18px;border-radius:20px;background:linear-gradient(180deg,rgba(43,30,88,.94),rgba(25,20,54,.92));border:1px solid rgba(255,255,255,.16);box-shadow:0 16px 30px rgba(7,8,24,.28);color:#fff4dd}
+  .topLogoutBtn{pointer-events:auto;display:flex;align-items:center;justify-content:center;min-height:58px;padding:10px 20px;border:none;border-radius:20px;background:linear-gradient(180deg,#fff6e5,#f0ddae);color:#6b441e;font-family:var(--display);font-size:18px;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 0 rgba(138,96,36,.42),0 10px 18px rgba(7,8,24,.2)}
+  .topLogoutBtn:hover{transform:translateY(-1px)}
+  .topLogoutBtn:disabled{opacity:.7;cursor:default;transform:none}
+  .topChip .icon{font-size:24px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+  .topChip .label{font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#dbcdfb}
+  .topChip .value{font-family:var(--display);font-size:28px;line-height:1;color:#fff}
+  .profileChip{gap:14px;padding-right:22px}
+  .profileBadge{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(180deg,#84d84a,#4f8e1f);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 8px 18px rgba(0,0,0,.22);font-size:28px}
+  .profileChipText{display:flex;flex-direction:column;align-items:flex-start}
+  .profileChipName{font-family:var(--display);font-size:28px;line-height:1;color:#fff9e6}
+  .profileChipLevel{font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#ddd0ff}
+  .menuSidebar{grid-column:1;grid-row:2 / span 2;display:flex;flex-direction:column;gap:18px;align-self:center}
+  .dashboardCard{pointer-events:auto;border-radius:28px;padding:18px;background:linear-gradient(180deg,rgba(20,17,36,.86),rgba(34,32,44,.76));border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 50px rgba(7,8,24,.34), inset 0 1px 0 rgba(255,255,255,.06);backdrop-filter:blur(6px);color:#fff7ea}
+  .profileHero{display:grid;grid-template-columns:126px 1fr;gap:16px;align-items:center;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .profileAvatar{width:126px;height:126px;border-radius:24px;display:grid;place-items:center;background:linear-gradient(180deg,#a9ee66,#5ca42b);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 18px 28px rgba(0,0,0,.26);font-size:70px}
+  .profileInfo .name{font-family:var(--display);font-size:34px;line-height:1;color:#fffdf5}
+  .profileInfo .level{margin-top:8px;font-family:var(--display);font-size:22px;letter-spacing:1px;color:#ffd34d}
+  .profileInfo .progressTrack{margin-top:14px;height:10px;border-radius:999px;background:rgba(255,255,255,.16);overflow:hidden}
+  .profileInfo .progressFill{height:100%;width:0;background:linear-gradient(90deg,#ad7dff,#7c5cf7 55%,#6fe0ff)}
+  .profileInfo .progressText{margin-top:8px;font-size:15px;font-weight:800;color:#e9defb}
+  .statsStrip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+  .statPill{border-radius:18px;padding:14px 10px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);text-align:center}
+  .statPillLabel{display:block;font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#d5c8f5}
+  .statPillValue{display:block;margin-top:6px;font-family:var(--display);font-size:28px;line-height:1;color:#fff}
+  .syncCard{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-radius:20px;background:linear-gradient(180deg,rgba(133,211,73,.2),rgba(42,80,24,.26));border:1px solid rgba(151,231,95,.28)}
+  .syncCardText{display:flex;flex-direction:column}
+  .syncCardTitle{font-family:var(--display);font-size:22px;color:#fff7e8}
+  .syncCardStatus{font-size:15px;font-weight:900;color:#96ea67}
+  .syncCardIcon{font-size:28px}
+  .menuHeroWrap{grid-column:2;grid-row:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;align-self:end;justify-self:center;width:min(100%,980px);position:relative;z-index:1}
+  .heroEyebrow{font-family:var(--display);font-size:34px;letter-spacing:3px;color:#fff8dd;text-shadow:0 6px 18px rgba(13,7,32,.5)}
+  .heroEyebrow .gem{color:#d976ff;margin:0 12px}
+  .title.dashboardTitle{margin:0;font-size:118px;line-height:.86;text-align:center;letter-spacing:3px;transform:none;animation:none;filter:drop-shadow(0 24px 26px rgba(22,8,4,.34))}
+  .title.dashboardTitle .lineTwo{display:block}
+  .heroRibbon{padding:14px 38px 18px;background:linear-gradient(180deg,#8e46d9,#6d2daf);border-radius:16px;clip-path:polygon(4% 0,96% 0,100% 50%,96% 100%,4% 100%,0 50%);font-family:var(--display);font-size:24px;letter-spacing:1px;color:#fff4e4;box-shadow:0 10px 28px rgba(44,11,73,.34)}
+  .menuPrimaryAction{pointer-events:auto;position:relative;border:none;border-radius:26px;padding:22px 64px 30px;background:linear-gradient(180deg,#ffe88a,#ffbe21 60%,#dc850a);box-shadow:0 8px 0 #a15b00,0 22px 38px rgba(44,24,4,.26);font-family:var(--display);font-size:48px;letter-spacing:2px;color:#4d2800;cursor:pointer}
+  .menuPrimaryAction:hover{transform:translateY(-2px) scale(1.01)}
+  .menuPrimaryAction:disabled{opacity:.7;transform:none;cursor:default}
+  .menuPrimaryCost{position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);padding:6px 16px;border-radius:999px;background:linear-gradient(180deg,#916230,#734314);color:#fff9e7;font-size:18px;letter-spacing:1px;box-shadow:0 6px 14px rgba(0,0,0,.2)}
+  .menuChooser{grid-column:2;grid-row:3;display:flex;flex-direction:column;align-items:center;justify-self:center;gap:16px;width:min(100%,980px);position:relative;z-index:1}
+  .chooseLabel{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:32px;color:#fff8dd;letter-spacing:1px;text-shadow:0 6px 18px rgba(13,7,32,.5)}
+  .chooseLabel .spark{color:#ffd34d}
+  .charRow.dashboardRow{gap:16px;margin:0}
+  .charCard{width:230px;min-height:220px;padding:22px 18px;border-radius:24px;background:linear-gradient(180deg,rgba(255,249,232,.95),rgba(245,232,194,.9));box-shadow:0 18px 40px rgba(15,11,34,.24)}
+  .charCard.sel{border-color:#ffe24c;box-shadow:0 0 0 4px rgba(255,226,76,.16),0 0 40px rgba(255,223,83,.32),0 20px 40px rgba(15,11,34,.26)}
+  .charCard.locked{background:linear-gradient(180deg,rgba(54,44,66,.9),rgba(38,31,50,.9));border-color:rgba(255,255,255,.08);color:#f0e6ff;cursor:default}
+  .charCard.locked .charName,.charCard.locked .charDesc{color:#f0e6ff}
+  .charBadge{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,#ffea86,#ffca2d);color:#7b4b00;font-size:18px;box-shadow:0 6px 12px rgba(0,0,0,.18)}
+  .charCardWrap{position:relative}
+  .mobileCharDots{display:none;align-items:center;justify-content:center;gap:12px}
+  .mobileCharDots span{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.22);box-shadow:inset 0 2px 4px rgba(0,0,0,.22)}
+  .mobileCharDots span.active{background:linear-gradient(180deg,#ffe27c,#ffbc23)}
+  .menuBottomNav{grid-column:1 / span 2;grid-row:4;justify-self:center;display:grid;grid-template-columns:repeat(5,minmax(160px,1fr));width:min(1420px,96%);border-radius:28px;background:linear-gradient(180deg,rgba(20,17,36,.88),rgba(18,22,36,.88));border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 40px rgba(7,8,24,.3);overflow:hidden}
+  .navBtn{pointer-events:auto;display:flex;align-items:center;justify-content:center;gap:12px;padding:22px 24px;border:none;background:transparent;color:#fff5de;font-family:var(--display);font-size:28px;letter-spacing:1px;cursor:pointer;border-right:1px solid rgba(255,255,255,.1)}
+  .navBtn:last-child{border-right:none}
+  .navBtn .navIcon{font-size:30px}
+  .navBtn.active{background:linear-gradient(180deg,rgba(255,201,54,.22),rgba(255,178,34,.14));box-shadow:inset 0 0 0 2px rgba(255,214,89,.75)}
+  .navBtn.disabled{opacity:.46;cursor:default}
+
+  @media (max-width: 1200px){
+    .menuShell{grid-template-columns:1fr;grid-template-rows:auto auto auto auto}
+    .menuBrand{grid-column:1;justify-self:center;align-items:center}
+    .menuTopbar{grid-column:1;justify-self:center}
+    .menuSidebar,.menuHeroWrap,.menuChooser{grid-column:1;grid-row:auto;justify-self:center}
+    .menuBottomNav{grid-column:1;grid-template-columns:repeat(2,minmax(160px,1fr))}
+    .title.dashboardTitle{font-size:84px}
+  }
+  @media (max-width: 768px){
+    #menu{
+      background:
+        linear-gradient(180deg, rgba(10,10,30,.08), rgba(5,9,25,.48)),
+        url('./assets/dashboard-mobile-bg.png') center top / cover no-repeat;
+      overflow:hidden;
+    }
+    .menuShell{
+      --mobile-dashboard-scale: clamp(0.46, calc((100vh - 4px) / 1120), 0.58);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+      padding:8px 10px 10px;
+      width:calc(100% / var(--mobile-dashboard-scale));
+      min-height:calc((100vh - 4px) / var(--mobile-dashboard-scale));
+      justify-content:flex-start;
+      overflow-y:hidden;
+      overflow-x:hidden;
+      transform:scale(var(--mobile-dashboard-scale));
+      transform-origin:top center;
+    }
+    .menuBrand{
+      order:1;
+      width:100%;
+      align-items:flex-start;
+      justify-self:stretch;
+      padding-left:2px;
+    }
+    .menuBrandTop{font-size:15px}
+    .menuBrandBottom{font-size:28px}
+    .menuTopbar{
+      order:2;
+      width:100%;
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:4px;
+      align-items:stretch;
+      justify-self:stretch;
+    }
+    .menuBrand{display:none}
+    .topLogoutBtn{display:none}
+    .topChip,.profileChip{
+      min-height:29px;
+      padding:3px 5px;
+      border-radius:10px;
+      gap:3px;
+      box-shadow:0 8px 14px rgba(7,8,24,.2);
+      min-width:0;
+    }
+    .topChip .icon{font-size:11px}
+    .topChip .label{font-size:6px}
+    .topChip .value{font-size:12px}
+    .profileChip{padding-right:5px}
+    .profileBadge{width:21px;height:21px;border-radius:6px;font-size:10px;flex:0 0 auto}
+    .profileChipText{min-width:0}
+    .profileChipName{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+    .profileChipLevel{font-size:6px}
+    .menuHeroWrap{
+      order:3;
+      width:100%;
+      gap:4px;
+      padding-top:22px;
+      margin-top:20px;
+      align-items:center;
+      justify-content:center;
+    }
+    .heroEyebrow{font-size:14px}
+    .title.dashboardTitle{
+      font-size:min(13vw,54px);
+      line-height:.88;
+      max-width:100%;
+    }
+    .heroRibbon{
+      font-size:9px;
+      padding:6px 12px 9px;
+      max-width:min(88vw,520px);
+      text-align:center;
+    }
+    .menuPrimaryAction{
+      width:min(60vw,260px);
+      font-size:18px;
+      padding:10px 14px 15px;
+      border-radius:16px;
+      box-shadow:0 6px 0 #a15b00,0 16px 26px rgba(44,24,4,.22);
+    }
+    .menuPrimaryCost{font-size:11px;bottom:-10px;padding:4px 10px}
+    .menuChooser{
+      order:5;
+      width:100%;
+      gap:8px;
+      margin-top:22px;
+    }
+    .chooseLabel{font-size:12px;gap:6px}
+    .charRow.dashboardRow{
+      width:100%;
+      flex-direction:row;
+      align-items:stretch;
+      justify-content:flex-start;
+      gap:7px;
+      overflow-x:auto;
+      overflow-y:hidden;
+      padding:2px 2px 2px;
+      scroll-snap-type:x proximity;
+      -webkit-overflow-scrolling:touch;
+    }
+    .charRow.dashboardRow::-webkit-scrollbar{display:none}
+    .charCard{
+      width:calc(33.333vw - 11px);
+      min-width:108px;
+      min-height:120px;
+      scroll-snap-align:center;
+      padding:8px 8px;
+      border-radius:14px;
+      box-shadow:0 9px 18px rgba(15,11,34,.22);
+    }
+    .charEmoji{font-size:26px;margin-bottom:3px}
+    .charName{font-size:10px;margin-bottom:2px}
+    .charDesc{font-size:7px;line-height:1.2}
+    .charBadge{width:19px;height:19px;font-size:9px;top:7px;right:7px}
+    .mobileCharDots{display:flex;order:6;margin-top:0;gap:6px}
+    .mobileCharDots span{width:8px;height:8px}
+    .menuSidebar{
+      order:4;
+      display:none;
+    }
+    .dashboardCard{
+      width:100%;
+      border-radius:18px;
+      padding:10px 10px;
+      background:linear-gradient(180deg,rgba(16,18,34,.9),rgba(18,24,34,.82));
+    }
+    .profileHero{
+      grid-template-columns:56px 1fr;
+      gap:8px;
+      align-items:center;
+      text-align:left;
+      justify-items:stretch;
+      padding-bottom:8px;
+    }
+    .profileAvatar{
+      width:52px;
+      height:52px;
+      border-radius:12px;
+      font-size:28px;
+      justify-self:start;
+    }
+    .profileInfo .name{font-size:16px}
+    .profileInfo .level{font-size:10px;margin-top:2px}
+    .profileInfo .progressTrack{margin-top:6px;height:6px}
+    .profileInfo .progressText{font-size:9px;margin-top:4px}
+    .statsStrip{
+      grid-template-columns:repeat(3,1fr);
+      gap:0;
+      margin-top:8px;
+      border-top:1px solid rgba(255,255,255,.12);
+      padding-top:8px;
+    }
+    .statPill{
+      background:transparent;
+      border:none;
+      border-right:1px solid rgba(255,255,255,.12);
+      border-radius:0;
+      padding:3px 4px;
+    }
+    .statPill:last-child{border-right:none}
+    .statPillLabel{font-size:8px}
+    .statPillValue{font-size:14px;margin-top:3px}
+    .syncCard{
+      margin-top:8px;
+      border-radius:14px;
+      padding:9px 10px;
+      background:linear-gradient(180deg,rgba(18,20,34,.84),rgba(12,18,28,.84));
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .syncCardTitle{font-size:11px}
+    .syncCardStatus{font-size:9px}
+    .syncCardIcon{font-size:16px}
+    .menuBottomNav{
+      order:7;
+      width:94%;
+      grid-template-columns:repeat(5,1fr);
+      border-radius:18px;
+      margin-top:auto;
+      align-self:center;
+      margin-bottom:2px;
+      position:static;
+      z-index:3;
+      background:linear-gradient(180deg,rgba(15,17,32,.94),rgba(11,16,28,.96));
+      box-shadow:0 14px 22px rgba(7,8,24,.28);
+    }
+    .navBtn{
+      flex-direction:column;
+      gap:4px;
+      padding:8px 2px 9px;
+      font-size:8px;
+      border-right:1px solid rgba(255,255,255,.09);
+      border-bottom:none;
+      letter-spacing:.4px;
+    }
+    .navBtn .navIcon{font-size:16px}
+    .navBtn:last-child{border-right:none}
+  }
+
+  @media (max-width: 768px) and (max-height: 700px){
+    .menuShell{--mobile-dashboard-scale: clamp(0.42, calc((100vh - 2px) / 1180), 0.54)}
+  }
 </style>
 </head>
 <body>
@@ -158,17 +459,103 @@
   </div>
 
   <div class="screen" id="menu" style="display:flex">
-    <div class="title">INFINFT MONSTER MAYHEM</div>
-    <div class="subtitle">~ survive the swarm. unleash the mayhem. ~</div>
-    <div id="menuCoins">🪙 0 coins</div>
-    <div class="accountMeta" id="menuProfile"></div>
-    <div class="accountActions"><button class="logoutBtn" id="menuLogoutBtn" type="button">LOG OUT</button></div>
-    <div class="charRow" id="charRow"></div>
-    <div class="btnRow">
-      <button class="bigBtn" id="startBtn">BASH!</button>
-      <button class="bigBtn secondary" id="shopBtn">UPGRADES</button>
+    <div class="menuShell">
+      <div class="menuBrand">
+        <div class="menuBrandTop">INFINFT</div>
+        <div class="menuBrandBottom">MONSTER<br>MAYHEM</div>
+      </div>
+
+      <div class="menuTopbar">
+        <button class="topLogoutBtn" id="menuLogoutBtn" type="button">LOG OUT</button>
+        <div class="topChip">
+          <span class="icon">🪙</span>
+          <div>
+            <div class="label">Coins</div>
+            <div class="value" id="menuCoins">0</div>
+          </div>
+        </div>
+        <div class="topChip">
+          <span class="icon">💎</span>
+          <div>
+            <div class="label">Wins</div>
+            <div class="value" id="topWins">0</div>
+          </div>
+        </div>
+        <div class="topChip">
+          <span class="icon">☠️</span>
+          <div>
+            <div class="label">Kills</div>
+            <div class="value" id="topKills">0</div>
+          </div>
+        </div>
+        <div class="profileChip">
+          <div class="profileBadge" id="topProfileBadge">👾</div>
+          <div class="profileChipText">
+            <div class="profileChipName" id="topProfileName">Player</div>
+            <div class="profileChipLevel" id="topProfileLevel">Level 1</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="menuSidebar">
+        <div class="dashboardCard">
+          <div class="profileHero">
+            <div class="profileAvatar" id="profileAvatar">👾</div>
+            <div class="profileInfo">
+              <span class="name" id="profileName">Player</span>
+              <span class="level" id="profileLevel">LEVEL 1</span>
+              <div class="progressTrack"><div class="progressFill" id="profileXpFill"></div></div>
+              <div class="progressText" id="profileXpText">0 / 100 XP</div>
+            </div>
+          </div>
+          <div class="statsStrip">
+            <div class="statPill">
+              <span class="statPillLabel">Wins</span>
+              <span class="statPillValue" id="menuWins">0</span>
+            </div>
+            <div class="statPill">
+              <span class="statPillLabel">Best Run</span>
+              <span class="statPillValue" id="menuBestRun">0:00</span>
+            </div>
+            <div class="statPill">
+              <span class="statPillLabel">Monsters</span>
+              <span class="statPillValue" id="menuMonsterKills">0</span>
+            </div>
+          </div>
+          <div class="syncCard">
+            <div class="syncCardText">
+              <span class="syncCardTitle">CLOUD SYNC</span>
+              <span class="syncCardStatus" id="menuSyncStatus">Checking progress...</span>
+            </div>
+            <span class="syncCardIcon" id="menuSyncIcon">☁️</span>
+          </div>
+        </div>
+      </aside>
+
+      <section class="menuHeroWrap">
+        <div class="heroEyebrow"><span class="gem">♦</span> INFINFT <span class="gem">♦</span></div>
+        <div class="title dashboardTitle">MONSTER<span class="lineTwo">MAYHEM</span></div>
+        <div class="heroRibbon">SURVIVE THE SWARM. UNLEASH THE MAYHEM.</div>
+        <button class="menuPrimaryAction" id="startBtn">
+          PLAY NOW
+          <span class="menuPrimaryCost">⚡ 5</span>
+        </button>
+      </section>
+
+      <section class="menuChooser">
+        <div class="chooseLabel"><span class="spark">✦</span> CHOOSE YOUR BASHER <span class="spark">✦</span></div>
+        <div class="charRow dashboardRow" id="charRow"></div>
+        <div class="mobileCharDots" aria-hidden="true"><span class="active"></span><span></span><span></span></div>
+      </section>
+
+      <nav class="menuBottomNav">
+        <button class="navBtn active" type="button" id="navHomeBtn"><span class="navIcon">🏠</span><span>HOME</span></button>
+        <button class="navBtn" type="button" id="shopBtn"><span class="navIcon">⏫</span><span>UPGRADES</span></button>
+        <button class="navBtn disabled" type="button" id="loadoutBtn"><span class="navIcon">🛡️</span><span>LOADOUT</span></button>
+        <button class="navBtn" type="button" id="leaderboardBtn"><span class="navIcon">📊</span><span>LEADERBOARD</span></button>
+        <button class="navBtn disabled" type="button" id="storeBtn"><span class="navIcon">🛒</span><span>STORE</span></button>
+      </nav>
     </div>
-    <div class="controls">WASD — move · SHIFT — sprint · SPACE — jump over enemies & up ledges · drag mouse — orbit camera · scroll — zoom<br>Smash glowing pots for food · collect XP gems · survive 30 minutes · wipe out every monster</div>
   </div>
 
   <div class="screen" id="levelup">
@@ -184,6 +571,7 @@
     <div class="btnRow">
       <button class="bigBtn" id="retryBtn">TRY AGAIN</button>
       <button class="bigBtn secondary" id="deadShopBtn">UPGRADES</button>
+      <button class="bigBtn secondary" id="deadMenuBtn">RETURN TO DASHBOARD</button>
     </div>
   </div>
 
@@ -206,9 +594,25 @@
     <div id="resetSave">reset all progress</div>
   </div>
 
+  <div class="screen" id="leaderboardScr">
+    <div id="leaderboardTitle">LEADERBOARD</div>
+    <div id="leaderboardSubtitle">Longest survival rules the board. Kills and wins settle the ties.</div>
+    <div class="leaderboardTabs">
+      <button class="leaderboardTab active" id="leaderboardTabSurvival" type="button">TOP SURVIVAL</button>
+      <button class="leaderboardTab" id="leaderboardTabKills" type="button">TOP KILLS</button>
+      <button class="leaderboardTab" id="leaderboardTabWins" type="button">TOP WINS</button>
+    </div>
+    <div id="leaderboardList"></div>
+    <button class="bigBtn" id="leaderboardBack">BACK</button>
+  </div>
+
   <div class="screen" id="pauseScr">
     <div class="endTitle">PAUSED</div>
     <div class="endStats">press P to resume</div>
+    <div class="btnRow">
+      <button class="bigBtn" id="pauseResumeBtn">RESUME</button>
+      <button class="bigBtn secondary" id="pauseEndRunBtn">END RUN</button>
+    </div>
   </div>
 </div>
 
@@ -236,6 +640,7 @@ const firebase = window.firebase;
 const GAME_TITLE = 'infiNFT Monster Mayhem';
 const GAME_PROFILE_DOC = 'profile';
 const GAME_RUNS_SUBCOLLECTION = 'runs';
+const GAME_LEADERBOARD_COLLECTION = 'infinft_monster_mayhem_leaderboard';
 const LEGACY_FIREBASE_CONFIG_KEY = 'infinft:mm:firebase-config';
 const PENDING_RUNS_KEY = 'infinft:mm:pending-runs';
 const cloudState = {
@@ -245,6 +650,8 @@ const cloudState = {
   user: null,
   account: null,
   profile: null,
+  leaderboardEntries: [],
+  leaderboardMode: 'survival',
   enabled: false,
   authChecked: false,
   profileReady: false,
@@ -437,6 +844,11 @@ function getCloudUserRef(uid = cloudState.user?.uid) {
   return cloudState.db.collection('users').doc(uid);
 }
 
+function getLeaderboardCollectionRef() {
+  if (!cloudState.db) return null;
+  return cloudState.db.collection(GAME_LEADERBOARD_COLLECTION);
+}
+
 function readPendingRuns() {
   try {
     const raw = localStorage.getItem(PENDING_RUNS_KEY);
@@ -496,7 +908,21 @@ function buildAccountMetaHtml() {
 
 function renderAccountUi() {
   const meta = buildAccountMetaHtml();
-  const markup = `
+  const totalRuns = Number(cloudState.profile?.totalRuns || 0);
+  const totalKills = Number(cloudState.profile?.totalKills || 0);
+  const totalWins = Number(cloudState.profile?.totalWins || 0);
+  const bestRunSeconds = Number(cloudState.profile?.bestRunSeconds || 0);
+  const dashboardLevel = Math.max(1, Math.floor(totalKills / 120) + totalWins + 1);
+  const levelBase = Math.max(0, (dashboardLevel - 1) * 120);
+  const xpInLevel = Math.max(0, totalKills - levelBase);
+  const xpGoal = 120;
+  const xpPct = Math.max(0, Math.min(100, xpInLevel / xpGoal * 100));
+  const avatarEmoji = CHARACTERS[chosenChar]?.emoji || '👾';
+  const syncGood = !!cloudState.user && readPendingRuns().length === 0;
+  const syncStatus = !cloudState.user ? 'Sign in required'
+    : readPendingRuns().length > 0 ? `${readPendingRuns().length} run${readPendingRuns().length === 1 ? '' : 's'} queued`
+    : 'All progress saved';
+  const compactMarkup = `
     <span class="name">${meta.name}</span>
     <span class="metaLine">${meta.statsLineOne}</span>
     <span class="metaLine">${meta.statsLineTwo}</span>
@@ -508,10 +934,186 @@ function renderAccountUi() {
   const deadMeta = document.getElementById('deadMeta');
   const winMeta = document.getElementById('winMeta');
 
-  if (accountHud) accountHud.innerHTML = markup;
-  if (menuProfile) menuProfile.innerHTML = markup;
-  if (deadMeta) deadMeta.innerHTML = markup;
-  if (winMeta) winMeta.innerHTML = markup;
+  if (accountHud) accountHud.innerHTML = compactMarkup;
+  if (menuProfile) menuProfile.innerHTML = compactMarkup;
+  if (deadMeta) deadMeta.innerHTML = compactMarkup;
+  if (winMeta) winMeta.innerHTML = compactMarkup;
+
+  const topProfileName = document.getElementById('topProfileName');
+  const topProfileLevel = document.getElementById('topProfileLevel');
+  const topProfileBadge = document.getElementById('topProfileBadge');
+  const topWins = document.getElementById('topWins');
+  const topKills = document.getElementById('topKills');
+  const profileAvatar = document.getElementById('profileAvatar');
+  const profileName = document.getElementById('profileName');
+  const profileLevel = document.getElementById('profileLevel');
+  const profileXpFill = document.getElementById('profileXpFill');
+  const profileXpText = document.getElementById('profileXpText');
+  const menuWins = document.getElementById('menuWins');
+  const menuBestRun = document.getElementById('menuBestRun');
+  const menuMonsterKills = document.getElementById('menuMonsterKills');
+  const menuSyncStatus = document.getElementById('menuSyncStatus');
+  const menuSyncIcon = document.getElementById('menuSyncIcon');
+
+  if (topProfileName) topProfileName.textContent = meta.name;
+  if (topProfileLevel) topProfileLevel.textContent = `LEVEL ${dashboardLevel}`;
+  if (topProfileBadge) topProfileBadge.textContent = avatarEmoji;
+  if (topWins) topWins.textContent = String(totalWins);
+  if (topKills) topKills.textContent = String(totalKills);
+  if (profileAvatar) profileAvatar.textContent = avatarEmoji;
+  if (profileName) profileName.textContent = meta.name;
+  if (profileLevel) profileLevel.textContent = `LEVEL ${dashboardLevel}`;
+  if (profileXpFill) profileXpFill.style.width = `${xpPct}%`;
+  if (profileXpText) profileXpText.textContent = `${xpInLevel.toLocaleString()} / ${xpGoal.toLocaleString()} XP`;
+  if (menuWins) menuWins.textContent = String(totalWins);
+  if (menuBestRun) menuBestRun.textContent = fmtTime(bestRunSeconds);
+  if (menuMonsterKills) menuMonsterKills.textContent = String(totalKills);
+  if (menuSyncStatus) menuSyncStatus.textContent = syncStatus;
+  if (menuSyncIcon) menuSyncIcon.textContent = syncGood ? '✅' : (!cloudState.user ? '🔒' : '☁️');
+}
+
+function getLeaderboardDisplayName() {
+  const username = (cloudState.account?.username || '').trim();
+  return username || 'anonymous';
+}
+
+function buildLeaderboardScore(bestRunSeconds, bestKills, totalWins) {
+  return bestRunSeconds * 1000000 + bestKills * 100 + totalWins;
+}
+
+function getLeaderboardModeMeta() {
+  return {
+    survival: {
+      title: 'Longest survival rules the board. Kills and wins settle the ties.',
+      orderField: 'leaderboardScore',
+      orderDirection: 'desc',
+    },
+    kills: {
+      title: 'Most total kills at the top. Best run time settles the ties.',
+      orderField: 'totalKills',
+      orderDirection: 'desc',
+    },
+    wins: {
+      title: 'Most monster mayhem victories. Survival time settles the ties.',
+      orderField: 'totalWins',
+      orderDirection: 'desc',
+    },
+  }[cloudState.leaderboardMode] || {
+    title: 'Longest survival rules the board. Kills and wins settle the ties.',
+    orderField: 'leaderboardScore',
+    orderDirection: 'desc',
+  };
+}
+
+function renderLeaderboardTabs() {
+  const mode = cloudState.leaderboardMode;
+  const subtitle = document.getElementById('leaderboardSubtitle');
+  const meta = getLeaderboardModeMeta();
+  if (subtitle) subtitle.textContent = meta.title;
+
+  document.getElementById('leaderboardTabSurvival')?.classList.toggle('active', mode === 'survival');
+  document.getElementById('leaderboardTabKills')?.classList.toggle('active', mode === 'kills');
+  document.getElementById('leaderboardTabWins')?.classList.toggle('active', mode === 'wins');
+}
+
+function renderLeaderboard() {
+  const list = document.getElementById('leaderboardList');
+  if (!list) return;
+  renderLeaderboardTabs();
+
+  if (!cloudState.leaderboardEntries.length) {
+    list.innerHTML = `<div class="leaderboardEmpty">No monster slayers on the board yet. Finish a run to claim a spot.</div>`;
+    return;
+  }
+
+  list.innerHTML = cloudState.leaderboardEntries.map((entry, index) => `
+    <div class="leaderboardRow ${index < 3 ? 'top3' : ''}">
+      <div class="leaderboardCell rank">#${index + 1}</div>
+      <div class="leaderboardCell name">${entry.username || 'anonymous'}</div>
+      <div class="leaderboardCell">
+        <span class="leaderboardStatLabel">Best Time</span>
+        <span class="leaderboardStatValue">${fmtTime(Number(entry.bestRunSeconds || 0))}</span>
+      </div>
+      <div class="leaderboardCell">
+        <span class="leaderboardStatLabel">Best Kills</span>
+        <span class="leaderboardStatValue">${Number(entry.bestKills || 0)}</span>
+      </div>
+      <div class="leaderboardCell">
+        <span class="leaderboardStatLabel">Runs</span>
+        <span class="leaderboardStatValue">${Number(entry.totalRuns || 0)}</span>
+      </div>
+      <div class="leaderboardCell">
+        <span class="leaderboardStatLabel">Wins</span>
+        <span class="leaderboardStatValue">${Number(entry.totalWins || 0)}</span>
+      </div>
+      <div class="leaderboardCell">
+        <span class="leaderboardStatLabel">Kills</span>
+        <span class="leaderboardStatValue">${Number(entry.totalKills || 0)}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function loadLeaderboard() {
+  const leaderboardRef = getLeaderboardCollectionRef();
+  if (!leaderboardRef) {
+    cloudState.leaderboardEntries = [];
+    renderLeaderboard();
+    return;
+  }
+
+  document.getElementById('leaderboardList').innerHTML = `<div class="leaderboardEmpty">Loading leaderboard...</div>`;
+  renderLeaderboardTabs();
+  try {
+    const modeMeta = getLeaderboardModeMeta();
+    const snap = await leaderboardRef
+      .orderBy(modeMeta.orderField, modeMeta.orderDirection)
+      .limit(25)
+      .get();
+
+    cloudState.leaderboardEntries = snap.docs.map(docSnap => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
+  } catch (error) {
+    console.error('Failed to load Monster Mayhem leaderboard:', error);
+    cloudState.leaderboardEntries = [];
+    document.getElementById('leaderboardList').innerHTML = `<div class="leaderboardEmpty">Leaderboard unavailable right now. Try again in a moment.</div>`;
+    return;
+  }
+
+  renderLeaderboard();
+}
+
+async function syncLeaderboardEntryFromProfile() {
+  if (!cloudState.user || !cloudState.profile) return;
+  const leaderboardRef = getLeaderboardCollectionRef();
+  if (!leaderboardRef) return;
+
+  const bestRunSeconds = Number(cloudState.profile.bestRunSeconds || 0);
+  const bestKills = Number(cloudState.profile.bestKills || 0);
+  const totalRuns = Number(cloudState.profile.totalRuns || 0);
+  const totalKills = Number(cloudState.profile.totalKills || 0);
+  const totalWins = Number(cloudState.profile.totalWins || 0);
+  const totalCoinsBanked = Number(cloudState.profile.totalCoinsBanked || 0);
+
+  if (bestRunSeconds <= 0 && bestKills <= 0 && totalRuns <= 0 && totalKills <= 0 && totalWins <= 0) {
+    return;
+  }
+
+  await leaderboardRef.doc(cloudState.user.uid).set({
+    uid: cloudState.user.uid,
+    username: getLeaderboardDisplayName(),
+    bestRunSeconds,
+    bestKills,
+    totalRuns,
+    totalKills,
+    totalWins,
+    totalCoinsBanked,
+    leaderboardScore: buildLeaderboardScore(bestRunSeconds, bestKills, totalWins),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    gameTitle: GAME_TITLE,
+  }, { merge: true });
 }
 
 async function logoutToApp() {
@@ -612,6 +1214,7 @@ function buildRunPayload(won) {
 async function persistRunPayload(runPayload) {
   const profileRef = getCloudProfileRef();
   if (!profileRef) throw new Error('No authenticated Monster Mayhem profile is ready.');
+  const leaderboardRef = getLeaderboardCollectionRef();
 
   const progress = runPayload.progress || getLocalProgressPayload();
   const runDurationSeconds = Math.max(0, Math.round(runPayload.durationSeconds || 0));
@@ -669,7 +1272,29 @@ async function persistRunPayload(runPayload) {
     totalCoinsBanked: Number(cloudState.profile?.totalCoinsBanked || 0) + earnedCoins,
     lastRun: runSummary,
   };
+
+  if (leaderboardRef && cloudState.user) {
+    await leaderboardRef.doc(cloudState.user.uid).set({
+      uid: cloudState.user.uid,
+      username: getLeaderboardDisplayName(),
+      bestRunSeconds: Number(cloudState.profile.bestRunSeconds || 0),
+      bestKills: Number(cloudState.profile.bestKills || 0),
+      totalRuns: Number(cloudState.profile.totalRuns || 0),
+      totalKills: Number(cloudState.profile.totalKills || 0),
+      totalWins: Number(cloudState.profile.totalWins || 0),
+      totalCoinsBanked: Number(cloudState.profile.totalCoinsBanked || 0),
+      leaderboardScore: buildLeaderboardScore(
+        Number(cloudState.profile.bestRunSeconds || 0),
+        Number(cloudState.profile.bestKills || 0),
+        Number(cloudState.profile.totalWins || 0)
+      ),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      gameTitle: GAME_TITLE,
+    }, { merge: true });
+  }
+
   renderAccountUi();
+  if (overlayScreen === 'leaderboard') await loadLeaderboard();
   if (overlayScreen === 'dead') document.getElementById('deadStats').innerHTML = endStatsHTML();
   if (overlayScreen === 'win') document.getElementById('winStats').innerHTML = endStatsHTML();
 }
@@ -747,6 +1372,7 @@ async function initializeCloudProgress() {
         if (!appliedRemote) {
           await syncCloudProfile('initial-local-migration');
         }
+        await syncLeaderboardEntryFromProfile();
         await flushPendingRuns();
       } catch (error) {
         console.error('Failed to load Monster Mayhem cloud profile:', error);
@@ -1206,8 +1832,8 @@ function setStartButtonsDisabled(disabled, label) {
     const btn = document.getElementById(id);
     if (!btn) continue;
     btn.disabled = disabled;
-    if (label) btn.textContent = label;
-    else if (id === 'startBtn') btn.textContent = 'BASH!';
+    if (label) btn.childNodes[0] ? btn.childNodes[0].textContent = label : (btn.textContent = label);
+    else if (id === 'startBtn') btn.childNodes[0] ? btn.childNodes[0].textContent = 'PLAY NOW' : (btn.textContent = 'PLAY NOW');
     else if (id === 'retryBtn') btn.textContent = 'TRY AGAIN';
     else if (id === 'winBtn') btn.textContent = 'ONE MORE RUN';
   }
@@ -2657,7 +3283,7 @@ addEventListener('keydown', e => {
       G.state = 'pause'; overlayScreen = 'pause'; Music.stop(); document.getElementById('pauseScr').style.display = 'flex'; emitHudState(true);
     }
     else if (G.state === 'pause') {
-      G.state = 'play'; overlayScreen = 'play'; Music.start(); document.getElementById('pauseScr').style.display = 'none'; emitHudState(true);
+      resumePause();
     }
   }
 });
@@ -2676,11 +3302,7 @@ window.addEventListener('message', event => {
   const { action, payload } = event.data;
   if (action === 'startGame') startGame();
   else if (action === 'resumePause' && G.state === 'pause') {
-    G.state = 'play';
-    overlayScreen = 'play';
-    Music.start();
-    document.getElementById('pauseScr').style.display = 'none';
-    emitHudState(true);
+    resumePause();
   }
   else if (action === 'selectCharacter' && typeof payload?.index === 'number' && CHARACTERS[payload.index]) {
     chosenChar = payload.index;
@@ -3075,18 +3697,39 @@ function endStatsHTML() {
          `🪙 banked <b>+${G.earned}</b> coins · total <b>${save.coins}</b>`;
 }
 
+function bankCurrentRunRewards() {
+  if (G.banked) return;
+  G.banked = true;
+  G.earned = Math.round(G.gold);
+  save.coins += G.earned;
+  persistSave();
+  refreshMenuCoins();
+}
+
+function returnToDashboard({ bankRun = false } = {}) {
+  if (bankRun) bankCurrentRunRewards();
+  Music.stop();
+  clearInputState();
+  G.state = 'menu';
+  overlayScreen = 'menu';
+  document.getElementById('hud').style.display = 'none';
+  document.getElementById('pauseScr').style.display = 'none';
+  document.getElementById('deadScr').style.display = 'none';
+  document.getElementById('winScr').style.display = 'none';
+  document.getElementById('shopScr').style.display = 'none';
+  document.getElementById('leaderboardScr').style.display = 'none';
+  document.getElementById('levelup').style.display = 'none';
+  document.getElementById('menu').style.display = 'flex';
+  renderAccountUi();
+  emitHudState(true);
+}
+
 function gameOver(won) {
   G.state = won ? 'win' : 'dead';
   overlayScreen = won ? 'win' : 'dead';
   Music.stop();
   document.getElementById('levelup').style.display = 'none'; // clear a same-frame card screen
-  if (!G.banked) { // run gold becomes permanent coins
-    G.banked = true;
-    G.earned = Math.round(G.gold);
-    save.coins += G.earned;
-    persistSave();
-    refreshMenuCoins();
-  }
+  bankCurrentRunRewards();
   for (const s of dmgPool) { s.life = 0; s.el.style.display = 'none'; }
   document.getElementById('hud').style.display = 'none';
   if (won) {
@@ -3114,14 +3757,19 @@ function gameOver(won) {
   const row = document.getElementById('charRow');
   CHARACTERS.forEach((c, i) => {
     const d = document.createElement('div');
-    d.className = 'charCard' + (i === 0 ? ' sel' : '');
-    d.innerHTML = `<div class="charEmoji">${c.emoji}</div><div class="charName">${c.name}</div><div class="charDesc">${c.desc}</div>`;
+    d.className = 'charCard charCardWrap' + (i === 0 ? ' sel' : '');
+    d.innerHTML = `${i === 0 ? '<div class="charBadge">★</div>' : ''}<div class="charEmoji">${c.emoji}</div><div class="charName">${c.name}</div><div class="charDesc">${c.desc}</div>`;
     d.onclick = () => {
       setChosenCharacter(i);
       Sfx.pick();
+      renderAccountUi();
     };
     row.appendChild(d);
   });
+  const locked = document.createElement('div');
+  locked.className = 'charCard charCardWrap locked';
+  locked.innerHTML = `<div class="charBadge">🔒</div><div class="charEmoji">👤</div><div class="charName">SPIKE</div><div class="charDesc">Unlocked at Level 12.<br>High damage specialist.</div>`;
+  row.appendChild(locked);
   document.getElementById('startBtn').onclick = startGame;
   document.getElementById('retryBtn').onclick = startGame;
   document.getElementById('winBtn').onclick = startGame;
@@ -3149,11 +3797,12 @@ function gameOver(won) {
    UPGRADE LAB (shop) — spend banked coins on permanent upgrades
 ============================================================ */
 function refreshMenuCoins() {
-  document.getElementById('menuCoins').textContent = `🪙 ${save.coins} coins`;
+  document.getElementById('menuCoins').textContent = String(save.coins);
   renderAccountUi();
   emitHudState(true);
 }
 let shopReturn = 'menu';
+let leaderboardReturn = 'menu';
 function buyMetaUpgrade(metaId) {
   const meta = META.find(item => item.id === metaId);
   if (!meta) return;
@@ -3205,10 +3854,51 @@ function closeShop() {
   Sfx.pick();
   emitHudState(true);
 }
+async function openLeaderboard(from = 'menu') {
+  leaderboardReturn = from;
+  overlayScreen = 'leaderboard';
+  document.getElementById(from).style.display = 'none';
+  document.getElementById('leaderboardScr').style.display = 'flex';
+  Sfx.pick();
+  emitHudState(true);
+  await loadLeaderboard();
+}
+function closeLeaderboard() {
+  document.getElementById('leaderboardScr').style.display = 'none';
+  document.getElementById(leaderboardReturn).style.display = 'flex';
+  overlayScreen = leaderboardReturn === 'deadScr' ? 'dead' : leaderboardReturn === 'winScr' ? 'win' : 'menu';
+  Sfx.pick();
+  emitHudState(true);
+}
+function resumePause() {
+  if (G.state !== 'pause') return;
+  G.state = 'play';
+  overlayScreen = 'play';
+  Music.start();
+  document.getElementById('pauseScr').style.display = 'none';
+  emitHudState(true);
+}
 document.getElementById('shopBtn').onclick = () => openShop('menu');
 document.getElementById('deadShopBtn').onclick = () => openShop('deadScr');
 document.getElementById('winShopBtn').onclick = () => openShop('winScr');
 document.getElementById('shopBack').onclick = () => closeShop();
+document.getElementById('leaderboardBtn').onclick = () => openLeaderboard('menu');
+document.getElementById('leaderboardBack').onclick = () => closeLeaderboard();
+document.getElementById('pauseResumeBtn').onclick = () => resumePause();
+document.getElementById('pauseEndRunBtn').onclick = () => returnToDashboard({ bankRun: true });
+document.getElementById('deadMenuBtn').onclick = () => returnToDashboard();
+document.getElementById('leaderboardTabSurvival').onclick = () => {
+  cloudState.leaderboardMode = 'survival';
+  loadLeaderboard();
+};
+document.getElementById('leaderboardTabKills').onclick = () => {
+  cloudState.leaderboardMode = 'kills';
+  loadLeaderboard();
+};
+document.getElementById('leaderboardTabWins').onclick = () => {
+  cloudState.leaderboardMode = 'wins';
+  loadLeaderboard();
+};
 function resetSaveData() {
   save.coins = 0;
   for (const m of META) save.upgrades[m.id] = 0;
