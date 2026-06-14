@@ -21,6 +21,7 @@
 
   /* ---------- HUD ---------- */
   #hud{position:absolute;inset:0;display:none}
+  #mobileJoystick{display:none}
   #weaponHero{position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:14px;min-width:300px;max-width:360px;padding:12px 18px 12px 12px;border-radius:28px;background:linear-gradient(180deg,rgba(23,24,29,.94),rgba(17,17,22,.88));border:2px solid rgba(255,217,102,.58);box-shadow:0 14px 28px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(10px)}
   #weaponHeroIcon{width:82px;height:82px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8d5bff,#4a2367 60%,#211226 100%);border:3px solid rgba(255,220,123,.78);box-shadow:0 0 0 4px rgba(255,255,255,.08),0 12px 20px rgba(0,0,0,.35);font-size:44px}
   #weaponHeroBody{display:flex;flex-direction:column;gap:8px;min-width:0}
@@ -289,6 +290,248 @@
     .title.dashboardTitle{font-size:84px}
   }
   @media (max-width: 768px){
+    #weaponHero{
+      top:14px;
+      left:14px;
+      min-width:0;
+      width:112px;
+      max-width:112px;
+      padding:7px 8px 8px 7px;
+      border-radius:18px;
+      gap:7px;
+      align-items:flex-start;
+      flex-direction:column;
+    }
+    #weaponHeroIcon{
+      width:46px;
+      height:46px;
+      font-size:24px;
+      border-width:2px;
+      box-shadow:0 0 0 2px rgba(255,255,255,.08),0 8px 14px rgba(0,0,0,.28);
+    }
+    #weaponHeroBody{gap:5px;width:100%}
+    #weaponHeroName{font-size:9px;line-height:1.05}
+    #weaponHeroPips{gap:4px}
+    .weaponPip{width:8px;height:8px;border-width:1px}
+    .weaponHeroMeta{display:none}
+    #xpbarWrap{
+      top:12px;
+      width:114px;
+      height:8px;
+      border-width:1px;
+      box-shadow:0 6px 12px rgba(0,0,0,.2), inset 0 1px 3px rgba(0,0,0,.34);
+    }
+    #lvlBadge{
+      top:15px;
+      min-width:0;
+      font-size:10px;
+      padding:0 8px;
+      letter-spacing:.6px;
+    }
+    #timer{
+      top:28px;
+      min-width:118px;
+      font-size:30px;
+      padding:11px 9px 9px;
+      border-radius:18px;
+      letter-spacing:1px;
+    }
+    #timer::before{border-radius:18px;border-width:2px}
+    #timer::after{
+      top:-10px;
+      right:14px;
+      font-size:10px;
+    }
+    #stats{
+      top:14px;
+      right:14px;
+      min-width:0;
+      width:104px;
+      padding:0;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      border:none;
+      background:transparent;
+      box-shadow:none;
+      backdrop-filter:none;
+    }
+    .hudStat{
+      gap:6px;
+      padding:7px 8px;
+      min-height:48px;
+      border-right:none;
+      border-radius:16px;
+      background:linear-gradient(180deg,rgba(28,29,33,.94),rgba(18,18,22,.88));
+      border:2px solid rgba(255,255,255,.12);
+      box-shadow:0 10px 18px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .hudStatIcon{
+      width:26px;
+      height:26px;
+      font-size:15px;
+    }
+    .hudStatLabel{font-size:6px}
+    .hudStatValue{font-size:13px}
+    #accountHud{display:none}
+    #bossWrap{
+      top:104px;
+      width:170px;
+    }
+    #bossName{font-size:11px;margin-bottom:4px}
+    #bossOuter{height:10px;border-width:1px}
+    #combo{
+      top:190px;
+      right:14px;
+      font-size:16px;
+      max-width:104px;
+      line-height:.95;
+    }
+    #mobileJoystick{
+      display:block;
+      position:absolute;
+      left:14px;
+      bottom:112px;
+      width:108px;
+      height:108px;
+      pointer-events:auto;
+      touch-action:none;
+      z-index:3;
+    }
+    #mobileJoystickBase{
+      position:relative;
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      background:radial-gradient(circle at 35% 30%,rgba(63,89,28,.34),rgba(18,32,10,.78) 68%,rgba(13,22,10,.92) 100%);
+      border:2px solid rgba(255,219,102,.78);
+      box-shadow:0 12px 22px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .joyArrow{
+      position:absolute;
+      color:rgba(255,255,255,.32);
+      font-size:16px;
+      font-weight:900;
+      line-height:1;
+      text-shadow:0 1px 3px rgba(0,0,0,.4);
+    }
+    .joyArrow.up{top:10px;left:50%;transform:translateX(-50%)}
+    .joyArrow.right{right:10px;top:50%;transform:translateY(-50%)}
+    .joyArrow.down{bottom:10px;left:50%;transform:translateX(-50%)}
+    .joyArrow.left{left:10px;top:50%;transform:translateY(-50%)}
+    #mobileJoystickKnob{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:42px;
+      height:42px;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      background:radial-gradient(circle at 35% 30%,#9e62ff,#7237c8 65%,#4e2282 100%);
+      border:2px solid rgba(193,151,255,.72);
+      box-shadow:0 8px 16px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.16);
+    }
+    #hpWrap{
+      left:14px;
+      bottom:14px;
+      width:130px;
+      padding:8px 9px;
+      border-radius:20px;
+    }
+    #hpOuter{
+      height:18px;
+      border-width:1px;
+    }
+    #hpText{
+      top:9px;
+      font-size:9px;
+      letter-spacing:.5px;
+    }
+    #stamWrap{
+      gap:7px;
+      margin-top:8px;
+    }
+    #stamWrap::before{
+      width:22px;
+      height:22px;
+      font-size:13px;
+      border-width:1px;
+    }
+    #stamOuter{
+      height:12px;
+      border-width:1px;
+    }
+    #weaponTray{
+      right:14px;
+      bottom:14px;
+      grid-template-columns:repeat(3,50px);
+      gap:6px;
+    }
+    .wslot{
+      width:50px;
+      height:68px;
+      border-radius:14px;
+      border-width:2px;
+      box-shadow:0 10px 16px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .wslot.active{
+      box-shadow:0 0 0 2px rgba(164,102,255,.24),0 12px 18px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .slotIcon{font-size:24px}
+    .slotLevel{
+      right:6px;
+      bottom:6px;
+      font-size:11px;
+    }
+    .slotIndex{
+      min-width:20px;
+      bottom:-8px;
+      padding:2px 6px;
+      font-size:10px;
+      border-radius:7px;
+    }
+    #hint{display:none}
+    #lvluptitle{
+      font-size:28px;
+      margin-bottom:18px;
+      letter-spacing:2px;
+    }
+    .cardRow{
+      width:100%;
+      justify-content:center;
+      gap:7px;
+      padding:0 6px;
+    }
+    .upCard{
+      width:calc(33.333vw - 11px);
+      min-width:108px;
+      min-height:120px;
+      padding:8px 8px;
+      border-radius:14px;
+      box-shadow:0 9px 18px rgba(15,11,34,.22);
+    }
+    .upEmoji{
+      font-size:26px;
+      margin:6px 0 8px;
+    }
+    .upName{
+      font-size:10px;
+      margin-bottom:2px;
+    }
+    .upLvl{
+      font-size:7px;
+      margin-bottom:6px;
+    }
+    .upDesc{
+      font-size:7px;
+      line-height:1.2;
+    }
+    .upTag{
+      font-size:7px;
+      letter-spacing:2px;
+      margin-top:8px;
+    }
+
     #menu{
       background:
         linear-gradient(180deg, rgba(10,10,30,.08), rgba(5,9,25,.48)),
@@ -490,6 +733,192 @@
     }
     .navBtn .navIcon{font-size:16px}
     .navBtn:last-child{border-right:none}
+    .endShell{
+      width:100%;
+      max-width:296px;
+      gap:8px;
+      padding:8px 7px 12px;
+    }
+    .endHero{
+      gap:1px;
+      margin-top:0;
+    }
+    .endKicker{
+      font-size:7px;
+      letter-spacing:1.1px;
+    }
+    .endTitle{
+      font-size:46px;
+      letter-spacing:.6px;
+      line-height:.86;
+    }
+    .endSubtitle{
+      font-size:21px;
+      letter-spacing:.6px;
+      line-height:.92;
+    }
+    .endStats{
+      width:100%;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      padding:7px 5px;
+      border-radius:14px;
+    }
+    .endSummaryItem{
+      gap:4px;
+      padding:2px 4px;
+      align-items:center;
+      flex-direction:column;
+      text-align:center;
+    }
+    .endSummaryBody{align-items:center}
+    .endSummaryIcon{font-size:22px}
+    .endSummaryLabel{font-size:6px}
+    .endSummaryValue{
+      font-size:11px;
+      line-height:1;
+    }
+    .accountMeta.endMeta{
+      width:100%;
+      grid-template-columns:72px 1fr;
+      gap:7px;
+      padding:9px 10px;
+      border-radius:16px;
+    }
+    .endProfileAvatar{
+      width:48px;
+      height:48px;
+      font-size:24px;
+      border-width:2px;
+    }
+    .endProfileMain{gap:3px}
+    .endProfileName{
+      font-size:18px;
+    }
+    .endProfileSub{
+      font-size:7px;
+      line-height:1.25;
+    }
+    .endProfileMetric{
+      padding-left:0;
+      border-left:none;
+      border-top:1px solid rgba(106,56,17,.14);
+      padding-top:8px;
+    }
+    .accountMeta.endMeta .endProfileMetric:nth-of-type(1),
+    .accountMeta.endMeta .endProfileMetric:nth-of-type(2),
+    .accountMeta.endMeta .endProfileMetric:nth-of-type(3){
+      grid-column:span 1;
+    }
+    .accountMeta.endMeta{
+      grid-template-columns:54px 1fr 1fr;
+      align-items:start;
+    }
+    .accountMeta.endMeta .endProfileMain{
+      grid-column:2 / span 2;
+    }
+    .accountMeta.endMeta .endProfileMetric{
+      min-width:0;
+    }
+    .endProfileMetricLabel{
+      font-size:7px;
+      letter-spacing:.6px;
+    }
+    .endProfileMetricValue{
+      font-size:11px;
+      line-height:1.1;
+    }
+    .endProgressPanel{
+      width:100%;
+      grid-template-columns:1fr;
+      padding:8px 10px;
+      border-radius:16px;
+      gap:7px;
+    }
+    .endProgressBlock{
+      gap:7px;
+      padding:0;
+      align-items:flex-start;
+    }
+    .endProgressBlock + .endProgressBlock{
+      border-left:none;
+      border-top:1px solid rgba(255,255,255,.12);
+      padding-top:7px;
+    }
+    .endProgressIcon{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      font-size:17px;
+    }
+    .endProgressText{gap:4px}
+    .endProgressLabel{
+      font-size:7px;
+      letter-spacing:.8px;
+    }
+    .endProgressValue{
+      font-size:15px;
+    }
+    .endProgressTrack{
+      margin-top:4px;
+      height:7px;
+    }
+    .endProgressMeta{
+      font-size:7px;
+      gap:8px;
+    }
+    .endActions{
+      width:100%;
+      gap:7px;
+      flex-direction:column;
+    }
+    .endActions .bigBtn,
+    .endActions .bigBtn.secondary{
+      width:100%;
+      min-width:0;
+      padding:9px 10px 10px;
+      border-radius:14px;
+      font-size:13px;
+      letter-spacing:.6px;
+      box-shadow:0 5px 0 rgba(138,84,0,.9),0 12px 20px rgba(0,0,0,.18);
+    }
+    .endActions .bigBtn.secondary{
+      box-shadow:0 5px 0 #5233a7,0 12px 20px rgba(0,0,0,.18);
+    }
+    #pauseScr{
+      padding:20px 14px;
+      justify-content:center;
+      gap:14px;
+    }
+    #pauseScr .endTitle{
+      font-size:52px;
+      line-height:.9;
+      margin-bottom:0;
+      letter-spacing:2px;
+      text-align:center;
+    }
+    #pauseScr .endStats{
+      display:none;
+    }
+    #pauseScr .btnRow{
+      width:100%;
+      max-width:300px;
+      gap:12px;
+      justify-content:center;
+      align-items:stretch;
+    }
+    #pauseScr .bigBtn,
+    #pauseScr .bigBtn.secondary{
+      flex:1 1 0;
+      min-width:0;
+      padding:10px 10px 12px;
+      border-radius:16px;
+      font-size:14px;
+      letter-spacing:1px;
+      box-shadow:0 4px 0 rgba(138,84,0,.9),0 10px 18px rgba(0,0,0,.18);
+    }
+    #pauseScr .bigBtn.secondary{
+      box-shadow:0 4px 0 #5233a7,0 10px 18px rgba(0,0,0,.18);
+    }
   }
 
   @media (max-width: 768px) and (max-height: 700px){
@@ -515,6 +944,15 @@
     <div id="timer">0:00</div>
     <div id="stats"></div>
     <div id="accountHud"></div>
+    <div id="mobileJoystick" aria-hidden="true">
+      <div id="mobileJoystickBase">
+        <span class="joyArrow up">▲</span>
+        <span class="joyArrow right">▶</span>
+        <span class="joyArrow down">▼</span>
+        <span class="joyArrow left">◀</span>
+        <div id="mobileJoystickKnob"></div>
+      </div>
+    </div>
     <div id="weaponTray"></div>
     <div id="bossWrap"><div id="bossName">BOSS</div><div id="bossOuter"><div id="bossFill"></div></div></div>
     <div id="hpWrap" data-react-hud><div id="hpOuter"><div id="hpFill"></div></div><div id="hpText">100/100</div>
@@ -3480,6 +3918,66 @@ function refreshWeaponTray() {
    INPUT
 ============================================================ */
 const keys = {};
+const mobileStick = {
+  active: false,
+  pointerId: null,
+  x: 0,
+  y: 0,
+};
+const mobileJoystickEl = document.getElementById('mobileJoystick');
+const mobileJoystickBaseEl = document.getElementById('mobileJoystickBase');
+const mobileJoystickKnobEl = document.getElementById('mobileJoystickKnob');
+
+function resetMobileJoystick() {
+  mobileStick.active = false;
+  mobileStick.pointerId = null;
+  mobileStick.x = 0;
+  mobileStick.y = 0;
+  if (mobileJoystickKnobEl) mobileJoystickKnobEl.style.transform = 'translate(-50%, -50%)';
+}
+
+function updateMobileJoystick(clientX, clientY) {
+  if (!mobileJoystickBaseEl || !mobileJoystickKnobEl) return;
+  const rect = mobileJoystickBaseEl.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const maxRadius = rect.width * 0.28;
+  let dx = clientX - cx;
+  let dy = clientY - cy;
+  const dist = Math.hypot(dx, dy);
+  if (dist > maxRadius && dist > 0) {
+    const scale = maxRadius / dist;
+    dx *= scale;
+    dy *= scale;
+  }
+  mobileStick.x = maxRadius ? dx / maxRadius : 0;
+  mobileStick.y = maxRadius ? dy / maxRadius : 0;
+  mobileJoystickKnobEl.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+}
+
+if (mobileJoystickEl && mobileJoystickBaseEl && mobileJoystickKnobEl) {
+  mobileJoystickEl.addEventListener('pointerdown', event => {
+    mobileStick.active = true;
+    mobileStick.pointerId = event.pointerId;
+    mobileJoystickEl.setPointerCapture?.(event.pointerId);
+    updateMobileJoystick(event.clientX, event.clientY);
+    event.preventDefault();
+  });
+  mobileJoystickEl.addEventListener('pointermove', event => {
+    if (!mobileStick.active || event.pointerId !== mobileStick.pointerId) return;
+    updateMobileJoystick(event.clientX, event.clientY);
+    event.preventDefault();
+  });
+  const releaseStick = event => {
+    if (!mobileStick.active || (event.pointerId != null && event.pointerId !== mobileStick.pointerId)) return;
+    mobileJoystickEl.releasePointerCapture?.(mobileStick.pointerId);
+    resetMobileJoystick();
+  };
+  mobileJoystickEl.addEventListener('pointerup', releaseStick);
+  mobileJoystickEl.addEventListener('pointercancel', releaseStick);
+  mobileJoystickEl.addEventListener('lostpointercapture', resetMobileJoystick);
+}
+
 addEventListener('keydown', e => {
   keys[e.code] = true;
   if (e.code === 'Space') e.preventDefault();
@@ -3497,6 +3995,7 @@ addEventListener('keyup', e => keys[e.code] = false);
 function clearInputState() {
   for (const code in keys) delete keys[code];
   P.sprinting = false;
+  resetMobileJoystick();
 }
 addEventListener('blur', clearInputState);
 addEventListener('visibilitychange', () => {
@@ -4275,6 +4774,10 @@ function tick(now) {
     if (keys.KeyS || keys.ArrowDown) mz += 1;
     if (keys.KeyA || keys.ArrowLeft) mx -= 1;
     if (keys.KeyD || keys.ArrowRight) mx += 1;
+    if (mobileStick.active) {
+      mx += mobileStick.x;
+      mz += mobileStick.y;
+    }
     const moving = !!(mx || mz);
     P.movingNow = moving;
 
