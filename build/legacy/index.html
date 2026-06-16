@@ -88,6 +88,9 @@
   .charCard:hover{transform:translateY(-7px) scale(1.03);border-color:#ffbe33;box-shadow:0 20px 40px rgba(84,49,18,.18)}
   .charCard.sel{border-color:var(--ui-green);box-shadow:0 0 0 4px rgba(150,201,61,.16),0 20px 40px rgba(84,49,18,.16)}
   .charEmoji{font-size:52px;margin-bottom:8px;filter:drop-shadow(0 6px 6px #0008)}
+  .charPreview{width:100%;height:150px;margin-bottom:12px;border-radius:18px;background:radial-gradient(circle at 50% 30%, rgba(255,255,255,.4), rgba(255,255,255,.08) 55%, rgba(31,23,50,.18) 100%);overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.28), inset 0 -10px 20px rgba(24,16,42,.12)}
+  .charPreview canvas{display:block;width:100%;height:100%}
+  .charCard.locked .charPreview{background:radial-gradient(circle at 50% 30%, rgba(255,255,255,.12), rgba(255,255,255,.04) 55%, rgba(12,10,18,.22) 100%)}
   .charName{color:var(--ink);font-family:var(--display);font-size:21px;letter-spacing:2px;margin-bottom:7px}
   .charDesc{color:var(--inkSoft);font-size:12.5px;font-weight:700;line-height:1.55}
   .bigBtn{pointer-events:auto;background:linear-gradient(180deg,#ffe07a,#f4ab17 70%,#d37f05);color:#4d2800;font-family:var(--display);font-size:28px;letter-spacing:3px;padding:15px 60px;border:none;border-radius:18px;cursor:pointer;box-shadow:0 5px 0 #965900,0 12px 24px rgba(85,47,14,.22);transition:transform .08s,box-shadow .08s}
@@ -222,6 +225,7 @@
   .menuBrandBottom{font-family:var(--display);font-size:52px;letter-spacing:1px;color:#ffc936;text-shadow:0 5px 0 #8b4105,0 10px 28px rgba(13,7,32,.58)}
   .menuTopbar{grid-column:2;grid-row:1;justify-self:end;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
   .topChip,.profileChip{pointer-events:auto;display:flex;align-items:center;gap:10px;min-height:58px;padding:10px 18px;border-radius:20px;background:linear-gradient(180deg,rgba(43,30,88,.94),rgba(25,20,54,.92));border:1px solid rgba(255,255,255,.16);box-shadow:0 16px 30px rgba(7,8,24,.28);color:#fff4dd}
+  .topChip.tokenChip .icon{width:24px;height:24px;border-radius:8px;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
   .topLogoutBtn{pointer-events:auto;display:flex;align-items:center;justify-content:center;min-height:58px;padding:10px 20px;border:none;border-radius:20px;background:linear-gradient(180deg,#fff6e5,#f0ddae);color:#6b441e;font-family:var(--display);font-size:18px;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 0 rgba(138,96,36,.42),0 10px 18px rgba(7,8,24,.2)}
   .topLogoutBtn:hover{transform:translateY(-1px)}
   .topLogoutBtn:disabled{opacity:.7;cursor:default;transform:none}
@@ -260,21 +264,86 @@
   .menuPrimaryAction{pointer-events:auto;position:relative;border:none;border-radius:26px;padding:22px 64px 30px;background:linear-gradient(180deg,#ffe88a,#ffbe21 60%,#dc850a);box-shadow:0 8px 0 #a15b00,0 22px 38px rgba(44,24,4,.26);font-family:var(--display);font-size:48px;letter-spacing:2px;color:#4d2800;cursor:pointer}
   .menuPrimaryAction:hover{transform:translateY(-2px) scale(1.01)}
   .menuPrimaryAction:disabled{opacity:.7;transform:none;cursor:default}
-  .menuPrimaryCost{position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);padding:6px 16px;border-radius:999px;background:linear-gradient(180deg,#916230,#734314);color:#fff9e7;font-size:18px;letter-spacing:1px;box-shadow:0 6px 14px rgba(0,0,0,.2)}
+  .menuPrimaryCost{position:absolute;left:50%;bottom:-24px;transform:translateX(-50%);min-width:132px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 16px 8px;border-radius:18px;background:linear-gradient(180deg,#916230,#734314);color:#fff9e7;font-size:18px;letter-spacing:1px;box-shadow:0 6px 14px rgba(0,0,0,.2);line-height:1}
+  .menuEnergyCount{display:block}
+  .menuEnergyTimer{display:block;font-family:ui-sans-serif,system-ui,sans-serif;font-size:10px;font-weight:900;letter-spacing:.4px;text-transform:uppercase;color:#ffe7a4;white-space:nowrap}
   .menuChooser{grid-column:1 / span 2;grid-row:3;display:flex;flex-direction:column;align-items:center;justify-self:center;gap:16px;width:min(100%,980px);position:relative;z-index:1}
   .menuChooser.selectorFocus{animation:selectorPulse 1s ease}
   .chooseLabel{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:32px;color:#fff8dd;letter-spacing:1px;text-shadow:0 6px 18px rgba(13,7,32,.5)}
   .chooseLabel .spark{color:#ffd34d}
   .charRow.dashboardRow{gap:16px;margin:0}
-  .charCard{width:230px;min-height:220px;padding:22px 18px;border-radius:24px;background:linear-gradient(180deg,rgba(255,249,232,.95),rgba(245,232,194,.9));box-shadow:0 18px 40px rgba(15,11,34,.24)}
+  .charCard{width:230px;min-height:272px;padding:22px 18px;border-radius:24px;background:linear-gradient(180deg,rgba(255,249,232,.95),rgba(245,232,194,.9));box-shadow:0 18px 40px rgba(15,11,34,.24)}
   .charCard.sel{border-color:#ffe24c;box-shadow:0 0 0 4px rgba(255,226,76,.16),0 0 40px rgba(255,223,83,.32),0 20px 40px rgba(15,11,34,.26)}
+  .charCard.equipped{box-shadow:0 0 0 3px rgba(127,231,172,.18),0 18px 40px rgba(15,11,34,.24)}
   .charCard.locked{background:linear-gradient(180deg,rgba(54,44,66,.9),rgba(38,31,50,.9));border-color:rgba(255,255,255,.08);color:#f0e6ff;cursor:default}
   .charCard.locked .charName,.charCard.locked .charDesc{color:#f0e6ff}
   .charBadge{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,#ffea86,#ffca2d);color:#7b4b00;font-size:18px;box-shadow:0 6px 12px rgba(0,0,0,.18)}
+  .charEquipBadge{position:absolute;top:14px;left:12px;padding:6px 12px;border-radius:999px;background:linear-gradient(180deg,#86f0b3,#42c878);color:#103321;font-family:var(--display);font-size:13px;letter-spacing:1px;box-shadow:0 8px 14px rgba(7,56,25,.24)}
   .charCardWrap{position:relative}
   .mobileCharDots{display:none;align-items:center;justify-content:center;gap:12px}
   .mobileCharDots span{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.22);box-shadow:inset 0 2px 4px rgba(0,0,0,.22)}
   .mobileCharDots span.active{background:linear-gradient(180deg,#ffe27c,#ffbc23)}
+  .loadoutShell{width:min(1100px,94vw);display:flex;flex-direction:column;align-items:center;gap:24px;padding:34px 28px 30px;border-radius:30px;background:linear-gradient(180deg,rgba(20,17,36,.92),rgba(18,22,36,.94));border:1px solid rgba(255,255,255,.14);box-shadow:0 28px 50px rgba(7,8,24,.34);color:#fff7ea}
+  .loadoutEyebrow{font-family:var(--display);font-size:22px;letter-spacing:2px;color:#ffd86a}
+  .loadoutTitle{font-family:var(--display);font-size:76px;line-height:.9;letter-spacing:2px;color:#fff8dd;text-align:center;text-shadow:0 8px 18px rgba(13,7,32,.5)}
+  .loadoutSub{max-width:720px;text-align:center;font-size:20px;font-weight:800;line-height:1.45;color:#dcd1fb}
+  .loadoutPanel{width:100%;display:flex;flex-direction:column;align-items:center;gap:18px;padding:24px 20px 20px;border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1)}
+  .loadoutPanel .charRow{margin:0;justify-content:center;flex-wrap:wrap}
+  .loadoutActions{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+  .loadoutBackBtn{min-width:220px}
+  #storeScr{
+    background:
+      radial-gradient(circle at 50% 14%, rgba(255,219,111,.24), rgba(255,219,111,0) 28%),
+      linear-gradient(180deg, rgba(18,13,40,.92), rgba(25,18,48,.9) 42%, rgba(21,17,36,.96) 100%),
+      url('./assets/dashboard-bg.png') center center / cover no-repeat;
+    padding:24px;
+  }
+  .storeShell{width:min(1180px,96vw);display:flex;flex-direction:column;align-items:center;gap:20px;padding:30px 28px 26px;border-radius:32px;background:linear-gradient(180deg,rgba(18,17,34,.88),rgba(15,18,31,.92));border:1px solid rgba(255,255,255,.12);box-shadow:0 28px 50px rgba(7,8,24,.34);color:#fff8e8;max-height:100%;overflow:auto}
+  .storeEyebrow{font-family:var(--display);font-size:22px;letter-spacing:2px;color:#8ddfff}
+  .storeTitle{font-family:var(--display);font-size:78px;line-height:.9;letter-spacing:2px;text-align:center;color:#fff7dc;text-shadow:0 8px 18px rgba(13,7,32,.5)}
+  .storeSub{max-width:760px;text-align:center;font-size:19px;font-weight:800;line-height:1.45;color:#ddd1ff}
+  .storeBalanceRow{width:min(880px,100%);display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+  .storeBalanceChip,.storeStatus{display:flex;align-items:center;gap:12px;padding:16px 20px;border-radius:20px;background:linear-gradient(180deg,rgba(43,30,88,.94),rgba(25,20,54,.92));border:1px solid rgba(255,255,255,.14);box-shadow:0 16px 30px rgba(7,8,24,.24)}
+  .storeBalanceChip img{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+  .storeBalanceLabel{display:block;font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#d8ccff}
+  .storeBalanceValue{display:block;font-family:var(--display);font-size:34px;line-height:1;color:#fff}
+  .storeStatus{min-height:70px;justify-content:center;text-align:center;font-size:14px;font-weight:800;color:#f6eedf}
+  .storeStatus.error{color:#ffd2cb;border-color:rgba(255,122,92,.4)}
+  .storeGrid{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  .storeCard{display:flex;flex-direction:column;align-items:center;gap:14px;padding:22px 18px 18px;border-radius:26px;background:linear-gradient(180deg,rgba(255,249,232,.95),rgba(245,232,194,.9));border:3px solid rgba(138,111,60,.16);box-shadow:0 18px 40px rgba(15,11,34,.24);color:var(--ink);text-align:center;position:relative}
+  .storeCard.bestValue{border-color:#ffd449;box-shadow:0 0 0 3px rgba(255,212,73,.18),0 18px 40px rgba(15,11,34,.24)}
+  .storeBadge{position:absolute;top:12px;right:12px;padding:6px 10px;border-radius:999px;background:linear-gradient(180deg,#8e46d9,#6d2daf);color:#fff5e3;font-family:var(--display);font-size:12px;letter-spacing:1px;box-shadow:0 6px 12px rgba(44,11,73,.24)}
+  .storeTokenArt{width:86px;height:86px;object-fit:contain;filter:drop-shadow(0 8px 14px rgba(0,0,0,.18))}
+  .storeTokenAmount{font-family:var(--display);font-size:34px;line-height:1;color:#2b7fe7}
+  .storeTokenLabel{font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#7c6386}
+  .storePrice{font-family:var(--display);font-size:42px;line-height:1;color:#8a4e11}
+  .storeUnitCopy{font-size:13px;font-weight:800;color:#86653f}
+  .storeBuyBtn{pointer-events:auto;width:100%;border:none;border-radius:16px;padding:14px 18px;background:linear-gradient(180deg,#ffe88a,#ffbe21 60%,#dc850a);box-shadow:0 5px 0 #a15b00,0 16px 26px rgba(44,24,4,.18);font-family:var(--display);font-size:22px;letter-spacing:1px;color:#4d2800;cursor:pointer}
+  .storeBuyBtn.continue{background:linear-gradient(180deg,#9770e1,#6f50c8 70%,#5334ad);box-shadow:0 5px 0 #5233a7,0 16px 26px rgba(44,24,4,.18);color:#fff7e8}
+  .storeBuyBtn:disabled{opacity:.72;cursor:default;transform:none}
+  .storeFinePrint{font-size:12px;font-weight:800;color:#cdbff8;text-align:center}
+  .storeActions{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;width:100%}
+  .storeCheckoutModal{position:absolute;inset:0;z-index:40;display:none;align-items:center;justify-content:center;padding:26px;background:rgba(11,10,24,.74);backdrop-filter:blur(8px)}
+  .storeCheckoutCard{position:relative;width:min(960px,96vw);min-height:560px;padding:26px 24px 24px;border-radius:28px;background:linear-gradient(180deg,rgba(17,18,28,.96),rgba(11,12,20,.96));border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 60px rgba(0,0,0,.42);display:flex;flex-direction:column;gap:14px}
+  .storeCheckoutClose{position:absolute;top:14px;right:14px;width:42px;height:42px;border:none;border-radius:50%;background:linear-gradient(180deg,#fff6e5,#f0ddae);color:#6b441e;font-family:var(--display);font-size:24px;cursor:pointer;box-shadow:0 4px 0 rgba(138,96,36,.42)}
+  .storeCheckoutTitle{font-family:var(--display);font-size:34px;letter-spacing:1px;color:#fff7de}
+  .storeCheckoutHint{font-size:14px;font-weight:800;color:#d2c8f4}
+  #storeCheckoutMount{flex:1;border-radius:22px;overflow:hidden;background:#fff;min-height:440px}
+  .energyGateModal{position:absolute;inset:0;z-index:45;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(10,9,22,.72);backdrop-filter:blur(10px)}
+  .energyGateCard{width:min(520px,94vw);display:flex;flex-direction:column;align-items:center;gap:18px;padding:28px 26px 24px;border-radius:30px;background:linear-gradient(180deg,rgba(20,17,36,.96),rgba(17,20,35,.96));border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 60px rgba(0,0,0,.42);color:#fff6e3;text-align:center}
+  .energyGateIconWrap{width:108px;height:108px;border-radius:30px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%, rgba(255,230,140,.9), rgba(255,190,33,.32) 54%, rgba(255,190,33,.06) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.26),0 18px 30px rgba(255,190,33,.14)}
+  .energyGateIcon{font-size:52px;color:#ffd145;text-shadow:0 8px 16px rgba(122,72,0,.28)}
+  .energyGateTitle{font-family:var(--display);font-size:44px;letter-spacing:2px;color:#fff8dd;text-shadow:0 8px 18px rgba(13,7,32,.5)}
+  .energyGateCopy{font-size:16px;font-weight:800;line-height:1.55;color:#ddd1ff;max-width:400px}
+  .energyGateBalance{display:flex;align-items:center;gap:12px;padding:16px 18px;border-radius:20px;background:linear-gradient(180deg,rgba(43,30,88,.94),rgba(25,20,54,.92));border:1px solid rgba(255,255,255,.14);box-shadow:0 16px 30px rgba(7,8,24,.24)}
+  .energyGateBalance img{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+  .energyGateBalanceLabel{display:block;font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#d8ccff;text-align:left}
+  .energyGateBalanceValue{display:block;font-family:var(--display);font-size:30px;line-height:1;color:#fff;text-align:left}
+  .energyGateHint{min-height:24px;font-size:13px;font-weight:900;color:#ffe7a4}
+  .energyGateHint.error{color:#ffd2cb}
+  .energyGateActions{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;width:100%}
+  .energyGateActions .bigBtn{min-width:190px}
+  .energyGateActions .bigBtn.secondary{min-width:160px}
   .menuBottomNav{grid-column:1 / span 2;grid-row:4;justify-self:center;display:grid;grid-template-columns:repeat(5,minmax(160px,1fr));width:min(1420px,96%);border-radius:28px;background:linear-gradient(180deg,rgba(20,17,36,.88),rgba(18,22,36,.88));border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 40px rgba(7,8,24,.3);overflow:hidden}
   .navBtn{pointer-events:auto;display:flex;align-items:center;justify-content:center;gap:12px;padding:22px 24px;border:none;background:transparent;color:#fff5de;font-family:var(--display);font-size:28px;letter-spacing:1px;cursor:pointer;border-right:1px solid rgba(255,255,255,.1)}
   .navBtn:last-child{border-right:none}
@@ -294,6 +363,9 @@
     .menuSidebar,.menuHeroWrap,.menuChooser{grid-column:1;grid-row:auto;justify-self:center}
     .menuBottomNav{grid-column:1;grid-template-columns:repeat(2,minmax(160px,1fr))}
     .title.dashboardTitle{font-size:84px}
+    .loadoutTitle{font-size:58px}
+    .storeTitle{font-size:58px}
+    .storeGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
   }
   @media (max-width: 768px){
     #weaponHero{
@@ -511,7 +583,7 @@
     .upCard{
       width:calc(33.333vw - 11px);
       min-width:108px;
-      min-height:120px;
+      min-height:156px;
       padding:8px 8px;
       border-radius:14px;
       box-shadow:0 9px 18px rgba(15,11,34,.22);
@@ -587,6 +659,7 @@
       box-shadow:0 8px 14px rgba(7,8,24,.2);
       min-width:0;
     }
+    .topChip.tokenChip .icon{width:11px;height:11px;border-radius:4px}
     .topChip .icon{font-size:11px}
     .topChip .label{font-size:6px}
     .topChip .value{font-size:12px}
@@ -623,7 +696,15 @@
       border-radius:16px;
       box-shadow:0 6px 0 #a15b00,0 16px 26px rgba(44,24,4,.22);
     }
-    .menuPrimaryCost{font-size:11px;bottom:-10px;padding:4px 10px}
+    .menuPrimaryCost{
+      min-width:86px;
+      bottom:-19px;
+      gap:1px;
+      padding:4px 8px 5px;
+      border-radius:12px;
+      font-size:11px;
+    }
+    .menuEnergyTimer{font-size:7px;letter-spacing:.2px}
     .menuChooser{
       order:5;
       width:100%;
@@ -654,11 +735,148 @@
       box-shadow:0 9px 18px rgba(15,11,34,.22);
     }
     .charEmoji{font-size:26px;margin-bottom:3px}
+    .charPreview{height:92px;margin-bottom:6px;border-radius:12px}
     .charName{font-size:10px;margin-bottom:2px}
     .charDesc{font-size:7px;line-height:1.2}
     .charBadge{width:19px;height:19px;font-size:9px;top:7px;right:7px}
     .mobileCharDots{display:flex;order:6;margin-top:0;gap:6px}
     .mobileCharDots span{width:8px;height:8px}
+    .loadoutShell{
+      width:min(96vw,360px);
+      gap:14px;
+      padding:18px 14px 16px;
+      border-radius:22px;
+    }
+    .loadoutEyebrow{font-size:12px;letter-spacing:1.2px}
+    .loadoutTitle{font-size:42px;line-height:.92}
+    .loadoutSub{font-size:12px;line-height:1.35}
+    .loadoutPanel{
+      padding:12px 10px 10px;
+      border-radius:18px;
+      gap:10px;
+    }
+    .loadoutPanel .charRow{
+      width:100%;
+      justify-content:flex-start;
+      flex-wrap:nowrap;
+    }
+    .loadoutActions{
+      width:100%;
+      gap:10px;
+      flex-direction:column;
+    }
+    .loadoutActions .bigBtn,
+    .loadoutActions .bigBtn.secondary{
+      width:100%;
+      min-width:0;
+      padding:10px 10px 12px;
+      border-radius:14px;
+      font-size:14px;
+      letter-spacing:.8px;
+      box-shadow:0 4px 0 rgba(138,84,0,.9),0 10px 18px rgba(0,0,0,.18);
+    }
+    .loadoutActions .bigBtn.secondary{
+      box-shadow:0 4px 0 #5233a7,0 10px 18px rgba(0,0,0,.18);
+    }
+    #storeScr{padding:12px}
+    .storeShell{
+      width:min(96vw,360px);
+      gap:12px;
+      padding:18px 14px 16px;
+      border-radius:22px;
+    }
+    .storeEyebrow{font-size:11px;letter-spacing:1.2px}
+    .storeTitle{font-size:38px}
+    .storeSub{font-size:12px;line-height:1.35}
+    .storeBalanceRow{gap:10px}
+    .storeBalanceChip,.storeStatus{
+      width:100%;
+      min-height:0;
+      padding:10px 12px;
+      border-radius:16px;
+      gap:8px;
+    }
+    .storeBalanceChip img{width:22px;height:22px}
+    .storeBalanceLabel{font-size:9px}
+    .storeBalanceValue{font-size:20px}
+    .storeStatus{font-size:11px}
+    .storeGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .storeCard{
+      gap:8px;
+      padding:12px 10px 10px;
+      border-radius:18px;
+    }
+    .storeBadge{top:8px;right:8px;padding:4px 8px;font-size:8px}
+    .storeTokenArt{width:48px;height:48px}
+    .storeTokenAmount{font-size:18px}
+    .storeTokenLabel{font-size:8px}
+    .storePrice{font-size:24px}
+    .storeUnitCopy{font-size:9px}
+    .storeBuyBtn{
+      padding:10px 8px 12px;
+      border-radius:12px;
+      font-size:14px;
+      box-shadow:0 4px 0 #a15b00,0 10px 18px rgba(44,24,4,.16);
+    }
+    .storeBuyBtn.continue{box-shadow:0 4px 0 #5233a7,0 10px 18px rgba(44,24,4,.16)}
+    .storeFinePrint{font-size:9px}
+    .storeActions .bigBtn.secondary{
+      width:100%;
+      padding:10px 10px 12px;
+      border-radius:14px;
+      font-size:14px;
+      box-shadow:0 4px 0 #5233a7,0 10px 18px rgba(0,0,0,.18);
+    }
+    .storeCheckoutModal{padding:10px}
+    .storeCheckoutCard{
+      min-height:0;
+      height:min(92vh,720px);
+      padding:16px 14px 14px;
+      border-radius:20px;
+      gap:10px;
+    }
+    .storeCheckoutClose{width:34px;height:34px;font-size:18px}
+    .storeCheckoutTitle{font-size:20px}
+    .storeCheckoutHint{font-size:11px;padding-right:24px}
+    #storeCheckoutMount{min-height:360px}
+    .energyGateModal{padding:14px}
+    .energyGateCard{
+      width:min(94vw,360px);
+      gap:12px;
+      padding:20px 16px 16px;
+      border-radius:22px;
+    }
+    .energyGateIconWrap{width:78px;height:78px;border-radius:22px}
+    .energyGateIcon{font-size:38px}
+    .energyGateTitle{font-size:26px;letter-spacing:1px}
+    .energyGateCopy{font-size:12px;line-height:1.4}
+    .energyGateBalance{
+      width:100%;
+      padding:12px 14px;
+      border-radius:16px;
+      gap:10px;
+    }
+    .energyGateBalance img{width:24px;height:24px}
+    .energyGateBalanceLabel{font-size:8px}
+    .energyGateBalanceValue{font-size:20px}
+    .energyGateHint{min-height:18px;font-size:10px}
+    .energyGateActions{
+      gap:10px;
+      flex-direction:column;
+    }
+    .energyGateActions .bigBtn,
+    .energyGateActions .bigBtn.secondary{
+      width:100%;
+      min-width:0;
+      padding:10px 10px 12px;
+      border-radius:14px;
+      font-size:14px;
+      letter-spacing:.8px;
+      box-shadow:0 4px 0 rgba(138,84,0,.9),0 10px 18px rgba(0,0,0,.18);
+    }
+    .energyGateActions .bigBtn.secondary{
+      box-shadow:0 4px 0 #5233a7,0 10px 18px rgba(0,0,0,.18);
+    }
     .menuSidebar{
       order:4;
       display:none;
@@ -978,6 +1196,13 @@
 
       <div class="menuTopbar">
         <button class="topLogoutBtn" id="menuLogoutBtn" type="button">LOG OUT</button>
+        <div class="topChip tokenChip">
+          <img class="icon" src="./assets/infift_token.png" alt="Infinity token">
+          <div>
+            <div class="label">Tokens</div>
+            <div class="value" id="topInfinityTokens">0</div>
+          </div>
+        </div>
         <div class="topChip">
           <span class="icon">🪙</span>
           <div>
@@ -1049,12 +1274,15 @@
         <div class="heroRibbon">SURVIVE THE SWARM. UNLEASH THE MAYHEM.</div>
         <button class="menuPrimaryAction" id="startBtn">
           PLAY NOW
-          <span class="menuPrimaryCost">⚡ 5</span>
+          <span class="menuPrimaryCost" id="menuEnergyCost">
+            <span class="menuEnergyCount" id="menuEnergyCount">⚡ 5</span>
+            <span class="menuEnergyTimer" id="menuEnergyTimer"></span>
+          </span>
         </button>
       </section>
 
       <section class="menuChooser" id="menuChooser">
-        <div class="chooseLabel"><span class="spark">✦</span> CHOOSE YOUR BASHER <span class="spark">✦</span></div>
+        <div class="chooseLabel"><span class="spark">✦</span> CHOOSE YOUR MODE <span class="spark">✦</span></div>
         <div class="charRow dashboardRow" id="charRow"></div>
         <div class="mobileCharDots" aria-hidden="true"><span class="active"></span><span></span><span></span></div>
       </section>
@@ -1064,7 +1292,7 @@
         <button class="navBtn" type="button" id="shopBtn"><span class="navIcon">⏫</span><span>UPGRADES</span></button>
         <button class="navBtn" type="button" id="loadoutBtn"><span class="navIcon">🛡️</span><span>LOADOUT</span></button>
         <button class="navBtn" type="button" id="leaderboardBtn"><span class="navIcon">📊</span><span>LEADERBOARD</span></button>
-        <button class="navBtn disabled" type="button" id="storeBtn"><span class="navIcon">🛒</span><span>STORE</span></button>
+        <button class="navBtn" type="button" id="storeBtn"><span class="navIcon">🛒</span><span>STORE</span></button>
       </nav>
     </div>
   </div>
@@ -1130,6 +1358,46 @@
     <button class="bigBtn" id="leaderboardBack">BACK</button>
   </div>
 
+  <div class="screen" id="loadoutScr">
+    <div class="loadoutShell">
+      <div class="loadoutEyebrow">MONSTER MAYHEM LOADOUT</div>
+      <div class="loadoutTitle">CHOOSE YOUR CHARACTER</div>
+      <div class="loadoutSub">Pick the actual asset-backed character model you want to use in-game. This is separate from your selected game mode.</div>
+      <div class="loadoutPanel">
+        <div class="chooseLabel"><span class="spark">✦</span> AVAILABLE CHARACTERS <span class="spark">✦</span></div>
+        <div class="charRow dashboardRow" id="loadoutCharRow"></div>
+        <div class="mobileCharDots" aria-hidden="true"><span class="active"></span><span></span><span></span></div>
+      </div>
+      <div class="loadoutActions">
+        <button class="bigBtn" id="loadoutEquipBtn">EQUIP</button>
+        <button class="bigBtn secondary loadoutBackBtn" id="loadoutBack">BACK TO HOME</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="storeScr">
+    <div class="storeShell">
+      <div class="storeEyebrow">INFINITY TOKEN STORE</div>
+      <div class="storeTitle">STACK YOUR TOKENS</div>
+      <div class="storeSub">Use the same infiNFT token packs offered across the wider ecosystem and fund future unlocks, cosmetics, and account-linked progression.</div>
+      <div class="storeBalanceRow">
+        <div class="storeBalanceChip">
+          <img src="./assets/infift_token.png" alt="Infinity token">
+          <div>
+            <span class="storeBalanceLabel">Current Balance</span>
+            <span class="storeBalanceValue" id="storeTokenBalance">0</span>
+          </div>
+        </div>
+        <div class="storeStatus" id="storeStatus">Choose a token pack to begin secure Stripe checkout.</div>
+      </div>
+      <div class="storeGrid" id="storeGrid"></div>
+      <div class="storeFinePrint">Payments are handled securely by Stripe and token balances are updated on your main infiNFT user profile.</div>
+      <div class="storeActions">
+        <button class="bigBtn secondary" id="storeBack">BACK TO HOME</button>
+      </div>
+    </div>
+  </div>
+
   <div class="screen" id="pauseScr">
     <div class="endTitle">PAUSED</div>
     <div class="endStats">press P to resume</div>
@@ -1143,6 +1411,35 @@
 <script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore-compat.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<div class="storeCheckoutModal" id="storeCheckoutModal">
+  <div class="storeCheckoutCard">
+    <button class="storeCheckoutClose" id="storeCheckoutClose" type="button" aria-label="Close checkout">×</button>
+    <div class="storeCheckoutTitle">Secure Checkout</div>
+    <div class="storeCheckoutHint" id="storeCheckoutHint">Complete your Stripe checkout below. Your Infinity Tokens will appear in your account as soon as the purchase clears.</div>
+    <div id="storeCheckoutMount"></div>
+  </div>
+</div>
+<div class="energyGateModal" id="energyGateModal">
+  <div class="energyGateCard" role="dialog" aria-modal="true" aria-labelledby="energyGateTitle" onclick="event.stopPropagation()">
+    <div class="energyGateIconWrap"><div class="energyGateIcon">⚡</div></div>
+    <div class="energyGateTitle" id="energyGateTitle">OUT OF ENERGY</div>
+    <div class="energyGateCopy">You are out of run energy. Spend 100 Infinity Tokens to jump straight into the next match.</div>
+    <div class="energyGateBalance">
+      <img src="./assets/infift_token.png" alt="Infinity token">
+      <div>
+        <span class="energyGateBalanceLabel">Current Token Balance</span>
+        <span class="energyGateBalanceValue" id="energyGateTokenBalance">0</span>
+      </div>
+    </div>
+    <div class="energyGateHint" id="energyGateHint"></div>
+    <div class="energyGateActions">
+      <button class="bigBtn" id="energyGateConfirmBtn" type="button">USE 100 TOKENS</button>
+      <button class="bigBtn secondary" id="energyGateStoreBtn" type="button">GET TOKENS</button>
+      <button class="bigBtn secondary" id="energyGateCancelBtn" type="button">NOT NOW</button>
+    </div>
+  </div>
+</div>
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
@@ -1166,9 +1463,27 @@ const firebase = window.firebase;
 const GAME_TITLE = 'infiNFT Monster Mayhem';
 const GAME_PROFILE_DOC = 'profile';
 const GAME_RUNS_SUBCOLLECTION = 'runs';
+const GAME_STORE_RECEIPTS_SUBCOLLECTION = 'storeReceipts';
 const GAME_LEADERBOARD_COLLECTION = 'infinft_monster_mayhem_leaderboard';
 const LEGACY_FIREBASE_CONFIG_KEY = 'infinft:mm:firebase-config';
+const LEGACY_COMMERCE_CONFIG_KEY = 'infinft:mm:commerce-config';
 const PENDING_RUNS_KEY = 'infinft:mm:pending-runs';
+const STORE_PENDING_CHECKOUT_KEY = 'infinft:mm:pending-store-checkout';
+const ENERGY_MAX = 5;
+const ENERGY_RECHARGE_INTERVAL_MS = 3 * 60 * 60 * 1000;
+const RUN_TOKEN_ENTRY_COST = 100;
+const DEFAULT_COMMERCE_API_BASE_URL = 'https://us-central1-infinft-card-game.cloudfunctions.net/app';
+const DEFAULT_STRIPE_TEST_KEY2 = 'pk_test_51RTZpsR8JsbQ82ZJ3tElYXLccFna1xVrghkQI75cHzDAl63fHbzkoNsqSPEAZCBAKEwB2Q4rTC0fWQ2UGtvdeQch004qtrCxwo';
+const DEFAULT_STRIPE_LIVE_KEY = 'pk_live_51IM7l2JOpsxdxVe2sgvbNRrXl5wOl7atbigW1Ypva7qXB5JonKekA5nwGlWb5lZI9Mv17DifYkuOGbinq8HanViP00ZlDcHysm';
+const TOKEN_PRODUCTS = [
+  { id: 'tokens-75', amount: 75, price: 99, deal: null },
+  { id: 'tokens-500', amount: 500, price: 499, deal: null },
+  { id: 'tokens-1000', amount: 1000, price: 999, deal: null },
+  { id: 'tokens-2000', amount: 2000, price: 1999, deal: null },
+  { id: 'tokens-2500', amount: 2500, price: 2399, deal: null },
+  { id: 'tokens-5000', amount: 5000, price: 4499, deal: 0.8 },
+  { id: 'tokens-10000', amount: 10000, price: 8499, deal: 0.75 },
+];
 const cloudState = {
   app: null,
   auth: null,
@@ -1182,12 +1497,29 @@ const cloudState = {
   authChecked: false,
   profileReady: false,
   profileSyncTimer: 0,
+  energyRechargeTimer: 0,
+  energyCountdownTimer: 0,
   lastLocalProgressSignature: '',
 };
 const bootState = {
   modelReady: false,
   cloudReady: false,
 };
+const storeState = {
+  pendingCheckout: null,
+  stripe: null,
+  embeddedCheckout: null,
+  busyProductId: '',
+  status: '',
+  error: false,
+  statusTimer: 0,
+  pollTimer: 0,
+};
+const energyGateState = {
+  open: false,
+  busy: false,
+};
+try { localStorage.removeItem(STORE_PENDING_CHECKOUT_KEY); } catch (_) {}
 
 /* ============================================================
    AUDIO — tiny procedural synth
@@ -1360,6 +1692,60 @@ function getLegacyFirebaseConfig() {
   }
 }
 
+function getLegacyCommerceConfig() {
+  try {
+    const raw = localStorage.getItem(LEGACY_COMMERCE_CONFIG_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : null;
+  } catch (error) {
+    console.warn('Could not read commerce config bridge for legacy runtime:', error);
+    return null;
+  }
+}
+
+function getCommerceApiBaseUrl() {
+  const raw = String(getLegacyCommerceConfig()?.commerceApiBaseUrl || '').trim();
+  return raw ? raw.replace(/\/+$/, '') : DEFAULT_COMMERCE_API_BASE_URL;
+}
+
+function getStripePublishableKey() {
+  const config = getLegacyCommerceConfig() || {};
+  const explicit = String(config.publishableKey || '').trim();
+  if (explicit) return explicit;
+  const isLocalhost = typeof window !== 'undefined' && window.location?.origin?.includes('localhost');
+  const testKey = String(config.stripeTestKey2 || '').trim();
+  const liveKey = String(config.stripeLiveKey || '').trim();
+  return isLocalhost
+    ? (testKey || liveKey || DEFAULT_STRIPE_TEST_KEY2 || DEFAULT_STRIPE_LIVE_KEY)
+    : (liveKey || testKey || DEFAULT_STRIPE_LIVE_KEY || DEFAULT_STRIPE_TEST_KEY2);
+}
+
+function isTestCheckoutEnv() {
+  return typeof window !== 'undefined'
+    && (window.location?.hostname?.includes('localhost') || window.location?.hostname?.includes('web.app'));
+}
+
+function formatUsdCents(cents) {
+  return `$${(Number(cents || 0) / 100).toFixed(2)}`;
+}
+
+function getStoreReceiptRef(cartId, uid = cloudState.user?.uid) {
+  if (!cloudState.db || !uid || !cartId) return null;
+  return cloudState.db.collection('users').doc(uid).collection(GAME_TITLE).doc(GAME_PROFILE_DOC).collection(GAME_STORE_RECEIPTS_SUBCOLLECTION).doc(cartId);
+}
+
+function writePendingStoreCheckout(payload) {
+  // Intentionally in-memory only. Persisting this flag caused stale
+  // "continue checkout" states after successful purchases.
+  void payload;
+}
+
+function clearPendingStoreCheckout() {
+  storeState.pendingCheckout = null;
+  writePendingStoreCheckout(null);
+}
+
 function getCloudProfileRef(uid = cloudState.user?.uid) {
   if (!cloudState.db || !uid) return null;
   return cloudState.db.collection('users').doc(uid).collection(GAME_TITLE).doc(GAME_PROFILE_DOC);
@@ -1410,6 +1796,132 @@ function getAccountUsername() {
   const username = cloudState.account?.username || cloudState.profile?.username;
   if (username) return username;
   return cloudState.user ? 'username missing' : 'not signed in';
+}
+
+function getMaxEnergy() {
+  const raw = Number(cloudState.profile?.maxEnergy ?? ENERGY_MAX);
+  if (!Number.isFinite(raw)) return ENERGY_MAX;
+  return Math.max(1, Math.min(ENERGY_MAX, Math.floor(raw)));
+}
+
+function getCurrentEnergy() {
+  const maxEnergy = getMaxEnergy();
+  const raw = Number(cloudState.profile?.energy ?? maxEnergy);
+  if (!Number.isFinite(raw)) return maxEnergy;
+  return Math.max(0, Math.min(maxEnergy, Math.floor(raw)));
+}
+
+function hasEnoughEnergyToStart() {
+  return getCurrentEnergy() >= 1;
+}
+
+function formatEnergyCountdown(ms) {
+  const totalSeconds = Math.max(0, Math.ceil(ms / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  if (hours > 0) return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  return `${minutes}:${String(seconds).padStart(2, '0')}`;
+}
+
+function getEnergyUpdatedAtMs(profile = cloudState.profile || {}, nowMs = Date.now()) {
+  const rawMs = Number(profile.energyUpdatedAtMs);
+  if (Number.isFinite(rawMs) && rawMs > 0) return rawMs;
+  const timestamp = profile.energyUpdatedAt || profile.progressUpdatedAt;
+  if (timestamp?.toMillis) return timestamp.toMillis();
+  if (timestamp?.seconds) return timestamp.seconds * 1000;
+  return nowMs;
+}
+
+function calculateRechargedEnergy(profile = cloudState.profile || {}, nowMs = Date.now()) {
+  const rawMaxEnergy = Number(profile.maxEnergy ?? ENERGY_MAX);
+  const maxEnergy = Number.isFinite(rawMaxEnergy)
+    ? Math.max(1, Math.min(ENERGY_MAX, Math.floor(rawMaxEnergy)))
+    : ENERGY_MAX;
+  const rawEnergy = Number(profile.energy ?? maxEnergy);
+  const currentEnergy = Number.isFinite(rawEnergy)
+    ? Math.max(0, Math.min(maxEnergy, Math.floor(rawEnergy)))
+    : maxEnergy;
+  const lastUpdatedAtMs = getEnergyUpdatedAtMs(profile, nowMs);
+
+  if (currentEnergy >= maxEnergy) {
+    return {
+      energy: maxEnergy,
+      maxEnergy,
+      energyUpdatedAtMs: nowMs,
+      gained: 0,
+      changed: currentEnergy !== maxEnergy || Number(profile.maxEnergy) !== maxEnergy,
+    };
+  }
+
+  const elapsedMs = Math.max(0, nowMs - lastUpdatedAtMs);
+  const gained = Math.floor(elapsedMs / ENERGY_RECHARGE_INTERVAL_MS);
+  const nextEnergy = Math.min(maxEnergy, currentEnergy + gained);
+  const usedIntervals = Math.max(0, nextEnergy - currentEnergy);
+  const nextUpdatedAtMs = nextEnergy >= maxEnergy
+    ? nowMs
+    : lastUpdatedAtMs + usedIntervals * ENERGY_RECHARGE_INTERVAL_MS;
+
+  return {
+    energy: nextEnergy,
+    maxEnergy,
+    energyUpdatedAtMs: nextUpdatedAtMs,
+    gained: usedIntervals,
+    changed: usedIntervals > 0 || Number(profile.maxEnergy) !== maxEnergy || !Number.isFinite(Number(profile.energyUpdatedAtMs)),
+  };
+}
+
+function getNextEnergyDripMs(nowMs = Date.now()) {
+  const currentEnergy = getCurrentEnergy();
+  const maxEnergy = getMaxEnergy();
+  if (currentEnergy >= maxEnergy) return 0;
+  const lastUpdatedAtMs = getEnergyUpdatedAtMs(cloudState.profile || {}, nowMs);
+  return Math.max(0, lastUpdatedAtMs + ENERGY_RECHARGE_INTERVAL_MS - nowMs);
+}
+
+function updateEnergyCountdownUi() {
+  const countEl = document.getElementById('menuEnergyCount');
+  const timerEl = document.getElementById('menuEnergyTimer');
+  const fallbackEl = document.getElementById('menuEnergyCost');
+  const currentEnergy = getCurrentEnergy();
+  const maxEnergy = getMaxEnergy();
+  const nextMs = getNextEnergyDripMs();
+  const countText = `⚡ ${currentEnergy}`;
+
+  if (countEl) countEl.textContent = countText;
+  else if (fallbackEl) fallbackEl.textContent = countText;
+
+  if (!timerEl) return;
+  if (currentEnergy >= maxEnergy) {
+    timerEl.textContent = 'FULL';
+    return;
+  }
+
+  timerEl.textContent = `NEXT ${formatEnergyCountdown(nextMs)}`;
+  if (nextMs <= 0 && cloudState.user && G.state !== 'play') {
+    rechargeCloudEnergy('energy-recharge-countdown').catch(error => {
+      console.error('Failed to refresh Monster Mayhem countdown energy:', error);
+    });
+  }
+}
+
+function getInfinityTokenCountFromAccount(account = {}) {
+  const raw = account.infinityTokens
+    ?? account.infiTokens
+    ?? account.infiftTokens
+    ?? account.tokenBalance
+    ?? account.tokens
+    ?? 0;
+  const count = Number(raw);
+  return Number.isFinite(count) ? Math.max(0, Math.floor(count)) : 0;
+}
+
+function getInfinityTokenCount() {
+  return getInfinityTokenCountFromAccount(cloudState.account || {});
+}
+
+function hasEnoughTokensForRunStart() {
+  return getInfinityTokenCount() >= RUN_TOKEN_ENTRY_COST;
 }
 
 function buildAccountMetaHtml() {
@@ -1502,7 +2014,7 @@ function renderEndMetaCard(targetId) {
   const el = document.getElementById(targetId);
   if (!el) return;
   const meta = buildAccountMetaHtml();
-  const avatarEmoji = CHARACTERS[chosenChar]?.emoji || '👾';
+  const avatarEmoji = getSelectedAvatar()?.emoji || '👾';
   const syncClass = meta.syncNote.toLowerCase().includes('ready') ? 'endSyncGood' : '';
   el.innerHTML = `
     <div class="endProfileAvatar">${avatarEmoji}</div>
@@ -1536,7 +2048,7 @@ function renderAccountUi() {
   const xpInLevel = Math.max(0, totalKills - levelBase);
   const xpGoal = 120;
   const xpPct = Math.max(0, Math.min(100, xpInLevel / xpGoal * 100));
-  const avatarEmoji = CHARACTERS[chosenChar]?.emoji || '👾';
+  const avatarEmoji = getSelectedAvatar()?.emoji || '👾';
   const syncGood = !!cloudState.user && readPendingRuns().length === 0;
   const syncStatus = !cloudState.user ? 'Sign in required'
     : readPendingRuns().length > 0 ? `${readPendingRuns().length} run${readPendingRuns().length === 1 ? '' : 's'} queued`
@@ -1563,6 +2075,7 @@ function renderAccountUi() {
   const topProfileName = document.getElementById('topProfileName');
   const topProfileLevel = document.getElementById('topProfileLevel');
   const topProfileBadge = document.getElementById('topProfileBadge');
+  const topInfinityTokens = document.getElementById('topInfinityTokens');
   const topWins = document.getElementById('topWins');
   const topKills = document.getElementById('topKills');
   const profileAvatar = document.getElementById('profileAvatar');
@@ -1579,6 +2092,7 @@ function renderAccountUi() {
   if (topProfileName) topProfileName.textContent = meta.name;
   if (topProfileLevel) topProfileLevel.textContent = `LEVEL ${dashboardLevel}`;
   if (topProfileBadge) topProfileBadge.textContent = avatarEmoji;
+  if (topInfinityTokens) topInfinityTokens.textContent = String(getInfinityTokenCount());
   if (topWins) topWins.textContent = String(totalWins);
   if (topKills) topKills.textContent = String(totalKills);
   if (profileAvatar) profileAvatar.textContent = avatarEmoji;
@@ -1591,6 +2105,477 @@ function renderAccountUi() {
   if (menuMonsterKills) menuMonsterKills.textContent = String(totalKills);
   if (menuSyncStatus) menuSyncStatus.textContent = syncStatus;
   if (menuSyncIcon) menuSyncIcon.textContent = syncGood ? '✅' : (!cloudState.user ? '🔒' : '☁️');
+  updateEnergyCountdownUi();
+  renderStore();
+  renderEnergyGateModal();
+}
+
+async function refreshCloudAccountData() {
+  const userRef = getCloudUserRef();
+  if (!userRef) return;
+  try {
+    const snap = await userRef.get();
+    cloudState.account = snap.exists ? snap.data() : null;
+    renderAccountUi();
+  } catch (error) {
+    console.error('Failed to refresh Monster Mayhem account data:', error);
+  }
+}
+
+function setStoreStatus(message, isError = false, sticky = false) {
+  storeState.status = message || '';
+  storeState.error = !!isError;
+  const statusEl = document.getElementById('storeStatus');
+  if (statusEl) {
+    statusEl.textContent = storeState.status || 'Choose a token pack to begin secure Stripe checkout.';
+    statusEl.classList.toggle('error', !!storeState.error);
+  }
+  clearTimeout(storeState.statusTimer);
+  if (!sticky && message) {
+    storeState.statusTimer = setTimeout(() => {
+      storeState.status = '';
+      storeState.error = false;
+      const nextStatusEl = document.getElementById('storeStatus');
+      if (nextStatusEl) {
+        nextStatusEl.textContent = 'Choose a token pack to begin secure Stripe checkout.';
+        nextStatusEl.classList.remove('error');
+      }
+    }, 4200);
+  }
+}
+
+function renderStore() {
+  const grid = document.getElementById('storeGrid');
+  const balance = document.getElementById('storeTokenBalance');
+  if (balance) balance.textContent = String(getInfinityTokenCount());
+  if (!grid) return;
+
+  grid.innerHTML = TOKEN_PRODUCTS.map(product => {
+    const pending = storeState.pendingCheckout?.productId === product.id;
+    const busy = storeState.busyProductId === product.id;
+    const dealLabel = product.deal ? `<div class="storeBadge">${Math.round((1 - product.deal) * 100)}% OFF</div>` : '';
+    const buttonLabel = pending ? 'CONTINUE' : busy ? 'LOADING...' : 'BUY NOW';
+    const buttonClass = pending ? 'storeBuyBtn continue' : 'storeBuyBtn';
+    const unitPrice = product.amount > 0 ? (product.price / product.amount).toFixed(2) : '0.00';
+    return `
+      <div class="storeCard ${product.deal ? 'bestValue' : ''}">
+        ${dealLabel}
+        <img class="storeTokenArt" src="./assets/infift_token.png" alt="Infinity token pack">
+        <div class="storeTokenAmount">${product.amount.toLocaleString()}</div>
+        <div class="storeTokenLabel">Infinity Tokens</div>
+        <div class="storePrice">${formatUsdCents(product.price)}</div>
+        <div class="storeUnitCopy">$${unitPrice} per token pack unit</div>
+        <button class="${buttonClass}" data-store-product="${product.id}" ${busy ? 'disabled' : ''}>${buttonLabel}</button>
+      </div>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('[data-store-product]').forEach(button => {
+    button.onclick = () => handleStoreProductAction(button.getAttribute('data-store-product'));
+  });
+}
+
+function getTokenAmountFromCartData(cartData = {}) {
+  return (Array.isArray(cartData.items) ? cartData.items : []).reduce((sum, item) => {
+    if (item?.type !== 'tokens') return sum;
+    const qty = Math.max(1, Number(item?.qty || 1));
+    const amount = Number(item?.meta?.amount || item?.amount || 0);
+    return sum + Math.max(0, amount * qty);
+  }, 0);
+}
+
+async function fulfillMonsterMayhemTokenCart(cartId, cartData, opts = {}) {
+  const userRef = getCloudUserRef();
+  const receiptRef = getStoreReceiptRef(cartId);
+  const cartRef = cloudState.db?.collection('carts').doc(cartId);
+  if (!userRef || !receiptRef || !cartRef) return 0;
+
+  const tokenAmount = getTokenAmountFromCartData(cartData);
+  if (!tokenAmount) return 0;
+
+  let granted = 0;
+  const now = Date.now();
+  const dbInstance = cloudState.db;
+
+  await dbInstance.runTransaction(async transaction => {
+    const [receiptSnap, cartSnap] = await Promise.all([
+      transaction.get(receiptRef),
+      transaction.get(cartRef),
+    ]);
+    if (receiptSnap.exists) return;
+
+    const liveCart = cartSnap.exists ? (cartSnap.data() || {}) : cartData || {};
+    const liveTokenAmount = getTokenAmountFromCartData(liveCart);
+    if (!liveTokenAmount) return;
+
+    transaction.set(userRef, {
+      infinityTokens: firebase.firestore.FieldValue.increment(liveTokenAmount),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }, { merge: true });
+
+    transaction.set(receiptRef, {
+      cartId,
+      amount: liveTokenAmount,
+      source: liveCart.source || 'monster-mayhem',
+      fulfilledBy: 'monster-mayhem-client-fallback',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      recoveredAtMs: now,
+    }, { merge: true });
+
+    transaction.set(cartRef, {
+      monsterMayhemRecovered: true,
+      monsterMayhemRecoveredAt: firebase.firestore.FieldValue.serverTimestamp(),
+      monsterMayhemRecoveredAmount: liveTokenAmount,
+    }, { merge: true });
+
+    transaction.set(cloudState.db.collection('users').doc(cloudState.user.uid).collection('purchases').doc(), {
+      cartId,
+      productType: 'Infinity Tokens',
+      amount: liveTokenAmount,
+      product: { name: 'Infinity Tokens', amount: liveTokenAmount },
+      price: Number((Number(liveCart.totalUSD || 0) / 100).toFixed(2)),
+      claimed: true,
+      date: now,
+      payMethod: 'stripe',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      source: 'monster-mayhem-client-fallback',
+    });
+
+    granted = liveTokenAmount;
+  });
+
+  if (granted > 0 && !opts.silent) {
+    setStoreStatus(`Recovered ${granted.toLocaleString()} Infinity Tokens from your completed purchase.`);
+  }
+  return granted;
+}
+
+async function reconcileMonsterMayhemStorePurchases({ recentOnly = false, silent = true } = {}) {
+  const userId = cloudState.user?.uid;
+  if (!cloudState.db || !userId) return 0;
+  try {
+    const snap = await cloudState.db.collection('carts')
+      .where('customerID', '==', userId)
+      .limit(20)
+      .get();
+
+    let recoveredTotal = 0;
+    const cutoff = Date.now() - (recentOnly ? 3 * 24 * 60 * 60 * 1000 : 14 * 24 * 60 * 60 * 1000);
+
+    for (const docSnap of snap.docs) {
+      const cart = docSnap.data() || {};
+      if (cart.source !== 'monster-mayhem') continue;
+      if (!cart.purchased) continue;
+      if (recentOnly && Number(cart.lastUpdated || 0) < cutoff) continue;
+      const receiptRef = getStoreReceiptRef(docSnap.id);
+      const receiptSnap = receiptRef ? await receiptRef.get() : null;
+      if (receiptSnap?.exists) {
+        if (storeState.pendingCheckout?.cartId === docSnap.id) clearPendingStoreCheckout();
+        continue;
+      }
+      recoveredTotal += await fulfillMonsterMayhemTokenCart(docSnap.id, cart, { silent: true });
+      if (storeState.pendingCheckout?.cartId === docSnap.id) clearPendingStoreCheckout();
+    }
+
+    if (recoveredTotal > 0) {
+      await refreshCloudAccountData();
+      if (!silent) {
+        setStoreStatus(`Recovered ${recoveredTotal.toLocaleString()} Infinity Tokens from recent completed purchases.`);
+      }
+    }
+    return recoveredTotal;
+  } catch (error) {
+    console.error('Failed to reconcile Monster Mayhem token purchases:', error);
+    if (!silent) setStoreStatus('Could not reconcile recent token purchases yet. Please try again in a moment.', true);
+    return 0;
+  }
+}
+
+async function ensurePendingStoreCheckoutIsActive() {
+  const pending = storeState.pendingCheckout;
+  if (!pending?.cartId || !cloudState.db || !cloudState.user?.uid) return false;
+
+  try {
+    const [receiptSnap, cartSnap] = await Promise.all([
+      getStoreReceiptRef(pending.cartId)?.get(),
+      cloudState.db.collection('carts').doc(pending.cartId).get(),
+    ]);
+
+    if (receiptSnap?.exists) {
+      clearPendingStoreCheckout();
+      renderStore();
+      return false;
+    }
+
+    if (cartSnap?.exists) {
+      const cart = cartSnap.data() || {};
+      if (cart.purchased) {
+        await fulfillMonsterMayhemTokenCart(pending.cartId, cart, { silent: true });
+        await refreshCloudAccountData();
+        clearPendingStoreCheckout();
+        renderStore();
+        return false;
+      }
+      if (cart.locked === false && cart.purchased !== true) {
+        clearPendingStoreCheckout();
+        renderStore();
+        return false;
+      }
+      return true;
+    }
+  } catch (error) {
+    console.error('Failed to validate pending Monster Mayhem checkout:', error);
+  }
+
+  return !!storeState.pendingCheckout?.cartId;
+}
+
+async function postCommerceJson(path, payload) {
+  const response = await fetch(`${getCommerceApiBaseUrl()}/${path}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data?.error || data?.message || `Request failed (${response.status})`);
+  }
+  return data;
+}
+
+function buildStoreCartPayload(product) {
+  return {
+    customerID: cloudState.user.uid,
+    items: [{
+      type: 'tokens',
+      id: product.id,
+      name: `${product.amount} Tokens`,
+      image: './assets/infift_token.png',
+      priceUSD: Number(product.price),
+      qty: 1,
+      meta: {
+        amount: Number(product.amount),
+        source: 'monster-mayhem',
+      },
+    }],
+    subtotalUSD: Number(product.price),
+    discountUSD: 0,
+    totalUSD: Number(product.price),
+    totalTokens: 0,
+    promo: null,
+    purchased: false,
+    locked: true,
+    lastUpdated: Date.now(),
+    source: 'monster-mayhem',
+  };
+}
+
+function cleanupEmbeddedCheckout() {
+  const checkout = storeState.embeddedCheckout;
+  if (checkout?.destroy) {
+    try { checkout.destroy(); } catch (_) {}
+  } else if (checkout?.unmount) {
+    try { checkout.unmount(); } catch (_) {}
+  }
+  storeState.embeddedCheckout = null;
+  const mount = document.getElementById('storeCheckoutMount');
+  if (mount) mount.innerHTML = '';
+}
+
+function stopStoreCheckoutPolling() {
+  clearInterval(storeState.pollTimer);
+  storeState.pollTimer = 0;
+}
+
+function startStoreCheckoutPolling() {
+  stopStoreCheckoutPolling();
+  storeState.pollTimer = setInterval(() => {
+    checkStoreCheckoutStatus({ silent: true, closeOnPurchased: true }).catch(error => {
+      console.error('Failed polling Monster Mayhem checkout status:', error);
+    });
+  }, 2500);
+}
+
+async function openStoreCheckoutModal(clientSecret) {
+  const publishableKey = getStripePublishableKey();
+  if (!publishableKey) {
+    throw new Error('Stripe is not configured for this environment yet.');
+  }
+  if (!window.Stripe) {
+    throw new Error('Stripe.js failed to load.');
+  }
+
+  cleanupEmbeddedCheckout();
+
+  if (!storeState.stripe || storeState.stripePublishableKey !== publishableKey) {
+    storeState.stripe = window.Stripe(publishableKey);
+    storeState.stripePublishableKey = publishableKey;
+  }
+
+  const modal = document.getElementById('storeCheckoutModal');
+  const hint = document.getElementById('storeCheckoutHint');
+  if (hint) hint.textContent = 'Complete your Stripe checkout below. Your Infinity Tokens will appear in your account as soon as the purchase clears.';
+  if (modal) modal.style.display = 'flex';
+
+  const embedded = await storeState.stripe.initEmbeddedCheckout({
+    fetchClientSecret: async () => clientSecret,
+  });
+  storeState.embeddedCheckout = embedded;
+  embedded.mount('#storeCheckoutMount');
+  startStoreCheckoutPolling();
+}
+
+async function checkStoreCheckoutStatus({ silent = false, closeOnPurchased = false } = {}) {
+  const pending = storeState.pendingCheckout;
+  if (!pending?.cartId) return false;
+  const data = await postCommerceJson('cart_checkout_status', {
+    cartId: pending.cartId,
+    test: isTestCheckoutEnv(),
+  });
+
+  if (data?.state === 'purchased') {
+    stopStoreCheckoutPolling();
+    await fulfillMonsterMayhemTokenCart(pending.cartId, {
+      source: 'monster-mayhem',
+      totalUSD: pending.price,
+      items: [{
+        type: 'tokens',
+        qty: 1,
+        meta: { amount: pending.amount },
+      }],
+    }, { silent: true });
+    clearPendingStoreCheckout();
+    if (closeOnPurchased) {
+      cleanupEmbeddedCheckout();
+      const modal = document.getElementById('storeCheckoutModal');
+      if (modal) modal.style.display = 'none';
+    }
+    await refreshCloudAccountData();
+    setStoreStatus('Purchase complete. Your Infinity Tokens have been added to your account.');
+    renderStore();
+    return true;
+  }
+
+  if (data?.state === 'open') {
+    if (data?.client_secret) {
+      storeState.pendingCheckout.clientSecret = data.client_secret;
+    }
+    if (!silent) setStoreStatus('Checkout is still open. Tap continue to finish your purchase.');
+    renderStore();
+    return false;
+  }
+
+  if (data?.state === 'unlocked') {
+    stopStoreCheckoutPolling();
+    clearPendingStoreCheckout();
+    if (closeOnPurchased) {
+      cleanupEmbeddedCheckout();
+      const modal = document.getElementById('storeCheckoutModal');
+      if (modal) modal.style.display = 'none';
+    }
+    if (!silent) setStoreStatus('Checkout closed before payment. You can start a fresh purchase anytime.');
+    renderStore();
+    return false;
+  }
+
+  renderStore();
+  return false;
+}
+
+async function closeStoreCheckoutModal({ reconcile = true } = {}) {
+  stopStoreCheckoutPolling();
+  cleanupEmbeddedCheckout();
+  const modal = document.getElementById('storeCheckoutModal');
+  if (modal) modal.style.display = 'none';
+  if (reconcile && storeState.pendingCheckout?.cartId) {
+    try {
+      await checkStoreCheckoutStatus({ silent: false, closeOnPurchased: false });
+    } catch (error) {
+      console.error('Failed reconciling Monster Mayhem checkout:', error);
+      setStoreStatus('Could not verify checkout status yet. If payment completed, your balance should refresh shortly.', true);
+    }
+  }
+}
+
+async function startStoreCheckout(product) {
+  if (!cloudState.user || !cloudState.db) {
+    setStoreStatus('Sign in before purchasing Infinity Tokens.', true);
+    return;
+  }
+
+  storeState.busyProductId = product.id;
+  renderStore();
+
+  try {
+    const cartRef = await cloudState.db.collection('carts').add(buildStoreCartPayload(product));
+    const data = await postCommerceJson('create_checkout_from_cart', {
+      cartId: cartRef.id,
+      url: typeof window !== 'undefined' ? window.location.origin : 'https://infinftstudios.com',
+      test: isTestCheckoutEnv(),
+      expectedTotalUSD: Number(product.price),
+      promo: null,
+    });
+
+    if (!data?.client_secret) {
+      throw new Error('Checkout client secret missing.');
+    }
+
+    storeState.pendingCheckout = {
+      cartId: cartRef.id,
+      productId: product.id,
+      clientSecret: data.client_secret,
+      amount: product.amount,
+      price: product.price,
+      preBalance: getInfinityTokenCount(),
+      startedAt: Date.now(),
+    };
+    writePendingStoreCheckout(storeState.pendingCheckout);
+    await openStoreCheckoutModal(data.client_secret);
+    setStoreStatus(`Checkout ready for ${product.amount.toLocaleString()} Infinity Tokens.`);
+  } catch (error) {
+    console.error('Failed to start Monster Mayhem token checkout:', error);
+    setStoreStatus(error?.message || 'Could not start checkout. Please try again.', true);
+  } finally {
+    storeState.busyProductId = '';
+    renderStore();
+  }
+}
+
+async function continueStoreCheckout() {
+  if (!storeState.pendingCheckout?.cartId) return;
+  try {
+    const stillActive = await ensurePendingStoreCheckoutIsActive();
+    if (!stillActive) {
+      setStoreStatus('That checkout is already complete. Your Store is ready for a new purchase.');
+      return;
+    }
+    const purchased = await checkStoreCheckoutStatus({ silent: true, closeOnPurchased: false });
+    if (purchased || !storeState.pendingCheckout?.clientSecret) return;
+    await openStoreCheckoutModal(storeState.pendingCheckout.clientSecret);
+    setStoreStatus('Resumed your existing checkout session.');
+  } catch (error) {
+    console.error('Failed to continue Monster Mayhem checkout:', error);
+    setStoreStatus(error?.message || 'Could not resume checkout. Start a new purchase if needed.', true);
+  }
+}
+
+async function handleStoreProductAction(productId) {
+  const product = TOKEN_PRODUCTS.find(item => item.id === productId);
+  if (!product) return;
+  const stillActive = await ensurePendingStoreCheckoutIsActive();
+  if (!stillActive && storeState.pendingCheckout?.cartId) {
+    clearPendingStoreCheckout();
+  }
+  if (storeState.pendingCheckout?.productId === productId) {
+    continueStoreCheckout();
+    return;
+  }
+  if (storeState.pendingCheckout?.cartId) {
+    setStoreStatus('You already have a checkout in progress. Finish or resume that one first.', true);
+    renderStore();
+    return;
+  }
+  startStoreCheckout(product);
 }
 
 function getLeaderboardDisplayName() {
@@ -1766,7 +2751,11 @@ function getLocalProgressPayload() {
   return {
     coins: Math.max(0, Math.floor(save.coins || 0)),
     upgrades: getLocalUpgradePayload(),
-    selectedAvatar: CHARACTERS[chosenChar]?.id || CHARACTERS[0].id,
+    energy: getCurrentEnergy(),
+    maxEnergy: getMaxEnergy(),
+    energyUpdatedAtMs: getEnergyUpdatedAtMs(),
+    selectedMode: getSelectedGameMode()?.id || GAME_MODES[0].id,
+    equippedCharacter: getSelectedAvatar()?.id || PLAYER_CHARACTERS[0].id,
   };
 }
 
@@ -1779,7 +2768,23 @@ function applyRemoteProfileToLocal(profile = {}) {
   for (const meta of META) {
     save.upgrades[meta.id] = Math.max(0, Math.min(meta.max, Math.floor(remoteUpgrades[meta.id] || 0)));
   }
-  if (profile.selectedAvatar) applyChosenCharacterById(profile.selectedAvatar, { silent: true });
+  const remoteMaxEnergy = Number(profile.maxEnergy);
+  const remoteEnergy = Number(profile.energy);
+  const normalizedEnergy = calculateRechargedEnergy({
+    ...profile,
+    maxEnergy: Number.isFinite(remoteMaxEnergy) ? remoteMaxEnergy : ENERGY_MAX,
+    energy: Number.isFinite(remoteEnergy) ? remoteEnergy : undefined,
+  });
+  cloudState.profile = {
+    ...(cloudState.profile || {}),
+    maxEnergy: normalizedEnergy.maxEnergy,
+    energy: normalizedEnergy.energy,
+    energyUpdatedAtMs: normalizedEnergy.energyUpdatedAtMs,
+  };
+  if (profile.selectedMode) applyChosenModeById(profile.selectedMode, { silent: true });
+  if (profile.equippedCharacter || profile.selectedAvatar) {
+    applyChosenCharacterById(profile.equippedCharacter || profile.selectedAvatar, { silent: true });
+  }
   persistSave();
   return true;
 }
@@ -1799,12 +2804,78 @@ async function syncCloudProfile(reason = 'progress-sync') {
     username: firebase.firestore.FieldValue.delete(),
     displayName: firebase.firestore.FieldValue.delete(),
     email: firebase.firestore.FieldValue.delete(),
+    selectedAvatar: firebase.firestore.FieldValue.delete(),
     createdAt: firebase.firestore.FieldValue.delete(),
     updatedAt: firebase.firestore.FieldValue.delete(),
     lastLoginAt: firebase.firestore.FieldValue.delete(),
   }, { merge: true });
   cloudState.profile = { ...(cloudState.profile || {}), ...progress };
   renderAccountUi();
+}
+
+async function rechargeCloudEnergy(reason = 'energy-recharge') {
+  const profileRef = getCloudProfileRef();
+  if (!profileRef || !cloudState.db) {
+    const recharged = calculateRechargedEnergy();
+    cloudState.profile = {
+      ...(cloudState.profile || {}),
+      energy: recharged.energy,
+      maxEnergy: recharged.maxEnergy,
+      energyUpdatedAtMs: recharged.energyUpdatedAtMs,
+    };
+    renderAccountUi();
+    refreshStartAvailability();
+    return recharged;
+  }
+
+  const result = await cloudState.db.runTransaction(async transaction => {
+    const snap = await transaction.get(profileRef);
+    const profile = snap.exists ? (snap.data() || {}) : {};
+    const recharged = calculateRechargedEnergy(profile);
+    if (recharged.changed) {
+      transaction.set(profileRef, {
+        energy: recharged.energy,
+        maxEnergy: recharged.maxEnergy,
+        energyUpdatedAtMs: recharged.energyUpdatedAtMs,
+        energyUpdatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        progressUpdatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        lastSyncReason: reason,
+      }, { merge: true });
+    }
+    return recharged;
+  });
+
+  cloudState.profile = {
+    ...(cloudState.profile || {}),
+    energy: result.energy,
+    maxEnergy: result.maxEnergy,
+    energyUpdatedAtMs: result.energyUpdatedAtMs,
+  };
+  renderAccountUi();
+  refreshStartAvailability();
+  return result;
+}
+
+function startEnergyRechargePolling() {
+  clearInterval(cloudState.energyRechargeTimer);
+  clearInterval(cloudState.energyCountdownTimer);
+  updateEnergyCountdownUi();
+  cloudState.energyRechargeTimer = window.setInterval(() => {
+    if (!cloudState.user || G.state === 'play') return;
+    rechargeCloudEnergy('energy-recharge-poll').catch(error => {
+      console.error('Failed to refresh Monster Mayhem energy:', error);
+    });
+  }, 60 * 1000);
+  cloudState.energyCountdownTimer = window.setInterval(() => {
+    updateEnergyCountdownUi();
+  }, 1000);
+}
+
+function stopEnergyRechargePolling() {
+  clearInterval(cloudState.energyRechargeTimer);
+  clearInterval(cloudState.energyCountdownTimer);
+  cloudState.energyRechargeTimer = 0;
+  cloudState.energyCountdownTimer = 0;
 }
 
 function queueCloudProfileSync(reason = 'progress-sync', delay = 220) {
@@ -1826,10 +2897,103 @@ function buildRunPayload(won) {
     coinsEarned: Math.max(0, Math.round(G.earned || 0)),
     gemsBanked: Math.max(0, Math.round(G.gemsBank || 0)),
     levelReached: Math.max(1, Math.round(P.level || 1)),
-    characterId: progress.selectedAvatar,
+    modeId: progress.selectedMode,
+    characterId: progress.equippedCharacter,
     endedAt: new Date().toISOString(),
     progress,
   };
+}
+
+async function consumeRunEnergy() {
+  await rechargeCloudEnergy('energy-recharge-before-run').catch(error => {
+    console.error('Failed to refresh energy before run:', error);
+  });
+
+  const currentEnergy = getCurrentEnergy();
+  if (currentEnergy < 1) {
+    refreshStartAvailability();
+    renderAccountUi();
+    throw new Error('NO_ENERGY');
+  }
+
+  const profileRef = getCloudProfileRef();
+  if (profileRef && cloudState.db) {
+    const result = await cloudState.db.runTransaction(async transaction => {
+      const snap = await transaction.get(profileRef);
+      const profile = snap.exists ? (snap.data() || {}) : {};
+      const recharged = calculateRechargedEnergy(profile);
+      if (recharged.energy < 1) {
+        throw new Error('NO_ENERGY');
+      }
+      const nextEnergy = recharged.energy - 1;
+      const nextUpdatedAtMs = nextEnergy >= recharged.maxEnergy
+        ? Date.now()
+        : recharged.energyUpdatedAtMs;
+      transaction.set(profileRef, {
+        energy: nextEnergy,
+        maxEnergy: recharged.maxEnergy,
+        energyUpdatedAtMs: nextUpdatedAtMs,
+        energyUpdatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        progressUpdatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        lastSyncReason: 'run-energy-spend',
+      }, { merge: true });
+      return { energy: nextEnergy, maxEnergy: recharged.maxEnergy, energyUpdatedAtMs: nextUpdatedAtMs };
+    });
+
+    cloudState.profile = {
+      ...(cloudState.profile || {}),
+      energy: result.energy,
+      maxEnergy: result.maxEnergy,
+      energyUpdatedAtMs: result.energyUpdatedAtMs,
+    };
+    renderAccountUi();
+    refreshStartAvailability();
+    return result.energy;
+  }
+
+  cloudState.profile = {
+    ...(cloudState.profile || {}),
+    energy: currentEnergy - 1,
+    maxEnergy: getMaxEnergy(),
+    energyUpdatedAtMs: getCurrentEnergy() >= getMaxEnergy() ? Date.now() : getEnergyUpdatedAtMs(),
+  };
+  renderAccountUi();
+  refreshStartAvailability();
+  return cloudState.profile.energy;
+}
+
+async function consumeRunStartTokens() {
+  if (!cloudState.user || !cloudState.db) {
+    throw new Error('SIGN_IN_REQUIRED');
+  }
+
+  const userRef = getCloudUserRef();
+  if (!userRef) {
+    throw new Error('SIGN_IN_REQUIRED');
+  }
+
+  const result = await cloudState.db.runTransaction(async transaction => {
+    const userSnap = await transaction.get(userRef);
+    const account = userSnap.exists ? (userSnap.data() || {}) : {};
+    const liveTokenBalance = getInfinityTokenCountFromAccount(account);
+    if (liveTokenBalance < RUN_TOKEN_ENTRY_COST) {
+      throw new Error('INSUFFICIENT_TOKENS');
+    }
+    const nextBalance = liveTokenBalance - RUN_TOKEN_ENTRY_COST;
+    transaction.set(userRef, {
+      infinityTokens: nextBalance,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }, { merge: true });
+    return { account, nextBalance };
+  });
+
+  cloudState.account = {
+    ...(cloudState.account || {}),
+    ...(result.account || {}),
+    infinityTokens: result.nextBalance,
+  };
+  renderAccountUi();
+  return result.nextBalance;
 }
 
 async function persistRunPayload(runPayload) {
@@ -1851,7 +3015,7 @@ async function persistRunPayload(runPayload) {
     coinsEarned: earnedCoins,
     gemsBanked: Math.max(0, Math.round(runPayload.gemsBanked || 0)),
     levelReached: Math.max(1, Math.round(runPayload.levelReached || 1)),
-    characterId: progress.selectedAvatar,
+    characterId: progress.equippedCharacter,
     endedAt: runPayload.endedAt || new Date().toISOString(),
   };
 
@@ -1973,6 +3137,7 @@ async function initializeCloudProgress() {
       cloudState.authChecked = true;
 
       if (!user) {
+        stopEnergyRechargePolling();
         cloudState.account = null;
         cloudState.profile = null;
         cloudState.profileReady = true;
@@ -1993,8 +3158,11 @@ async function initializeCloudProgress() {
         if (!appliedRemote) {
           await syncCloudProfile('initial-local-migration');
         }
+        await rechargeCloudEnergy('energy-recharge-login');
+        startEnergyRechargePolling();
         await syncLeaderboardEntryFromProfile();
         await flushPendingRuns();
+        await reconcileMonsterMayhemStorePurchases({ recentOnly: true, silent: true });
       } catch (error) {
         console.error('Failed to load Monster Mayhem cloud profile:', error);
       } finally {
@@ -2416,23 +3584,29 @@ scene.add(motes);
 /* ============================================================
    PLAYER — little humanoid hero with a procedural rig
 ============================================================ */
-const CHARACTERS = [
-  { id:'zippy', emoji:'🪃', name:'ZIPPY',  desc:'Fast skirmisher.<br>Starts with Boomerang.',                 hp:90,  speed:10.0, weapon:'boomerang',
-    shirt:0x3aa8e8, pants:0x2c3e66, hair:0xf2e23e, band:0xff5577, build:0.9, badge:'★', modelId:'duck' },
-  { id:'chonk', emoji:'💀', name:'CHONK',  desc:'Durable bruiser.<br>Starts with Bash Orbs.',                hp:145, speed:7.8, weapon:'orbs',
-    shirt:0x8a93a8, pants:0x3a3f52, hair:0x2a2a33, band:0x7dff6a, build:1.18, modelId:'duck' },
-  { id:'banana', emoji:'🍌', name:'BANANA', desc:'Brainpunk striker.<br>Starts with Sky Zapper.',            hp:112, speed:9.1, weapon:'lightning',
-    shirt:0xcfe95a, pants:0x5a2767, hair:0x8e42ff, band:0x2af3d5, build:1.02, badge:'⚡', modelId:'banana' },
-  { id:'skelly', emoji:'💀', name:'SKELLY', desc:'VRM bone lord.<br>Starts with Cube Cannon.',               hp:104, speed:9.4, weapon:'rail',
-    shirt:0xd9e6ff, pants:0x56426f, hair:0x8ef3ff, band:0xff6a9d, build:1.0, badge:'☠', modelId:'skelly' },
+const GAME_MODES = [
+  { id:'zippy', emoji:'🪃', name:'ZIPPY', desc:'Fast skirmisher.<br>Starts with Boomerang.', hp:90, speed:10.0, weapon:'boomerang', sprintMult:1.65, badge:'★' },
+  { id:'chonk', emoji:'💀', name:'CHONK', desc:'Durable bruiser.<br>Starts with Bash Orbs.', hp:145, speed:7.8, weapon:'orbs', sprintMult:1.58 },
+  { id:'coop', emoji:'👥', name:'CO-OP', desc:'Coming soon.<br>Team up for mayhem.', locked:true, badge:'🔒' },
 ];
-let chosenChar = 0;
+const PLAYER_CHARACTERS = [
+  { id:'duck', emoji:'🦆', name:'DUCK RACER', desc:'Punk racer duck.<br>Ready for mayhem.', shirt:0x3aa8e8, pants:0x2c3e66, hair:0xf2e23e, band:0xff5577, build:0.9, badge:'★', modelId:'duck' },
+  { id:'banana', emoji:'🍌', name:'BANANA', desc:'Brainpunk banana drag.<br>Electric style.', shirt:0xcfe95a, pants:0x5a2767, hair:0x8e42ff, band:0x2af3d5, build:1.02, badge:'⚡', modelId:'banana' },
+  { id:'skelly', emoji:'☠️', name:'SKELLY', desc:'VRM bone lord.<br>Undead swagger.', shirt:0xd9e6ff, pants:0x56426f, hair:0x8ef3ff, band:0xff6a9d, build:1.0, badge:'☠', modelId:'skelly' },
+];
+let chosenMode = 0;
+let chosenAvatar = 0;
+let equippedAvatar = 0;
 const CHARACTER_MODELS = {
   duck: {
     id: 'duck',
     kind: 'gltf',
     sceneUrl: './assets/Meshy_AI_Punk_Racer_Duck_biped/Meshy_AI_Punk_Racer_Duck_biped_Character_output.glb',
     runUrl: './assets/Meshy_AI_Punk_Racer_Duck_biped/Meshy_AI_Punk_Racer_Duck_biped_Animation_Running_withSkin.glb',
+    idleUrl: './assets/Meshy_AI_Punk_Racer_Duck_biped/Meshy_AI_Punk_Racer_Duck_biped_Animation_Alert_withSkin.glb',
+    jumpUrl: './assets/Meshy_AI_Punk_Racer_Duck_biped/Meshy_AI_Punk_Racer_Duck_biped_Animation_Jump_Run_withSkin.glb',
+    winUrl: './assets/Meshy_AI_Punk_Racer_Duck_biped/Meshy_AI_Punk_Racer_Duck_biped_Animation_happy_jump_m_withSkin.glb',
+    loseUrl: './assets/Meshy_AI_Punk_Racer_Duck_biped/Meshy_AI_Punk_Racer_Duck_biped_Animation_falling_down_withSkin.glb',
     targetHeight: 0.85,
   },
   banana: {
@@ -2440,6 +3614,10 @@ const CHARACTER_MODELS = {
     kind: 'gltf',
     sceneUrl: './assets/Meshy_AI_Banana_Brainpunk_Drag_biped/Meshy_AI_Banana_Brainpunk_Drag_biped_Animation_Running_withSkin.glb',
     runUrl: './assets/Meshy_AI_Banana_Brainpunk_Drag_biped/Meshy_AI_Banana_Brainpunk_Drag_biped_Animation_Running_withSkin.glb',
+    idleUrl: './assets/Meshy_AI_Banana_Brainpunk_Drag_biped/Meshy_AI_Banana_Brainpunk_Drag_biped_Animation_Alert_withSkin.glb',
+    jumpUrl: './assets/Meshy_AI_Banana_Brainpunk_Drag_biped/Meshy_AI_Banana_Brainpunk_Drag_biped_Animation_Jump_Run_withSkin.glb',
+    winUrl: './assets/Meshy_AI_Banana_Brainpunk_Drag_biped/Meshy_AI_Banana_Brainpunk_Drag_biped_Animation_happy_jump_m_withSkin.glb',
+    loseUrl: './assets/Meshy_AI_Banana_Brainpunk_Drag_biped/Meshy_AI_Banana_Brainpunk_Drag_biped_Animation_falling_down_withSkin.glb',
     targetHeight: 0.9,
   },
   skelly: {
@@ -2458,6 +3636,32 @@ const MODEL_BONE_NAMES = {
 const playerModelLoader = new GLTFLoader();
 const playerRigAssets = new Map();
 const playerModelPromises = new Map();
+const characterPreviewEntries = new Map();
+let characterPreviewFrame = 0;
+const CHARACTER_PREVIEW_SCALE = 0.92;
+const CHARACTER_PREVIEW_SETTINGS = {
+  duck: {
+    scale: 0.52,
+    modelYOffset: -0.46,
+    cameraYOffset: 0.52,
+    lookAtYOffset: 0.5,
+    distanceMult: 3.7,
+  },
+  banana: {
+    scale: 0.48,
+    modelYOffset: -0.46,
+    cameraYOffset: 0.5,
+    lookAtYOffset: 0.48,
+    distanceMult: 3.9,
+  },
+  skelly: {
+    scale: 0.62,
+    modelYOffset: -0.32,
+    cameraYOffset: 0.56,
+    lookAtYOffset: 0.54,
+    distanceMult: 3.25,
+  },
+};
 
 function createCharacterLoader(modelConfig = null) {
   const loader = new GLTFLoader();
@@ -2482,16 +3686,162 @@ function applyTransformState(obj, state) {
   obj.scale.copy(state.scale);
 }
 
-function getCharacterModelConfig(character = CHARACTERS[chosenChar]) {
+function ensureCharacterPreviewLoop() {
+  if (characterPreviewFrame) return;
+  const tick = () => {
+    characterPreviewFrame = requestAnimationFrame(tick);
+    characterPreviewEntries.forEach(entry => {
+      if (!entry.canvas.isConnected) {
+        disposeCharacterPreview(entry.key);
+        return;
+      }
+      entry.group.rotation.y += 0.01;
+      entry.renderer.render(entry.scene, entry.camera);
+    });
+    if (!characterPreviewEntries.size) {
+      cancelAnimationFrame(characterPreviewFrame);
+      characterPreviewFrame = 0;
+    }
+  };
+  characterPreviewFrame = requestAnimationFrame(tick);
+}
+
+function resizeCharacterPreviews() {
+  characterPreviewEntries.forEach(entry => {
+    const width = entry.hostEl.clientWidth || 194;
+    const height = entry.hostEl.clientHeight || 110;
+    entry.renderer.setSize(width, height, false);
+    entry.camera.aspect = width / Math.max(height, 1);
+    entry.camera.updateProjectionMatrix();
+    entry.renderer.render(entry.scene, entry.camera);
+  });
+}
+
+function disposeCharacterPreview(key) {
+  const entry = characterPreviewEntries.get(key);
+  if (!entry) return;
+  entry.renderer.dispose();
+  characterPreviewEntries.delete(key);
+}
+
+function getCharacterPreviewSettings(character) {
+  return CHARACTER_PREVIEW_SETTINGS[character?.id] || {
+    scale: CHARACTER_PREVIEW_SCALE,
+    modelYOffset: -0.08,
+    cameraYOffset: 0.2,
+    lookAtYOffset: 0.08,
+    distanceMult: 2.65,
+  };
+}
+
+function createCharacterPreviewModel(character, rigAssets, modelConfig = null) {
+  if (!rigAssets?.scene) return null;
+  const previewSettings = getCharacterPreviewSettings(character);
+  if (rigAssets.kind !== 'vrm') {
+    const previewRoot = makeAnimatedPlayerMesh(character, rigAssets, modelConfig);
+    const previewRig = previewRoot.userData?.rig;
+    if (previewRig?.hammer) previewRig.hammer.visible = false;
+    previewRoot.position.y += previewSettings.modelYOffset;
+    previewRoot.scale.multiplyScalar(previewSettings.scale);
+    return previewRoot;
+  }
+  const previewRoot = new THREE.Group();
+  const avatar = rigAssets.scene.clone(true);
+  avatar.traverse(obj => {
+    if (!obj.isMesh) return;
+    obj.castShadow = true;
+    obj.receiveShadow = true;
+  });
+  const avatarBounds = new THREE.Box3().setFromObject(avatar);
+  const avatarSize = avatarBounds.getSize(new THREE.Vector3());
+  const avatarCenter = avatarBounds.getCenter(new THREE.Vector3());
+  const avatarScale = ((modelConfig?.targetHeight || 0.88) * 1.25) / Math.max(avatarSize.y, 0.001);
+  avatar.position.set(
+    -avatarCenter.x * avatarScale,
+    -avatarBounds.min.y * avatarScale - 0.18,
+    -avatarCenter.z * avatarScale
+  );
+  avatar.scale.setScalar(avatarScale);
+  avatar.rotation.y = modelConfig?.facingY || 0;
+  previewRoot.add(avatar);
+  previewRoot.scale.set(character.build || 1, 1, character.build || 1);
+  previewRoot.position.y += previewSettings.modelYOffset;
+  previewRoot.scale.multiplyScalar(previewSettings.scale);
+  return previewRoot;
+}
+
+function renderCharacterPreview(character, hostEl) {
+  if (!hostEl || !character?.modelId) return;
+  const key = character.id;
+  const existing = characterPreviewEntries.get(key);
+  if (existing && existing.canvas.isConnected && existing.hostEl === hostEl) return;
+  if (existing) disposeCharacterPreview(key);
+  const modelConfig = getCharacterModelConfig(character);
+  const previewSettings = getCharacterPreviewSettings(character);
+  loadPlayerModel(character).then(rigAssets => {
+    if (!hostEl.isConnected || !rigAssets) return;
+    const previewModel = createCharacterPreviewModel(character, rigAssets, modelConfig);
+    if (!previewModel) return;
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(hostEl.clientWidth || 194, hostEl.clientHeight || 110, false);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(28, (hostEl.clientWidth || 194) / Math.max(hostEl.clientHeight || 110, 1), 0.1, 100);
+    previewModel.rotation.y = Math.PI * 0.12;
+    const previewBounds = new THREE.Box3().setFromObject(previewModel);
+    const previewCenter = previewBounds.getCenter(new THREE.Vector3());
+    const previewSize = previewBounds.getSize(new THREE.Vector3());
+    const previewRadius = Math.max(previewSize.x, previewSize.y, previewSize.z, 0.8);
+    camera.near = 0.01;
+    camera.far = Math.max(100, previewRadius * 20);
+    camera.position.set(
+      previewCenter.x + previewRadius * 0.18,
+      previewCenter.y + previewRadius * previewSettings.cameraYOffset,
+      previewCenter.z + previewRadius * previewSettings.distanceMult
+    );
+    camera.lookAt(previewCenter.x, previewCenter.y + previewRadius * previewSettings.lookAtYOffset, previewCenter.z);
+    camera.updateProjectionMatrix();
+    const ambient = new THREE.AmbientLight(0xffffff, 1.8);
+    const keyLight = new THREE.DirectionalLight(0xfff3cf, 1.35);
+    keyLight.position.set(2.5, 4, 3.5);
+    const rimLight = new THREE.DirectionalLight(0x7fd6ff, 0.85);
+    rimLight.position.set(-3, 2.4, -2.4);
+    scene.add(ambient, keyLight, rimLight, previewModel);
+    const canvas = renderer.domElement;
+    hostEl.innerHTML = '';
+    hostEl.appendChild(canvas);
+    const entry = { key, hostEl, canvas, renderer, scene, camera, group: previewModel };
+    characterPreviewEntries.set(key, entry);
+    renderer.render(scene, camera);
+    ensureCharacterPreviewLoop();
+  }).catch(error => {
+    console.error(`Failed to render character preview "${character.id}":`, error);
+  });
+}
+
+function getSelectedGameMode() {
+  return GAME_MODES[chosenMode] || GAME_MODES[0];
+}
+
+function getPreviewAvatar() {
+  return PLAYER_CHARACTERS[chosenAvatar] || PLAYER_CHARACTERS[0];
+}
+
+function getSelectedAvatar() {
+  return PLAYER_CHARACTERS[equippedAvatar] || PLAYER_CHARACTERS[0];
+}
+
+function getCharacterModelConfig(character = getSelectedAvatar()) {
   return character?.modelId ? (CHARACTER_MODELS[character.modelId] || null) : null;
 }
 
-function hasCharacterModelReady(character = CHARACTERS[chosenChar]) {
+function hasCharacterModelReady(character = getSelectedAvatar()) {
   const modelConfig = getCharacterModelConfig(character);
   return !modelConfig || playerRigAssets.has(modelConfig.id);
 }
 
-function getCharacterRigAssets(character = CHARACTERS[chosenChar]) {
+function getCharacterRigAssets(character = getSelectedAvatar()) {
   const modelConfig = getCharacterModelConfig(character);
   return modelConfig ? (playerRigAssets.get(modelConfig.id) || null) : null;
 }
@@ -2501,31 +3851,85 @@ function updateCharacterModelReadyState() {
   refreshStartAvailability();
 }
 
-function refreshCharacterSelectionUI() {
-  document.querySelectorAll('.charCard').forEach((el, index) => {
-    el.classList.toggle('sel', index === chosenChar);
+function refreshModeSelectionUI() {
+  document.querySelectorAll('.charCard[data-mode-index]').forEach(el => {
+    const index = Number(el.dataset.modeIndex);
+    el.classList.toggle('sel', index === chosenMode);
   });
 }
 
+function refreshCharacterSelectionUI() {
+  document.querySelectorAll('.charCard[data-avatar-index]').forEach(el => {
+    const index = Number(el.dataset.avatarIndex);
+    el.classList.toggle('sel', index === chosenAvatar);
+    el.classList.toggle('equipped', index === equippedAvatar);
+  });
+  refreshLoadoutEquipButton();
+}
+
+function refreshLoadoutEquipButton() {
+  const btn = document.getElementById('loadoutEquipBtn');
+  if (!btn) return;
+  const isEquippedSelection = chosenAvatar === equippedAvatar;
+  btn.textContent = isEquippedSelection ? 'EQUIPPED' : 'EQUIP';
+  btn.setAttribute('aria-label', btn.textContent);
+  btn.dataset.state = isEquippedSelection ? 'equipped' : 'equip';
+  btn.disabled = isEquippedSelection;
+}
+
+function setChosenMode(index, opts = {}) {
+  const mode = GAME_MODES[index];
+  if (!mode || mode.locked) return;
+  chosenMode = index;
+  refreshModeSelectionUI();
+  if (!opts.silent) queueCloudProfileSync('mode-change');
+  emitHudState(true);
+}
+
 function setChosenCharacter(index, opts = {}) {
-  if (index < 0 || index >= CHARACTERS.length) return;
-  chosenChar = index;
+  if (index < 0 || index >= PLAYER_CHARACTERS.length) return;
+  chosenAvatar = index;
+  refreshCharacterSelectionUI();
+  loadPlayerModel(getPreviewAvatar()).then(() => {
+    emitHudState(true);
+  });
+  emitHudState(true);
+}
+
+function setEquippedCharacter(index, opts = {}) {
+  if (index < 0 || index >= PLAYER_CHARACTERS.length) return;
+  equippedAvatar = index;
+  if (opts.syncSelection !== false) chosenAvatar = index;
+  if (document.getElementById('loadoutScr')?.style.display === 'flex') {
+    renderCharacterCards('loadoutCharRow');
+  }
   refreshCharacterSelectionUI();
   renderAccountUi();
   updateCharacterModelReadyState();
   if (!bootState.modelReady) {
-    loadPlayerModel(CHARACTERS[chosenChar]).then(() => {
+    loadPlayerModel(getSelectedAvatar()).then(() => {
       updateCharacterModelReadyState();
       emitHudState(true);
     });
   }
-  if (!opts.silent) queueCloudProfileSync('avatar-change');
+  if (!opts.silent) queueCloudProfileSync('equip-character');
   emitHudState(true);
 }
 
+function applyChosenModeById(id, opts = {}) {
+  const index = GAME_MODES.findIndex(mode => mode.id === id);
+  if (index >= 0) setChosenMode(index, opts);
+}
+
 function applyChosenCharacterById(id, opts = {}) {
-  const index = CHARACTERS.findIndex(char => char.id === id);
-  if (index >= 0) setChosenCharacter(index, opts);
+  const legacyAvatarMap = {
+    zippy: 'duck',
+    chonk: 'duck',
+    coop: 'duck',
+  };
+  const normalizedId = legacyAvatarMap[id] || id;
+  const index = PLAYER_CHARACTERS.findIndex(char => char.id === normalizedId);
+  if (index >= 0) setEquippedCharacter(index, { ...opts, syncSelection: true });
 }
 
 function setStartButtonsDisabled(disabled, label) {
@@ -2550,6 +3954,70 @@ function focusCharacterSelector() {
   setTimeout(() => chooser.classList.remove('selectorFocus'), 1000);
 }
 
+function setMenuNavActive(section = 'home') {
+  const navMap = {
+    home: 'navHomeBtn',
+    upgrades: 'shopBtn',
+    loadout: 'loadoutBtn',
+    leaderboard: 'leaderboardBtn',
+    store: 'storeBtn',
+  };
+  for (const [key, id] of Object.entries(navMap)) {
+    const btn = document.getElementById(id);
+    if (!btn) continue;
+    btn.classList.toggle('active', key === section);
+  }
+}
+
+function buildCharacterCardMarkup(character, opts = {}) {
+  const previewMarkup = character.modelId
+    ? `<div class="charPreview" data-preview-id="${character.id}"></div>`
+    : `<div class="charEmoji">${character.emoji}</div>`;
+  const equippedMarkup = opts.isEquipped ? `<div class="charEquipBadge">EQUIPPED</div>` : '';
+  return `${equippedMarkup}${character.badge ? `<div class="charBadge">${character.badge}</div>` : ''}${previewMarkup}<div class="charName">${character.name}</div><div class="charDesc">${character.desc}</div>`;
+}
+
+function renderModeCards(rowId) {
+  const row = document.getElementById(rowId);
+  if (!row) return;
+  row.innerHTML = '';
+  GAME_MODES.forEach((mode, i) => {
+    const d = document.createElement('div');
+    d.className = 'charCard charCardWrap' + (mode.locked ? ' locked' : '') + (i === chosenMode && !mode.locked ? ' sel' : '');
+    d.dataset.modeIndex = String(i);
+    d.innerHTML = buildCharacterCardMarkup(mode);
+    if (!mode.locked) {
+      d.onclick = () => {
+        setChosenMode(i);
+        Sfx.pick();
+      };
+    }
+    row.appendChild(d);
+  });
+}
+
+function renderCharacterCards(rowId) {
+  const row = document.getElementById(rowId);
+  if (!row) return;
+  row.innerHTML = '';
+  PLAYER_CHARACTERS.forEach((c, i) => {
+    const d = document.createElement('div');
+    d.className = 'charCard charCardWrap' + (i === chosenAvatar ? ' sel' : '') + (i === equippedAvatar ? ' equipped' : '');
+    d.dataset.avatarIndex = String(i);
+    d.innerHTML = buildCharacterCardMarkup(c, { isEquipped: i === equippedAvatar });
+    d.onclick = () => {
+      setChosenCharacter(i);
+      Sfx.pick();
+    };
+    row.appendChild(d);
+  });
+  row.querySelectorAll('[data-preview-id]').forEach(hostEl => {
+    const character = PLAYER_CHARACTERS.find(item => item.id === hostEl.dataset.previewId);
+    if (character) renderCharacterPreview(character, hostEl);
+  });
+  refreshLoadoutEquipButton();
+}
+
 function refreshStartAvailability() {
   if (!bootState.modelReady) {
     setStartButtonsDisabled(true, 'LOADING AVATAR...');
@@ -2564,7 +4032,85 @@ function refreshStartAvailability() {
   setStartButtonsDisabled(false);
 }
 
-function loadPlayerModel(character = CHARACTERS[chosenChar]) {
+function renderEnergyGateModal() {
+  const modal = document.getElementById('energyGateModal');
+  const balanceEl = document.getElementById('energyGateTokenBalance');
+  const hintEl = document.getElementById('energyGateHint');
+  const confirmBtn = document.getElementById('energyGateConfirmBtn');
+  if (!modal || !balanceEl || !hintEl || !confirmBtn) return;
+
+  const tokenBalance = getInfinityTokenCount();
+  const hasEnoughTokens = hasEnoughTokensForRunStart();
+  balanceEl.textContent = tokenBalance.toLocaleString();
+  hintEl.textContent = hasEnoughTokens
+    ? `This run will cost ${RUN_TOKEN_ENTRY_COST.toLocaleString()} Infinity Tokens.`
+    : `You need ${RUN_TOKEN_ENTRY_COST.toLocaleString()} Infinity Tokens to start without energy.`;
+  hintEl.classList.toggle('error', !hasEnoughTokens);
+  confirmBtn.disabled = energyGateState.busy || !hasEnoughTokens;
+  confirmBtn.textContent = energyGateState.busy
+    ? 'STARTING...'
+    : `USE ${RUN_TOKEN_ENTRY_COST.toLocaleString()} TOKENS`;
+  modal.style.display = energyGateState.open ? 'flex' : 'none';
+}
+
+function openEnergyGateModal() {
+  energyGateState.open = true;
+  energyGateState.busy = false;
+  renderEnergyGateModal();
+}
+
+function closeEnergyGateModal() {
+  energyGateState.open = false;
+  energyGateState.busy = false;
+  renderEnergyGateModal();
+}
+
+function getStoreReturnScreenForCurrentOverlay() {
+  if (overlayScreen === 'dead') return 'deadScr';
+  if (overlayScreen === 'win') return 'winScr';
+  return 'menu';
+}
+
+function launchGameSession() {
+  closeEnergyGateModal();
+  Sfx.ensure();
+  Music.start();
+  resetGame();
+  document.getElementById('menu').style.display = 'none';
+  document.getElementById('deadScr').style.display = 'none';
+  document.getElementById('winScr').style.display = 'none';
+  document.getElementById('hud').style.display = 'block';
+  G.state = 'play';
+  overlayScreen = 'play';
+  emitHudState(true);
+}
+
+async function handleEnergyGateConfirm() {
+  if (energyGateState.busy) return;
+  energyGateState.busy = true;
+  renderEnergyGateModal();
+  try {
+    await consumeRunStartTokens();
+    setStoreStatus(`Started a run for ${RUN_TOKEN_ENTRY_COST.toLocaleString()} Infinity Tokens.`);
+    launchGameSession();
+  } catch (error) {
+    if (error?.message === 'INSUFFICIENT_TOKENS') {
+      setStoreStatus(`You need ${RUN_TOKEN_ENTRY_COST.toLocaleString()} Infinity Tokens to start without energy.`, true);
+    } else if (error?.message === 'SIGN_IN_REQUIRED') {
+      setStoreStatus('Sign in before using Infinity Tokens to start a run.', true);
+    } else {
+      console.error('Failed to spend Infinity Tokens for run start:', error);
+      setStoreStatus('Could not spend Infinity Tokens right now. Please try again.', true);
+    }
+    energyGateState.busy = false;
+    renderEnergyGateModal();
+    return;
+  }
+  energyGateState.busy = false;
+  renderEnergyGateModal();
+}
+
+function loadPlayerModel(character = getSelectedAvatar()) {
   const modelConfig = getCharacterModelConfig(character);
   if (!modelConfig) return Promise.resolve(null);
   if (playerRigAssets.has(modelConfig.id)) return Promise.resolve(playerRigAssets.get(modelConfig.id) || null);
@@ -2573,12 +4119,21 @@ function loadPlayerModel(character = CHARACTERS[chosenChar]) {
   const loadGltf = url => new Promise((resolve, reject) => {
     loader.load(url, resolve, undefined, reject);
   });
-  const urls = modelConfig.runUrl && modelConfig.runUrl !== modelConfig.sceneUrl
-    ? [modelConfig.sceneUrl, modelConfig.runUrl]
-    : [modelConfig.sceneUrl];
+  const urls = Array.from(new Set([
+    modelConfig.sceneUrl,
+    modelConfig.runUrl,
+    modelConfig.idleUrl,
+    modelConfig.jumpUrl,
+    modelConfig.winUrl,
+    modelConfig.loseUrl,
+  ].filter(Boolean)));
   const playerModelPromise = Promise.all(urls.map(loadGltf)).then(gltfs => {
-    const baseGltf = gltfs[0];
-    const runGltf = gltfs[gltfs.length - 1];
+    const gltfByUrl = new Map(urls.map((url, index) => [url, gltfs[index]]));
+    const baseGltf = gltfByUrl.get(modelConfig.sceneUrl) || gltfs[0];
+    const runGltf = gltfByUrl.get(modelConfig.runUrl) || baseGltf;
+    const idleGltf = gltfByUrl.get(modelConfig.idleUrl) || null;
+    const winGltf = gltfByUrl.get(modelConfig.winUrl) || null;
+    const loseGltf = gltfByUrl.get(modelConfig.loseUrl) || null;
     const vrm = baseGltf.userData?.vrm || null;
     const modelScene = vrm?.scene || baseGltf.scene;
     modelScene.traverse(obj => {
@@ -2590,6 +4145,10 @@ function loadPlayerModel(character = CHARACTERS[chosenChar]) {
       kind: modelConfig.kind || 'gltf',
       scene: modelScene,
       runClip: runGltf.animations[0] || baseGltf.animations[0] || null,
+      idleClip: idleGltf?.animations?.[0] || null,
+      jumpClip: modelConfig.jumpUrl ? (gltfByUrl.get(modelConfig.jumpUrl)?.animations?.[0] || null) : null,
+      winClip: winGltf?.animations?.[0] || null,
+      loseClip: loseGltf?.animations?.[0] || null,
       vrm,
     };
     playerRigAssets.set(modelConfig.id, assets);
@@ -2630,12 +4189,30 @@ function makeAnimatedPlayerMesh(ch, rigAssets, modelConfig = null) {
 
   const mixer = new THREE.AnimationMixer(avatar);
   const runAction = rigAssets.runClip ? mixer.clipAction(rigAssets.runClip) : null;
-  for (const action of [runAction]) {
+  const idleAction = rigAssets.idleClip ? mixer.clipAction(rigAssets.idleClip) : null;
+  const jumpAction = rigAssets.jumpClip ? mixer.clipAction(rigAssets.jumpClip) : null;
+  const winAction = rigAssets.winClip ? mixer.clipAction(rigAssets.winClip) : null;
+  const loseAction = rigAssets.loseClip ? mixer.clipAction(rigAssets.loseClip) : null;
+  for (const action of [runAction, idleAction]) {
     if (!action) continue;
     action.enabled = true;
     action.clampWhenFinished = false;
     action.setLoop(THREE.LoopRepeat);
+    action.weight = 0;
     action.play();
+  }
+  if (jumpAction) {
+    jumpAction.enabled = true;
+    jumpAction.clampWhenFinished = true;
+    jumpAction.setLoop(THREE.LoopOnce, 1);
+    jumpAction.weight = 0;
+  }
+  for (const action of [winAction, loseAction]) {
+    if (!action) continue;
+    action.enabled = true;
+    action.clampWhenFinished = true;
+    action.setLoop(THREE.LoopOnce, 1);
+    action.weight = 0;
   }
 
   const rightHand = findCharacterBone(avatar, MODEL_BONE_NAMES.attack);
@@ -2669,6 +4246,11 @@ function makeAnimatedPlayerMesh(ch, rigAssets, modelConfig = null) {
     body: avatar,
     mixer,
     runAction,
+    idleAction,
+    jumpAction,
+    winAction,
+    loseAction,
+    currentEndAction: null,
     hammer,
     attackBone: rightHand || avatar,
     spineBone: spine || avatar,
@@ -2880,6 +4462,57 @@ let overlayScreen = 'menu';
 
 const damp = (cur, target, l, dt) => THREE.MathUtils.lerp(cur, target, 1 - Math.exp(-l * dt));
 
+function triggerCharacterJumpAnimation() {
+  const rig = P.mesh?.userData?.rig;
+  if (!rig?.animatedModel || !rig.jumpAction || rig.currentEndAction) return;
+  rig.jumpAction.reset();
+  rig.jumpAction.enabled = true;
+  rig.jumpAction.paused = false;
+  rig.jumpAction.timeScale = 1;
+  rig.jumpAction.weight = 1;
+  rig.jumpAction.play();
+}
+
+function triggerCharacterEndAnimation(outcome) {
+  const rig = P.mesh?.userData?.rig;
+  if (!rig?.animatedModel) return 0;
+  const endAction = outcome === 'win' ? rig.winAction : rig.loseAction;
+  if (!endAction) return 0;
+  rig.currentEndAction?.stop();
+  rig.currentEndAction = endAction;
+  if (rig.runAction) {
+    rig.runAction.weight = 0;
+    rig.runAction.stop();
+  }
+  if (rig.idleAction) {
+    rig.idleAction.weight = 0;
+    rig.idleAction.stop();
+  }
+  if (rig.jumpAction) {
+    rig.jumpAction.weight = 0;
+    rig.jumpAction.stop();
+  }
+  endAction.reset();
+  endAction.enabled = true;
+  endAction.paused = false;
+  endAction.timeScale = 1;
+  endAction.weight = 1;
+  endAction.play();
+  return Math.max(0, endAction.getClip()?.duration || 0);
+}
+
+function revealEndScreen(won) {
+  overlayScreen = won ? 'win' : 'dead';
+  if (won) {
+    document.getElementById('winStats').innerHTML = endStatsHTML();
+    document.getElementById('winScr').style.display = 'flex';
+  } else {
+    document.getElementById('deadStats').innerHTML = endStatsHTML();
+    document.getElementById('deadScr').style.display = 'flex';
+  }
+  emitHudState(true);
+}
+
 function animatePlayer(dt, moving) {
   const rig = P.mesh.userData.rig;
   if (rig.animatedModel) {
@@ -2887,16 +4520,33 @@ function animatePlayer(dt, moving) {
     P.hurtT = Math.max(0, P.hurtT - dt);
     P.landT = Math.max(0, P.landT - dt);
     rig.mixer?.update(dt);
+    const usingEndAnimation = !!rig.currentEndAction && (G.state === 'dead' || G.state === 'win');
 
     if (rig.runAction) {
       const allowLocomotion = G.state === 'play';
-      rig.runAction.weight = allowLocomotion && moving && P.onGround ? 1 : 0;
+      rig.runAction.weight = usingEndAnimation ? 0 : (allowLocomotion && moving && P.onGround ? 1 : 0);
       rig.runAction.timeScale = P.sprinting
         ? Math.max(1.08, speedRatio)
         : Math.max(0.62, speedRatio * 0.78);
     }
+    if (rig.idleAction) {
+      const allowIdle = !usingEndAnimation && G.state === 'play' && !moving && P.onGround;
+      rig.idleAction.weight = allowIdle ? 1 : 0;
+      rig.idleAction.timeScale = 1;
+    }
+    if (rig.jumpAction) {
+      if (!usingEndAnimation && !P.onGround) {
+        rig.jumpAction.weight = 1;
+      } else {
+        rig.jumpAction.weight = 0;
+        rig.jumpAction.stop();
+      }
+    }
+    if (rig.currentEndAction) {
+      rig.currentEndAction.weight = usingEndAnimation ? 1 : 0;
+    }
 
-    if (P.attackT > 0) {
+    if (!usingEndAnimation && P.attackT > 0) {
       P.attackT -= dt;
       const k = 1 - Math.max(0, P.attackT) / 0.32;
       const swingX = k < 0.38
@@ -2904,12 +4554,12 @@ function animatePlayer(dt, moving) {
         : THREE.MathUtils.lerp(-2.75, 1.2, (k - 0.38) / 0.62);
       rig.attackBone.rotation.x = swingX;
       rig.attackBone.rotation.z = 0.18;
-    } else {
+    } else if (!usingEndAnimation) {
       rig.attackBone.rotation.x = damp(rig.attackBone.rotation.x, 0.18, 12, dt);
       rig.attackBone.rotation.z = damp(rig.attackBone.rotation.z, 0, 12, dt);
     }
 
-    if (rig.humanoidProcedural) {
+    if (!usingEndAnimation && rig.humanoidProcedural) {
       if (!P.onGround) {
         if (rig.legL) rig.legL.rotation.x = damp(rig.legL.rotation.x, -1.05, 12, dt);
         if (rig.legR) rig.legR.rotation.x = damp(rig.legR.rotation.x, -0.52, 12, dt);
@@ -2950,13 +4600,13 @@ function animatePlayer(dt, moving) {
       spinePitch += 0.1 * thump;
     }
 
-    if (G.state === 'dead') {
+    if (!usingEndAnimation && G.state === 'dead') {
       spinePitch = 1.25;
       bodyPitch = 0.22;
       bodyRoll = -1.1;
       headPitch = -0.35;
       if (rig.runAction) rig.runAction.weight = 0;
-    } else if (G.state === 'win') {
+    } else if (!usingEndAnimation && G.state === 'win') {
       spinePitch = -0.2;
       bodyPitch = -0.06;
       bodyRoll = Math.sin(t * 7) * 0.08;
@@ -2964,10 +4614,12 @@ function animatePlayer(dt, moving) {
       if (rig.runAction) rig.runAction.weight = 0;
     }
 
-    rig.spineBone.rotation.x = damp(rig.spineBone.rotation.x, spinePitch, 8, dt);
-    rig.body.rotation.x = damp(rig.body.rotation.x, bodyPitch, 8, dt);
-    rig.body.rotation.z = damp(rig.body.rotation.z, bodyRoll, 8, dt);
-    rig.headBone.rotation.x = damp(rig.headBone.rotation.x, headPitch, 10, dt);
+    if (!usingEndAnimation) {
+      rig.spineBone.rotation.x = damp(rig.spineBone.rotation.x, spinePitch, 8, dt);
+      rig.body.rotation.x = damp(rig.body.rotation.x, bodyPitch, 8, dt);
+      rig.body.rotation.z = damp(rig.body.rotation.z, bodyRoll, 8, dt);
+      rig.headBone.rotation.x = damp(rig.headBone.rotation.x, headPitch, 10, dt);
+    }
 
     if (!P.wasGround && P.onGround) {
       P.squash = 0.32;
@@ -2978,7 +4630,7 @@ function animatePlayer(dt, moving) {
     P.squash = Math.max(0, P.squash - dt * 2.4);
     const airStretch = P.onGround ? 0 : Math.min(0.18, Math.abs(P.vy) * 0.014);
     P.mesh.scale.y = 1 - P.squash * 0.38 + airStretch;
-    const xz = (1 + P.squash * 0.22 - airStretch * 0.5) * CHARACTERS[chosenChar].build;
+    const xz = (1 + P.squash * 0.22 - airStretch * 0.5) * getSelectedAvatar().build;
     P.mesh.scale.x = xz;
     P.mesh.scale.z = xz;
     rig.vrm?.update(dt);
@@ -3051,7 +4703,7 @@ function animatePlayer(dt, moving) {
   P.squash = Math.max(0, P.squash - dt*2.4);
   const airStretch = P.onGround ? 0 : Math.min(0.18, Math.abs(P.vy)*0.014);
   P.mesh.scale.y = 1 - P.squash*0.38 + airStretch;
-  const xz = (1 + P.squash*0.22 - airStretch*0.5) * CHARACTERS[chosenChar].build;
+  const xz = (1 + P.squash*0.22 - airStretch*0.5) * getSelectedAvatar().build;
   P.mesh.scale.x = xz; P.mesh.scale.z = xz;
 }
 
@@ -3068,6 +4720,7 @@ const G = {
   combo: 0, comboT: 0, comboShown: -1,
   hitstop: 0, hurtUntil: 0, banked: false, earned: 0,
   cloudRunSaved: false,
+  endOverlayTimer: null,
 };
 
 const enemies = [];
@@ -4234,6 +5887,7 @@ addEventListener('blur', clearInputState);
 addEventListener('visibilitychange', () => {
   if (document.hidden) clearInputState();
 });
+addEventListener('resize', resizeCharacterPreviews);
 window.addEventListener('message', event => {
   if (event.origin !== window.location.origin) return;
   if (event.data?.type !== 'infinft:command') return;
@@ -4242,8 +5896,11 @@ window.addEventListener('message', event => {
   else if (action === 'resumePause' && G.state === 'pause') {
     resumePause();
   }
-  else if (action === 'selectCharacter' && typeof payload?.index === 'number' && CHARACTERS[payload.index]) {
+  else if (action === 'selectCharacter' && typeof payload?.index === 'number' && PLAYER_CHARACTERS[payload.index]) {
     setChosenCharacter(payload.index);
+  }
+  else if (action === 'selectMode' && typeof payload?.index === 'number' && GAME_MODES[payload.index] && !GAME_MODES[payload.index].locked) {
+    setChosenMode(payload.index);
   }
   else if (action === 'openShop') {
     if (overlayScreen === 'menu') openShop('menu');
@@ -4563,6 +6220,8 @@ function updateEShots(dt) {
    GAME FLOW
 ============================================================ */
 function resetGame() {
+  clearTimeout(G.endOverlayTimer);
+  G.endOverlayTimer = null;
   enemies.length = 0;
   for (const t in enemyPools) enemyPools[t].list.length = 0;
   for (const g of gems) { if (g.kind !== 'xp') scene.remove(g.m); }
@@ -4580,20 +6239,21 @@ function resetGame() {
   for (const pot of pots) scene.remove(pot.m);
   pots.length = 0; potQueue.length = 0;
 
-  const ch = CHARACTERS[chosenChar];
-  P.mesh = makePlayerMesh(ch);
+  const mode = getSelectedGameMode();
+  const avatar = getSelectedAvatar();
+  P.mesh = makePlayerMesh(avatar);
   scene.add(P.mesh);
   P.pos.set(0, terrainH(0, 0), 0); P.vy = 0; P.onGround = true; P.wasGround = true;
   // permanent upgrades from the Upgrade Lab apply here
   const mu = save.upgrades;
-  P.maxhp = ch.hp + mu.hp * 10; P.hp = P.maxhp; P.baseSpeed = ch.speed;
+  P.maxhp = mode.hp + mu.hp * 10; P.hp = P.maxhp; P.baseSpeed = mode.speed;
   P.level = 1; P.xp = 0; P.xpNext = 10;
   P.invuln = 0; P.animT = 0; P.attackT = 0; P.squash = 0; P.hurtT = 0; P.landT = 0;
   P.dmgMult = 1 + mu.dmg * 0.05; P.cdMult = 1; P.magnet = 3.5 * (1 + mu.magnet * 0.08);
   P.armor = 0; P.regen = mu.regen * 0.15; P.crit = 0.05; P.speedMult = 1 + mu.speed * 0.03;
   P.staminaMax = 100 + mu.stamina * 12; P.stamina = P.staminaMax; P.staminaRegen = 20;
-  P.sprintMult = ch.id === 'zippy' ? 1.65 : 1.58; P.winded = false; P.sprinting = false; P.dustT = 0; P.oobT = 0;
-  P.weapons = {}; P.weapons[ch.weapon] = 1; P.passives = {};
+  P.sprintMult = mode.sprintMult || 1.58; P.winded = false; P.sprinting = false; P.dustT = 0; P.oobT = 0;
+  P.weapons = {}; P.weapons[mode.weapon] = 1; P.passives = {};
   for (const id in WEAPONS) WEAPONS[id].timer = 0;
   syncOrbs();
 
@@ -4609,17 +6269,32 @@ function resetGame() {
   refreshWeaponTray();
 }
 
-function startGame() {
-  Sfx.ensure();
-  Music.start();
-  resetGame();
-  document.getElementById('menu').style.display = 'none';
-  document.getElementById('deadScr').style.display = 'none';
-  document.getElementById('winScr').style.display = 'none';
-  document.getElementById('hud').style.display = 'block';
-  G.state = 'play';
-  overlayScreen = 'play';
-  emitHudState(true);
+async function startGame() {
+  if (G.state === 'play') return;
+  await rechargeCloudEnergy('energy-recharge-start-check').catch(error => {
+    console.error('Failed to refresh Monster Mayhem energy before start:', error);
+  });
+  if (!hasEnoughEnergyToStart()) {
+    openEnergyGateModal();
+    refreshStartAvailability();
+    return;
+  }
+
+  setStartButtonsDisabled(true, 'SPENDING ENERGY...');
+  try {
+    await consumeRunEnergy();
+  } catch (error) {
+    if (error?.message === 'NO_ENERGY') {
+      openEnergyGateModal();
+    } else {
+      console.error('Failed to spend Monster Mayhem energy:', error);
+      setStoreStatus('Could not start your run right now. Please try again.', true);
+    }
+    refreshStartAvailability();
+    return;
+  }
+
+  launchGameSession();
 }
 
 function fmtTime(t) {
@@ -4669,6 +6344,8 @@ function bankCurrentRunRewards() {
 }
 
 function returnToDashboard({ bankRun = false } = {}) {
+  clearTimeout(G.endOverlayTimer);
+  G.endOverlayTimer = null;
   if (bankRun) bankCurrentRunRewards();
   Music.stop();
   clearInputState();
@@ -4680,28 +6357,40 @@ function returnToDashboard({ bankRun = false } = {}) {
   document.getElementById('winScr').style.display = 'none';
   document.getElementById('shopScr').style.display = 'none';
   document.getElementById('leaderboardScr').style.display = 'none';
+  document.getElementById('loadoutScr').style.display = 'none';
+  document.getElementById('storeScr').style.display = 'none';
   document.getElementById('levelup').style.display = 'none';
+  closeStoreCheckoutModal({ reconcile: false });
   document.getElementById('menu').style.display = 'flex';
+  setMenuNavActive('home');
   renderAccountUi();
   emitHudState(true);
 }
 
 function gameOver(won) {
+  if (G.state === 'dead' || G.state === 'win') return;
   G.state = won ? 'win' : 'dead';
-  overlayScreen = won ? 'win' : 'dead';
+  overlayScreen = 'play';
   Music.stop();
   document.getElementById('levelup').style.display = 'none'; // clear a same-frame card screen
   bankCurrentRunRewards();
   for (const s of dmgPool) { s.life = 0; s.el.style.display = 'none'; }
   document.getElementById('hud').style.display = 'none';
+  P.attackT = 0;
+  clearTimeout(G.endOverlayTimer);
   if (won) {
     Sfx.win();
-    document.getElementById('winStats').innerHTML = endStatsHTML();
-    document.getElementById('winScr').style.display = 'flex';
   } else {
     Sfx.die();
-    document.getElementById('deadStats').innerHTML = endStatsHTML();
-    document.getElementById('deadScr').style.display = 'flex';
+  }
+  const animationDurationMs = Math.round(triggerCharacterEndAnimation(won ? 'win' : 'lose') * 1000);
+  if (animationDurationMs > 0) {
+    G.endOverlayTimer = setTimeout(() => {
+      G.endOverlayTimer = null;
+      revealEndScreen(won);
+    }, animationDurationMs);
+  } else {
+    revealEndScreen(won);
   }
   if (!G.cloudRunSaved) {
     G.cloudRunSaved = true;
@@ -4716,25 +6405,12 @@ function gameOver(won) {
    MENU SETUP
 ============================================================ */
 {
-  const row = document.getElementById('charRow');
-  CHARACTERS.forEach((c, i) => {
-    const d = document.createElement('div');
-    d.className = 'charCard charCardWrap' + (i === 0 ? ' sel' : '');
-    d.innerHTML = `${c.badge ? `<div class="charBadge">${c.badge}</div>` : ''}<div class="charEmoji">${c.emoji}</div><div class="charName">${c.name}</div><div class="charDesc">${c.desc}</div>`;
-    d.onclick = () => {
-      setChosenCharacter(i);
-      Sfx.pick();
-    };
-    row.appendChild(d);
-  });
-  const locked = document.createElement('div');
-  locked.className = 'charCard charCardWrap locked';
-  locked.innerHTML = `<div class="charBadge">🔒</div><div class="charEmoji">👤</div><div class="charName">CO-OP</div><div class="charDesc">Coming soon.<br>Team up for mayhem.</div>`;
-  row.appendChild(locked);
+  renderModeCards('charRow');
+  renderCharacterCards('loadoutCharRow');
   document.getElementById('startBtn').onclick = startGame;
   document.getElementById('retryBtn').onclick = startGame;
   document.getElementById('winBtn').onclick = startGame;
-  document.getElementById('loadoutBtn').onclick = focusCharacterSelector;
+  document.getElementById('loadoutBtn').onclick = () => openLoadout('menu');
   document.getElementById('menuLogoutBtn').onclick = logoutToApp;
   const deadLogoutBtn = document.getElementById('deadLogoutBtn');
   const winLogoutBtn = document.getElementById('winLogoutBtn');
@@ -4743,7 +6419,7 @@ function gameOver(won) {
   setStartButtonsDisabled(true, 'LOADING AVATAR...');
   initializeCloudProgress();
   emitHudState(true);
-  loadPlayerModel(CHARACTERS[chosenChar]).then(() => {
+  loadPlayerModel(getSelectedAvatar()).then(() => {
     updateCharacterModelReadyState();
     emitHudState(true);
   });
@@ -4759,6 +6435,8 @@ function refreshMenuCoins() {
 }
 let shopReturn = 'menu';
 let leaderboardReturn = 'menu';
+let loadoutReturn = 'menu';
+let storeReturn = 'menu';
 function buyMetaUpgrade(metaId) {
   const meta = META.find(item => item.id === metaId);
   if (!meta) return;
@@ -4800,6 +6478,7 @@ function openShop(from) {
   document.getElementById(from).style.display = 'none';
   renderShop();
   document.getElementById('shopScr').style.display = 'flex';
+  setMenuNavActive('upgrades');
   Sfx.pick();
   emitHudState(true);
 }
@@ -4807,14 +6486,68 @@ function closeShop() {
   document.getElementById('shopScr').style.display = 'none';
   document.getElementById(shopReturn).style.display = 'flex';
   overlayScreen = shopReturn === 'deadScr' ? 'dead' : shopReturn === 'winScr' ? 'win' : 'menu';
+  if (overlayScreen === 'menu') setMenuNavActive('home');
   Sfx.pick();
   emitHudState(true);
+}
+function openLoadout(from = 'menu') {
+  loadoutReturn = from;
+  overlayScreen = 'loadout';
+  chosenAvatar = equippedAvatar;
+  document.getElementById(from).style.display = 'none';
+  document.getElementById('loadoutScr').style.display = 'flex';
+  setMenuNavActive('loadout');
+  renderCharacterCards('loadoutCharRow');
+  Sfx.pick();
+  emitHudState(true);
+}
+function closeLoadout() {
+  document.getElementById('loadoutScr').style.display = 'none';
+  document.getElementById(loadoutReturn).style.display = 'flex';
+  overlayScreen = loadoutReturn === 'deadScr' ? 'dead' : loadoutReturn === 'winScr' ? 'win' : 'menu';
+  if (overlayScreen === 'menu') setMenuNavActive('home');
+  Sfx.pick();
+  emitHudState(true);
+}
+function openStore(from = 'menu') {
+  storeReturn = from;
+  overlayScreen = 'store';
+  document.getElementById(from).style.display = 'none';
+  document.getElementById('storeScr').style.display = 'flex';
+  setMenuNavActive('store');
+  renderStore();
+  reconcileMonsterMayhemStorePurchases({ recentOnly: true, silent: true }).catch(error => {
+    console.error('Failed to reconcile Monster Mayhem purchases on store open:', error);
+  });
+  if (storeState.pendingCheckout?.cartId) {
+    ensurePendingStoreCheckoutIsActive().catch(error => {
+      console.error('Failed validating pending Monster Mayhem checkout:', error);
+    });
+    checkStoreCheckoutStatus({ silent: true, closeOnPurchased: false }).catch(error => {
+      console.error('Failed checking existing Monster Mayhem checkout:', error);
+    });
+  }
+  Sfx.pick();
+  emitHudState(true);
+}
+function closeStore() {
+  document.getElementById('storeScr').style.display = 'none';
+  document.getElementById(storeReturn).style.display = 'flex';
+  overlayScreen = storeReturn === 'deadScr' ? 'dead' : storeReturn === 'winScr' ? 'win' : 'menu';
+  if (overlayScreen === 'menu') setMenuNavActive('home');
+  Sfx.pick();
+  emitHudState(true);
+}
+function refreshDashboardSelections() {
+  refreshModeSelectionUI();
+  refreshCharacterSelectionUI();
 }
 async function openLeaderboard(from = 'menu') {
   leaderboardReturn = from;
   overlayScreen = 'leaderboard';
   document.getElementById(from).style.display = 'none';
   document.getElementById('leaderboardScr').style.display = 'flex';
+  setMenuNavActive('leaderboard');
   Sfx.pick();
   emitHudState(true);
   await loadLeaderboard();
@@ -4823,6 +6556,7 @@ function closeLeaderboard() {
   document.getElementById('leaderboardScr').style.display = 'none';
   document.getElementById(leaderboardReturn).style.display = 'flex';
   overlayScreen = leaderboardReturn === 'deadScr' ? 'dead' : leaderboardReturn === 'winScr' ? 'win' : 'menu';
+  if (overlayScreen === 'menu') setMenuNavActive('home');
   Sfx.pick();
   emitHudState(true);
 }
@@ -4840,9 +6574,36 @@ document.getElementById('winShopBtn').onclick = () => openShop('winScr');
 document.getElementById('shopBack').onclick = () => closeShop();
 document.getElementById('leaderboardBtn').onclick = () => openLeaderboard('menu');
 document.getElementById('leaderboardBack').onclick = () => closeLeaderboard();
+document.getElementById('loadoutBack').onclick = () => closeLoadout();
+document.getElementById('loadoutEquipBtn').onclick = () => {
+  setEquippedCharacter(chosenAvatar);
+};
+document.getElementById('navHomeBtn').onclick = () => {
+  if (overlayScreen === 'loadout') closeLoadout();
+  if (overlayScreen === 'store') closeStore();
+};
 document.getElementById('pauseResumeBtn').onclick = () => resumePause();
 document.getElementById('pauseEndRunBtn').onclick = () => returnToDashboard({ bankRun: true });
 document.getElementById('deadMenuBtn').onclick = () => returnToDashboard();
+document.getElementById('storeBtn').onclick = () => openStore('menu');
+document.getElementById('storeBack').onclick = () => closeStore();
+document.getElementById('storeCheckoutClose').onclick = () => closeStoreCheckoutModal({ reconcile: true });
+document.getElementById('storeCheckoutModal').onclick = event => {
+  if (event.target?.id === 'storeCheckoutModal') {
+    closeStoreCheckoutModal({ reconcile: true });
+  }
+};
+document.getElementById('energyGateCancelBtn').onclick = () => closeEnergyGateModal();
+document.getElementById('energyGateConfirmBtn').onclick = () => handleEnergyGateConfirm();
+document.getElementById('energyGateStoreBtn').onclick = () => {
+  closeEnergyGateModal();
+  openStore(getStoreReturnScreenForCurrentOverlay());
+};
+document.getElementById('energyGateModal').onclick = event => {
+  if (event.target?.id === 'energyGateModal') {
+    closeEnergyGateModal();
+  }
+};
 document.getElementById('leaderboardTabSurvival').onclick = () => {
   cloudState.leaderboardMode = 'survival';
   loadLeaderboard();
@@ -4926,13 +6687,22 @@ function buildHudPayload() {
       coins: save.coins,
       startDisabled: !!document.getElementById('startBtn')?.disabled,
       startLabel: document.getElementById('startBtn')?.textContent || 'BASH!',
-      characters: CHARACTERS.map((c, index) => ({
+      modes: GAME_MODES.map((mode, index) => ({
+        index,
+        id: mode.id,
+        emoji: mode.emoji,
+        name: mode.name,
+        desc: mode.desc,
+        selected: index === chosenMode,
+        locked: !!mode.locked,
+      })),
+      characters: PLAYER_CHARACTERS.map((c, index) => ({
         index,
         id: c.id,
         emoji: c.emoji,
         name: c.name,
         desc: c.desc,
-        selected: index === chosenChar,
+        selected: index === chosenAvatar,
       })),
     },
     levelup: G.state === 'levelup' ? {
@@ -4987,6 +6757,7 @@ function tick(now) {
   last = now;
   const wt = now / 1000;
   if (G.hitstop > 0) { G.hitstop -= dt; dt *= 0.2; } // crit slow-mo blink
+  let moving = false;
 
   if (G.state === 'play') {
     G.t += dt;
@@ -5001,7 +6772,7 @@ function tick(now) {
       mx += mobileStick.x;
       mz += mobileStick.y;
     }
-    const moving = !!(mx || mz);
+    moving = !!(mx || mz);
     P.movingNow = moving;
 
     // sprint: hold SHIFT for a burst of speed, gated by stamina
@@ -5049,15 +6820,18 @@ function tick(now) {
       if (gh < P.pos.y - 0.35) { P.onGround = false; P.vy = 0; } // walked off a ledge
       else P.pos.y = gh;
     }
-    if (keys.Space && P.onGround) { P.vy = 9.5; P.onGround = false; Sfx.jump(); }
+    if (keys.Space && P.onGround) {
+      P.vy = 9.5;
+      P.onGround = false;
+      triggerCharacterJumpAnimation();
+      Sfx.jump();
+    }
     if (!P.onGround) {
       P.vy -= 26 * dt;
       P.pos.y += P.vy * dt;
       if (P.vy <= 0 && P.pos.y <= gh) { P.pos.y = gh; P.vy = 0; P.onGround = true; }
     }
     P.mesh.position.copy(P.pos);
-
-    animatePlayer(dt, moving);
 
     // invuln flash
     if (P.invuln > 0) {
@@ -5137,6 +6911,10 @@ function tick(now) {
       }
     } else comboEl.style.display = 'none';
 
+  }
+
+  if (P.mesh && (G.state === 'play' || G.state === 'dead' || G.state === 'win')) {
+    animatePlayer(dt, moving);
   }
 
   emitHudState();

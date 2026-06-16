@@ -6,6 +6,7 @@ import landingBg from "./assets/landing-page-bg.png";
 const GAME_TITLE = "infiNFT Monster Mayhem";
 const GAME_PROFILE_DOC = "profile";
 const LEGACY_FIREBASE_CONFIG_KEY = "infinft:mm:firebase-config";
+const LEGACY_COMMERCE_CONFIG_KEY = "infinft:mm:commerce-config";
 const DEFAULT_GAME_UPGRADES = {
   dmg: 0,
   hp: 0,
@@ -69,7 +70,11 @@ async function ensureUserGameProfile(user, overrides = {}) {
       email: deleteField,
       coins: 0,
       upgrades: DEFAULT_GAME_UPGRADES,
-      selectedAvatar: "zippy",
+      energy: 5,
+      maxEnergy: 5,
+      energyUpdatedAtMs: Date.now(),
+      selectedMode: "zippy",
+      equippedCharacter: "duck",
       bestRunSeconds: 0,
       bestKills: 0,
       totalRuns: 0,
@@ -289,6 +294,23 @@ function App() {
     window.localStorage.setItem(
       LEGACY_FIREBASE_CONFIG_KEY,
       JSON.stringify(firebaseConfig)
+    );
+
+    const isLocalhost = window.location?.origin?.includes("localhost");
+    const fallbackPublishableKey = isLocalhost
+      ? (process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || process.env.REACT_APP_STRIPE_TEST_KEY2 || process.env.REACT_APP_STRIPE_LIVE_KEY || "")
+      : (process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || process.env.REACT_APP_STRIPE_LIVE_KEY || process.env.REACT_APP_STRIPE_TEST_KEY2 || "");
+
+    window.localStorage.setItem(
+      LEGACY_COMMERCE_CONFIG_KEY,
+      JSON.stringify({
+        commerceApiBaseUrl:
+          process.env.REACT_APP_COMMERCE_API_BASE_URL ||
+          "https://us-central1-infinft-card-game.cloudfunctions.net/app",
+        publishableKey: fallbackPublishableKey,
+        stripeTestKey2: process.env.REACT_APP_STRIPE_TEST_KEY2 || "",
+        stripeLiveKey: process.env.REACT_APP_STRIPE_LIVE_KEY || "",
+      })
     );
   }, [firebaseMissing]);
 
