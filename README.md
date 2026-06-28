@@ -6,6 +6,8 @@
 
 The project now has a React shell and keeps the original game runtime preserved under `public/legacy/index.html` while the migration is underway.
 
+If you want the concrete improvement plan, see [NEXT_LEVEL_ROADMAP.md](/Users/blacksatoshi/Documents/Projects/infiNFT-basher/NEXT_LEVEL_ROADMAP.md).
+
 ## ✨ Features
 
 - **30-minute runs** across a huge low-poly world with rolling hills, climbable mesas, and cliff ledges

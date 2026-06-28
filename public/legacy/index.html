@@ -24,6 +24,7 @@
   #mobileJoystick{display:none}
   #weaponHero{position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:14px;min-width:300px;max-width:360px;padding:12px 18px 12px 12px;border-radius:28px;background:linear-gradient(180deg,rgba(23,24,29,.94),rgba(17,17,22,.88));border:2px solid rgba(255,217,102,.58);box-shadow:0 14px 28px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(10px)}
   #weaponHeroIcon{width:82px;height:82px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8d5bff,#4a2367 60%,#211226 100%);border:3px solid rgba(255,220,123,.78);box-shadow:0 0 0 4px rgba(255,255,255,.08),0 12px 20px rgba(0,0,0,.35);font-size:44px}
+  #weaponHeroIcon img{width:54px;height:54px;object-fit:contain;display:block;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
   #weaponHeroBody{display:flex;flex-direction:column;gap:8px;min-width:0}
   #weaponHeroName{color:#fff9ec;font-family:var(--body);font-size:20px;font-weight:900;line-height:1.05;text-shadow:0 2px 6px rgba(0,0,0,.4)}
   #weaponHeroPips{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -36,10 +37,15 @@
   #timer{position:absolute;top:44px;left:50%;transform:translateX(-50%);min-width:236px;padding:10px 18px 12px;text-align:center;color:#fff;font-family:var(--display);font-size:58px;line-height:1;letter-spacing:2px;text-shadow:0 0 18px rgba(186,149,255,.45),0 3px 10px rgba(0,0,0,.56)}
   #timer::before{content:'';position:absolute;inset:0;border-radius:28px;background:linear-gradient(180deg,rgba(22,22,31,.95),rgba(12,12,18,.88));border:2px solid rgba(255,221,110,.72);box-shadow:0 18px 30px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08);z-index:-1}
   #timer::after{content:'✦';position:absolute;top:-18px;right:26px;color:#ffe799;font-size:14px;text-shadow:0 0 10px rgba(255,231,153,.65)}
+  #mutatorBadge{position:absolute;top:118px;left:50%;transform:translateX(-50%);display:none;max-width:min(460px,58vw);padding:10px 16px;border-radius:18px;background:linear-gradient(180deg,rgba(25,27,35,.94),rgba(17,17,23,.9));border:2px solid rgba(255,212,95,.46);box-shadow:0 14px 28px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.06);text-align:center}
+  #mutatorBadge.show{display:block}
+  #mutatorBadgeTitle{color:#fff0b4;font-family:var(--display);font-size:20px;letter-spacing:1px;line-height:1}
+  #mutatorBadgeDesc{margin-top:4px;color:#f4e8ff;font-size:11px;font-weight:900;letter-spacing:.8px;text-transform:uppercase}
   #stats{position:absolute;top:18px;right:18px;display:grid;grid-template-columns:repeat(3,minmax(112px,1fr));gap:0;min-width:396px;padding:10px 14px;border-radius:24px;background:linear-gradient(180deg,rgba(28,29,33,.94),rgba(18,18,22,.88));border:2px solid rgba(255,255,255,.14);box-shadow:0 14px 28px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.06);backdrop-filter:blur(10px)}
   .hudStat{display:flex;align-items:center;gap:10px;padding:4px 14px;border-right:1px solid rgba(255,255,255,.14)}
   .hudStat:last-child{border-right:none}
   .hudStatIcon{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;font-size:24px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+  .hudStatIcon img{width:24px;height:24px;object-fit:contain;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.24))}
   .hudStatBody{display:flex;flex-direction:column;align-items:flex-start}
   .hudStatLabel{color:#d8d1eb;font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
   .hudStatValue{color:#fff;font-family:var(--display);font-size:26px;line-height:1}
@@ -52,7 +58,9 @@
   #hpFill{height:100%;width:100%;background:linear-gradient(180deg,#ff7d7d,#ff4f5d 58%,#d61d37);border-radius:999px;box-shadow:0 0 18px rgba(255,79,93,.38)}
   #hpText{position:absolute;left:50%;top:18px;transform:translate(-50%,-50%);color:#fff;font-family:var(--display);font-size:19px;text-shadow:0 2px 7px rgba(0,0,0,.6);letter-spacing:1px;z-index:1}
   #stamWrap{display:flex;align-items:center;gap:12px;margin-top:12px}
-  #stamWrap::before{content:'⚡';width:42px;height:42px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;background:linear-gradient(180deg,#302210,#1b160b);border:2px solid rgba(255,219,102,.38);color:#ffd54a;font-size:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+  #stamWrap::before{content:'';width:42px;height:42px;flex:0 0 auto;display:block;border-radius:50%;background:
+    url('./assets/energy-icon.png') center/24px 24px no-repeat,
+    linear-gradient(180deg,#302210,#1b160b);border:2px solid rgba(255,219,102,.38);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
   #stamOuter{position:relative;height:22px;background:rgba(16,16,22,.82);border:2px solid rgba(255,219,102,.18);border-radius:999px;overflow:hidden;width:100%;box-shadow:inset 0 2px 5px rgba(0,0,0,.4)}
   #stamFill{height:100%;width:100%;background:linear-gradient(180deg,#ffe47e,#ffc82f 58%,#e59f05);border-radius:999px;box-shadow:0 0 16px rgba(255,200,47,.34)}
   #stamOuter.winded #stamFill{background:linear-gradient(180deg,#ff9f70,#ff6a42 58%,#de3b24)}
@@ -62,11 +70,12 @@
   .wslot.empty{opacity:.68}
   .wslot.empty .slotIcon{color:rgba(255,255,255,.5)}
   .slotIcon{font-size:42px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.34))}
+  .slotIcon img{width:42px;height:42px;object-fit:contain;display:block}
   .slotLevel{position:absolute;right:10px;bottom:10px;color:#fff;font-family:var(--display);font-size:20px;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.6)}
   .slotIndex{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);min-width:26px;padding:2px 8px;border-radius:8px;background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.12);color:#fffef5;font-size:14px;font-weight:900;line-height:1}
   .ptray{display:none}
   .pchip{display:none}
-  #bossWrap{position:absolute;top:128px;left:50%;transform:translateX(-50%);width:420px;display:none}
+  #bossWrap{position:absolute;top:182px;left:50%;transform:translateX(-50%);width:420px;display:none}
   #bossName{color:#ffd8dc;text-align:center;font-family:var(--display);font-size:18px;letter-spacing:2px;text-shadow:0 2px 6px rgba(0,0,0,.55);margin-bottom:6px}
   #bossOuter{height:16px;background:rgba(20,17,30,.84);border:2px solid rgba(255,132,150,.28);border-radius:999px;overflow:hidden;box-shadow:inset 0 2px 5px rgba(0,0,0,.4)}
   #bossFill{height:100%;width:100%;background:linear-gradient(180deg,#ff8397,#e63857 60%,#ba1738);border-radius:999px;box-shadow:0 0 16px rgba(255,104,131,.32)}
@@ -88,6 +97,7 @@
   .charCard:hover{transform:translateY(-7px) scale(1.03);border-color:#ffbe33;box-shadow:0 20px 40px rgba(84,49,18,.18)}
   .charCard.sel{border-color:var(--ui-green);box-shadow:0 0 0 4px rgba(150,201,61,.16),0 20px 40px rgba(84,49,18,.16)}
   .charEmoji{font-size:52px;margin-bottom:8px;filter:drop-shadow(0 6px 6px #0008)}
+  .charEmoji img{width:72px;height:72px;object-fit:contain;display:block;margin:0 auto}
   .charPreview{width:100%;height:150px;margin-bottom:12px;border-radius:18px;background:radial-gradient(circle at 50% 30%, rgba(255,255,255,.4), rgba(255,255,255,.08) 55%, rgba(31,23,50,.18) 100%);overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.28), inset 0 -10px 20px rgba(24,16,42,.12)}
   .charPreview canvas{display:block;width:100%;height:100%}
   .charCard.locked .charPreview{background:radial-gradient(circle at 50% 30%, rgba(255,255,255,.12), rgba(255,255,255,.04) 55%, rgba(12,10,18,.22) 100%)}
@@ -109,11 +119,15 @@
   .upCard:nth-child(3){animation-delay:.14s}
   @keyframes cardIn{from{opacity:0;transform:translateY(36px) scale(.85)}to{opacity:1;transform:translateY(0) scale(1)}}
   .upCard:hover{transform:translateY(-9px) scale(1.045);border-color:#ffbe33;box-shadow:0 0 26px rgba(255,210,62,.24),0 16px 34px rgba(85,47,14,.16)}
+  .upCard.rare{background:linear-gradient(180deg,rgba(255,246,209,.98),rgba(255,228,166,.94));border-color:#ffbd37;box-shadow:0 0 0 3px rgba(255,208,94,.16),0 20px 38px rgba(110,68,9,.18)}
+  .upCard.rare:hover{border-color:#ff9f1a;box-shadow:0 0 32px rgba(255,194,74,.34),0 18px 36px rgba(110,68,9,.22)}
   .upEmoji{font-size:50px;margin:8px 0 12px;filter:drop-shadow(0 6px 6px #0008)}
+  .upEmoji img{width:100%;height:100%;object-fit:contain;display:block}
   .upName{color:#8a4e11;font-family:var(--display);font-size:20px;letter-spacing:1px;margin-bottom:4px}
   .upLvl{color:#6c9824;font-size:12px;font-weight:900;letter-spacing:1px;margin-bottom:10px}
   .upDesc{color:var(--inkSoft);font-size:13px;font-weight:700;line-height:1.6}
   .upTag{margin-top:auto;font-size:11px;font-weight:900;color:#8a6e49;letter-spacing:3px}
+  .upCard.rare .upTag{color:#8b4e00}
 
   /* ---------- end screens ---------- */
   #deadScr,#winScr{
@@ -132,6 +146,7 @@
   .endSummaryItem{display:flex;align-items:center;gap:14px;padding:4px 20px;border-right:1px solid rgba(255,255,255,.12)}
   .endSummaryItem:last-child{border-right:none}
   .endSummaryIcon{font-size:52px;line-height:1;filter:drop-shadow(0 6px 10px rgba(0,0,0,.24))}
+  .endSummaryIcon img{width:52px;height:52px;object-fit:contain;display:block}
   .endSummaryBody{display:flex;flex-direction:column;align-items:flex-start}
   .endSummaryLabel{font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#efe8ff}
   .endSummaryValue{font-family:var(--display);font-size:30px;line-height:1.05;color:#ffcf42}
@@ -202,7 +217,7 @@
   .leaderboardStatValue{display:block;font-size:14px;font-weight:900;color:var(--inkSoft)}
   .leaderboardEmpty{padding:28px 20px;border-radius:20px;background:linear-gradient(180deg,rgba(255,251,241,.96),rgba(244,235,201,.92));border:3px solid rgba(138,111,60,.16);text-align:center;color:var(--inkSoft);font-weight:800}
   .metaCard{background:linear-gradient(180deg,rgba(255,251,241,.96),rgba(244,235,201,.92));border:3px solid rgba(138,111,60,.16);border-radius:20px;padding:14px 12px;text-align:center;box-shadow:0 16px 28px rgba(85,47,14,.12)}
-  .metaCard .upEmoji{font-size:34px;margin:2px 0 6px}
+  .metaCard .upEmoji{width:48px;height:48px;margin:2px auto 6px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.14))}
   .metaCard .upName{font-size:16px}
   .metaCard .mdesc{color:var(--inkSoft);font-size:11.5px;font-weight:700;line-height:1.45;min-height:34px;margin:4px 0 8px}
   .pips{letter-spacing:2px;font-size:11px;color:#6e9824;margin-bottom:8px}
@@ -229,7 +244,8 @@
   .topLogoutBtn{pointer-events:auto;display:flex;align-items:center;justify-content:center;min-height:58px;padding:10px 20px;border:none;border-radius:20px;background:linear-gradient(180deg,#fff6e5,#f0ddae);color:#6b441e;font-family:var(--display);font-size:18px;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 0 rgba(138,96,36,.42),0 10px 18px rgba(7,8,24,.2)}
   .topLogoutBtn:hover{transform:translateY(-1px)}
   .topLogoutBtn:disabled{opacity:.7;cursor:default;transform:none}
-  .topChip .icon{font-size:24px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+  .topChip .icon{width:24px;height:24px;display:grid;place-items:center;flex:0 0 auto;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+  .topChip .icon img{width:100%;height:100%;object-fit:contain;display:block}
   .topChip .label{font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#dbcdfb}
   .topChip .value{font-family:var(--display);font-size:28px;line-height:1;color:#fff}
   .profileChip{gap:14px;padding-right:22px}
@@ -265,7 +281,8 @@
   .menuPrimaryAction:hover{transform:translateY(-2px) scale(1.01)}
   .menuPrimaryAction:disabled{opacity:.7;transform:none;cursor:default}
   .menuPrimaryCost{position:absolute;left:50%;bottom:-24px;transform:translateX(-50%);min-width:132px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 16px 8px;border-radius:18px;background:linear-gradient(180deg,#916230,#734314);color:#fff9e7;font-size:18px;letter-spacing:1px;box-shadow:0 6px 14px rgba(0,0,0,.2);line-height:1}
-  .menuEnergyCount{display:block}
+  .menuEnergyCount{display:flex;align-items:center;justify-content:center;gap:8px}
+  .menuEnergyCount img{width:24px;height:24px;object-fit:contain;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.24))}
   .menuEnergyTimer{display:block;font-family:ui-sans-serif,system-ui,sans-serif;font-size:10px;font-weight:900;letter-spacing:.4px;text-transform:uppercase;color:#ffe7a4;white-space:nowrap}
   .menuChooser{grid-column:1 / span 2;grid-row:3;display:flex;flex-direction:column;align-items:center;justify-self:center;gap:16px;width:min(100%,980px);position:relative;z-index:1}
   .menuChooser.selectorFocus{animation:selectorPulse 1s ease}
@@ -332,7 +349,7 @@
   .energyGateModal{position:absolute;inset:0;z-index:45;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(10,9,22,.72);backdrop-filter:blur(10px)}
   .energyGateCard{width:min(520px,94vw);display:flex;flex-direction:column;align-items:center;gap:18px;padding:28px 26px 24px;border-radius:30px;background:linear-gradient(180deg,rgba(20,17,36,.96),rgba(17,20,35,.96));border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 60px rgba(0,0,0,.42);color:#fff6e3;text-align:center}
   .energyGateIconWrap{width:108px;height:108px;border-radius:30px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%, rgba(255,230,140,.9), rgba(255,190,33,.32) 54%, rgba(255,190,33,.06) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.26),0 18px 30px rgba(255,190,33,.14)}
-  .energyGateIcon{font-size:52px;color:#ffd145;text-shadow:0 8px 16px rgba(122,72,0,.28)}
+  .energyGateIcon{width:60px;height:60px;object-fit:contain;display:block;filter:drop-shadow(0 8px 16px rgba(122,72,0,.28))}
   .energyGateTitle{font-family:var(--display);font-size:44px;letter-spacing:2px;color:#fff8dd;text-shadow:0 8px 18px rgba(13,7,32,.5)}
   .energyGateCopy{font-size:16px;font-weight:800;line-height:1.55;color:#ddd1ff;max-width:400px}
   .energyGateBalance{display:flex;align-items:center;gap:12px;padding:16px 18px;border-radius:20px;background:linear-gradient(180deg,rgba(43,30,88,.94),rgba(25,20,54,.92));border:1px solid rgba(255,255,255,.14);box-shadow:0 16px 30px rgba(7,8,24,.24)}
@@ -347,7 +364,8 @@
   .menuBottomNav{grid-column:1 / span 2;grid-row:4;justify-self:center;display:grid;grid-template-columns:repeat(5,minmax(160px,1fr));width:min(1420px,96%);border-radius:28px;background:linear-gradient(180deg,rgba(20,17,36,.88),rgba(18,22,36,.88));border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 40px rgba(7,8,24,.3);overflow:hidden}
   .navBtn{pointer-events:auto;display:flex;align-items:center;justify-content:center;gap:12px;padding:22px 24px;border:none;background:transparent;color:#fff5de;font-family:var(--display);font-size:28px;letter-spacing:1px;cursor:pointer;border-right:1px solid rgba(255,255,255,.1)}
   .navBtn:last-child{border-right:none}
-  .navBtn .navIcon{font-size:30px}
+  .navBtn .navIcon{width:34px;height:34px;display:grid;place-items:center;flex:0 0 auto}
+  .navBtn .navIcon img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.24))}
   .navBtn.active{background:linear-gradient(180deg,rgba(255,201,54,.22),rgba(255,178,34,.14));box-shadow:inset 0 0 0 2px rgba(255,214,89,.75)}
   .navBtn.disabled{opacity:.46;cursor:default}
   @keyframes selectorPulse{
@@ -532,7 +550,7 @@
     #stamWrap::before{
       width:22px;
       height:22px;
-      font-size:13px;
+      background-size:12px 12px,100% 100%;
       border-width:1px;
     }
     #stamOuter{
@@ -660,7 +678,7 @@
       min-width:0;
     }
     .topChip.tokenChip .icon{width:11px;height:11px;border-radius:4px}
-    .topChip .icon{font-size:11px}
+    .topChip .icon{width:11px;height:11px}
     .topChip .label{font-size:6px}
     .topChip .value{font-size:12px}
     .profileChip{padding-right:5px}
@@ -847,7 +865,7 @@
       border-radius:22px;
     }
     .energyGateIconWrap{width:78px;height:78px;border-radius:22px}
-    .energyGateIcon{font-size:38px}
+    .energyGateIcon{width:44px;height:44px}
     .energyGateTitle{font-size:26px;letter-spacing:1px}
     .energyGateCopy{font-size:12px;line-height:1.4}
     .energyGateBalance{
@@ -955,7 +973,7 @@
       border-bottom:none;
       letter-spacing:.4px;
     }
-    .navBtn .navIcon{font-size:16px}
+    .navBtn .navIcon{width:20px;height:20px}
     .navBtn:last-child{border-right:none}
     .endShell{
       width:100%;
@@ -996,6 +1014,7 @@
     }
     .endSummaryBody{align-items:center}
     .endSummaryIcon{font-size:22px}
+    .endSummaryIcon img{width:22px;height:22px}
     .endSummaryLabel{font-size:6px}
     .endSummaryValue{
       font-size:11px;
@@ -1156,7 +1175,7 @@
 
   <div id="hud">
     <div id="weaponHero">
-      <div id="weaponHeroIcon">🪃</div>
+      <div id="weaponHeroIcon"><img src="./assets/boomerang-icon.png" alt="Boomerang"></div>
       <div id="weaponHeroBody">
         <div id="weaponHeroName">Boomerang</div>
         <div id="weaponHeroPips"></div>
@@ -1166,6 +1185,7 @@
     <div id="xpbarWrap"><div id="xpbar"></div></div>
     <div id="lvlBadge">LV 1</div>
     <div id="timer">0:00</div>
+    <div id="mutatorBadge"><div id="mutatorBadgeTitle">MUTATOR DORMANT</div><div id="mutatorBadgeDesc">The arena will shift every five minutes.</div></div>
     <div id="stats"></div>
     <div id="accountHud"></div>
     <div id="mobileJoystick" aria-hidden="true">
@@ -1204,21 +1224,21 @@
           </div>
         </div>
         <div class="topChip">
-          <span class="icon">🪙</span>
+          <span class="icon"><img src="./assets/coins-icon.png" alt="Coins"></span>
           <div>
             <div class="label">Coins</div>
             <div class="value" id="menuCoins">0</div>
           </div>
         </div>
         <div class="topChip">
-          <span class="icon">💎</span>
+          <span class="icon"><img src="./assets/wins-icon.png" alt="Wins"></span>
           <div>
             <div class="label">Wins</div>
             <div class="value" id="topWins">0</div>
           </div>
         </div>
         <div class="topChip">
-          <span class="icon">☠️</span>
+          <span class="icon"><img src="./assets/kills-icon.png" alt="Kills"></span>
           <div>
             <div class="label">Kills</div>
             <div class="value" id="topKills">0</div>
@@ -1275,7 +1295,7 @@
         <button class="menuPrimaryAction" id="startBtn">
           PLAY NOW
           <span class="menuPrimaryCost" id="menuEnergyCost">
-            <span class="menuEnergyCount" id="menuEnergyCount">⚡ 5</span>
+            <span class="menuEnergyCount" id="menuEnergyCount"><img src="./assets/energy-icon.png" alt="Energy"><span>5</span></span>
             <span class="menuEnergyTimer" id="menuEnergyTimer"></span>
           </span>
         </button>
@@ -1284,15 +1304,15 @@
       <section class="menuChooser" id="menuChooser">
         <div class="chooseLabel"><span class="spark">✦</span> CHOOSE YOUR MODE <span class="spark">✦</span></div>
         <div class="charRow dashboardRow" id="charRow"></div>
-        <div class="mobileCharDots" aria-hidden="true"><span class="active"></span><span></span><span></span></div>
+        <div class="mobileCharDots" aria-hidden="true"><span class="active"></span><span></span></div>
       </section>
 
       <nav class="menuBottomNav">
-        <button class="navBtn active" type="button" id="navHomeBtn"><span class="navIcon">🏠</span><span>HOME</span></button>
-        <button class="navBtn" type="button" id="shopBtn"><span class="navIcon">⏫</span><span>UPGRADES</span></button>
-        <button class="navBtn" type="button" id="loadoutBtn"><span class="navIcon">🛡️</span><span>LOADOUT</span></button>
-        <button class="navBtn" type="button" id="leaderboardBtn"><span class="navIcon">📊</span><span>LEADERBOARD</span></button>
-        <button class="navBtn" type="button" id="storeBtn"><span class="navIcon">🛒</span><span>STORE</span></button>
+        <button class="navBtn active" type="button" id="navHomeBtn"><span class="navIcon"><img src="./assets/home-icon.png" alt="Home"></span><span>HOME</span></button>
+        <button class="navBtn" type="button" id="shopBtn"><span class="navIcon"><img src="./assets/upgrade-icon.png" alt="Upgrades"></span><span>UPGRADES</span></button>
+        <button class="navBtn" type="button" id="loadoutBtn"><span class="navIcon"><img src="./assets/loadout-icon.png" alt="Loadout"></span><span>LOADOUT</span></button>
+        <button class="navBtn" type="button" id="leaderboardBtn"><span class="navIcon"><img src="./assets/leaderboards-icon.png" alt="Leaderboard"></span><span>LEADERBOARD</span></button>
+        <button class="navBtn" type="button" id="storeBtn"><span class="navIcon"><img src="./assets/store-icon.png" alt="Store"></span><span>STORE</span></button>
       </nav>
     </div>
   </div>
@@ -1422,7 +1442,7 @@
 </div>
 <div class="energyGateModal" id="energyGateModal">
   <div class="energyGateCard" role="dialog" aria-modal="true" aria-labelledby="energyGateTitle" onclick="event.stopPropagation()">
-    <div class="energyGateIconWrap"><div class="energyGateIcon">⚡</div></div>
+    <div class="energyGateIconWrap"><img class="energyGateIcon" src="./assets/energy-icon.png" alt="Energy"></div>
     <div class="energyGateTitle" id="energyGateTitle">OUT OF ENERGY</div>
     <div class="energyGateCopy">You are out of run energy. Spend 100 Infinity Tokens to jump straight into the next match.</div>
     <div class="energyGateBalance">
@@ -1475,6 +1495,9 @@ const RUN_TOKEN_ENTRY_COST = 100;
 const DEFAULT_COMMERCE_API_BASE_URL = 'https://us-central1-infinft-card-game.cloudfunctions.net/app';
 const DEFAULT_STRIPE_TEST_KEY2 = 'pk_test_51RTZpsR8JsbQ82ZJ3tElYXLccFna1xVrghkQI75cHzDAl63fHbzkoNsqSPEAZCBAKEwB2Q4rTC0fWQ2UGtvdeQch004qtrCxwo';
 const DEFAULT_STRIPE_LIVE_KEY = 'pk_live_51IM7l2JOpsxdxVe2sgvbNRrXl5wOl7atbigW1Ypva7qXB5JonKekA5nwGlWb5lZI9Mv17DifYkuOGbinq8HanViP00ZlDcHysm';
+const COINS_ICON_URL = './assets/coins-icon.png';
+const KILLS_ICON_URL = './assets/kills-icon.png';
+const WINS_ICON_URL = './assets/wins-icon.png';
 const TOKEN_PRODUCTS = [
   { id: 'tokens-75', amount: 75, price: 99, deal: null },
   { id: 'tokens-500', amount: 500, price: 499, deal: null },
@@ -1657,14 +1680,14 @@ const Music = (() => {
 ============================================================ */
 const SAVE_KEY = 'cubebasher_v1';
 const META = [
-  { id:'dmg',     emoji:'💪', name:'Power',     desc:'+5% damage per level',        max:10, base:30 },
-  { id:'hp',      emoji:'❤️', name:'Vitality',  desc:'+10 max HP per level',        max:10, base:25 },
-  { id:'speed',   emoji:'👟', name:'Swiftness', desc:'+3% move speed per level',    max:8,  base:35 },
-  { id:'regen',   emoji:'🌿', name:'Recovery',  desc:'+0.15 HP/s regen per level',  max:8,  base:40 },
-  { id:'stamina', emoji:'⚡', name:'Endurance', desc:'+12 max stamina per level',   max:8,  base:30 },
-  { id:'gold',    emoji:'💰', name:'Greed',     desc:'+10% gold found per level',   max:8,  base:45 },
-  { id:'magnet',  emoji:'🧲', name:'Magnetism', desc:'+8% pickup radius per level', max:8,  base:30 },
-  { id:'xp',      emoji:'📘', name:'Wisdom',    desc:'+6% XP gained per level',     max:8,  base:50 },
+  { id:'dmg',     emoji:'💪', icon:'./assets/power-icon.png',      name:'Power',     desc:'+5% damage per level',        max:10, base:30 },
+  { id:'hp',      emoji:'❤️', icon:'./assets/vitality-icon.png',   name:'Vitality',  desc:'+10 max HP per level',        max:10, base:25 },
+  { id:'speed',   emoji:'👟', icon:'./assets/swiftness-icon.png',  name:'Swiftness', desc:'+3% move speed per level',    max:8,  base:35 },
+  { id:'regen',   emoji:'🌿', icon:'./assets/recovery-icon.png',   name:'Recovery',  desc:'+0.15 HP/s regen per level',  max:8,  base:40 },
+  { id:'stamina', emoji:'⚡', icon:'./assets/endurance-icon.png',  name:'Endurance', desc:'+12 max stamina per level',   max:8,  base:30 },
+  { id:'gold',    emoji:'💰', icon:'./assets/greed-icon.png',      name:'Greed',     desc:'+10% gold found per level',   max:8,  base:45 },
+  { id:'magnet',  emoji:'🧲', icon:'./assets/magnetism-icon.png',  name:'Magnetism', desc:'+8% pickup radius per level', max:8,  base:30 },
+  { id:'xp',      emoji:'📘', icon:'./assets/wisdom-icon.png',     name:'Wisdom',    desc:'+6% XP gained per level',     max:8,  base:50 },
 ];
 const save = (() => {
   let s = null;
@@ -1678,6 +1701,19 @@ const save = (() => {
 function persistSave() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch (e) {} }
 function metaCost(m) { return Math.round(m.base * Math.pow(1.75, save.upgrades[m.id])); }
 const goldMult = () => 1 + save.upgrades.gold * 0.10;
+function metaIconMarkup(meta) {
+  return meta.icon
+    ? `<img src="${meta.icon}" alt="${meta.name}">`
+    : meta.emoji;
+}
+
+function iconMarkup(entity, fallbackAlt = '') {
+  if (entity?.icon) {
+    const alt = entity.name || fallbackAlt || 'Icon';
+    return `<img src="${entity.icon}" alt="${alt}">`;
+  }
+  return entity?.emoji || fallbackAlt;
+}
 
 function getLegacyFirebaseConfig() {
   try {
@@ -1886,10 +1922,10 @@ function updateEnergyCountdownUi() {
   const currentEnergy = getCurrentEnergy();
   const maxEnergy = getMaxEnergy();
   const nextMs = getNextEnergyDripMs();
-  const countText = `⚡ ${currentEnergy}`;
+  const countMarkup = `<img src="./assets/energy-icon.png" alt="Energy"><span>${currentEnergy}</span>`;
 
-  if (countEl) countEl.textContent = countText;
-  else if (fallbackEl) fallbackEl.textContent = countText;
+  if (countEl) countEl.innerHTML = countMarkup;
+  else if (fallbackEl) fallbackEl.innerHTML = countMarkup;
 
   if (!timerEl) return;
   if (currentEnergy >= maxEnergy) {
@@ -3190,6 +3226,7 @@ function buildShopItems() {
     return {
       id: meta.id,
       emoji: meta.emoji,
+      icon: meta.icon || '',
       name: meta.name,
       desc: meta.desc,
       level,
@@ -3199,6 +3236,10 @@ function buildShopItems() {
       canBuy: !maxed && save.coins >= cost,
     };
   });
+}
+
+function hudStatIconMarkup(src, alt, fallback) {
+  return src ? `<img src="${src}" alt="${alt}">` : fallback;
 }
 
 /* ============================================================
@@ -3585,8 +3626,7 @@ scene.add(motes);
    PLAYER — little humanoid hero with a procedural rig
 ============================================================ */
 const GAME_MODES = [
-  { id:'zippy', emoji:'🪃', name:'ZIPPY', desc:'Fast skirmisher.<br>Starts with Boomerang.', hp:90, speed:10.0, weapon:'boomerang', sprintMult:1.65, badge:'★' },
-  { id:'chonk', emoji:'💀', name:'CHONK', desc:'Durable bruiser.<br>Starts with Bash Orbs.', hp:145, speed:7.8, weapon:'orbs', sprintMult:1.58 },
+  { id:'zippy', emoji:'🪃', icon:'./assets/boomerang-icon.png', name:'MAYHEM', desc:'Fast skirmisher.<br>Starts with Boomerang.', hp:90, speed:10.0, weapon:'boomerang', sprintMult:1.65, badge:'★' },
   { id:'coop', emoji:'👥', name:'CO-OP', desc:'Coming soon.<br>Team up for mayhem.', locked:true, badge:'🔒' },
 ];
 const PLAYER_CHARACTERS = [
@@ -3917,14 +3957,14 @@ function setEquippedCharacter(index, opts = {}) {
 }
 
 function applyChosenModeById(id, opts = {}) {
-  const index = GAME_MODES.findIndex(mode => mode.id === id);
+  const normalizedId = id === 'chonk' ? 'zippy' : id;
+  const index = GAME_MODES.findIndex(mode => mode.id === normalizedId);
   if (index >= 0) setChosenMode(index, opts);
 }
 
 function applyChosenCharacterById(id, opts = {}) {
   const legacyAvatarMap = {
     zippy: 'duck',
-    chonk: 'duck',
     coop: 'duck',
   };
   const normalizedId = legacyAvatarMap[id] || id;
@@ -3972,7 +4012,7 @@ function setMenuNavActive(section = 'home') {
 function buildCharacterCardMarkup(character, opts = {}) {
   const previewMarkup = character.modelId
     ? `<div class="charPreview" data-preview-id="${character.id}"></div>`
-    : `<div class="charEmoji">${character.emoji}</div>`;
+    : `<div class="charEmoji">${iconMarkup(character, character.emoji || '👾')}</div>`;
   const equippedMarkup = opts.isEquipped ? `<div class="charEquipBadge">EQUIPPED</div>` : '';
   return `${equippedMarkup}${character.badge ? `<div class="charBadge">${character.badge}</div>` : ''}${previewMarkup}<div class="charName">${character.name}</div><div class="charDesc">${character.desc}</div>`;
 }
@@ -4452,13 +4492,28 @@ const P = {
   animT: 0, attackT: 0, squash: 0,
   hurtT: 0, landT: 0,
   dmgMult: 1, cdMult: 1, magnet: 3.5, armor: 0, regen: 0, crit: 0.05, speedMult: 1,
+  critMult: 2, projectileDmgMult: 1, orbDmgMult: 1, orbSpeedMult: 1, orbHitCd: 0.5,
+  slowVulnMult: 1, sprintDmgMult: 1, sprintCdMult: 1, frostRadiusBonus: 0,
   stamina: 100, staminaMax: 100, staminaRegen: 18, sprintMult: 1.65,
   sprinting: false, winded: false, dustT: 0,
   weapons: {},   // id -> level
   passives: {},  // id -> times picked
+  rareCards: {}, // id -> unlocked rare synergies
 };
 function playerSpeed(){ return P.baseSpeed * P.speedMult; }
 let overlayScreen = 'menu';
+
+function effectiveDamageMult(tags = []) {
+  let mult = P.dmgMult;
+  if (tags.includes('projectile')) mult *= P.projectileDmgMult;
+  if (tags.includes('orb')) mult *= P.orbDmgMult;
+  if (P.sprinting) mult *= P.sprintDmgMult;
+  return mult;
+}
+
+function effectiveCdMult() {
+  return P.cdMult * (P.sprinting ? P.sprintCdMult : 1);
+}
 
 const damp = (cur, target, l, dt) => THREE.MathUtils.lerp(cur, target, 1 - Math.exp(-l * dt));
 
@@ -4717,6 +4772,7 @@ const G = {
   shake: 0,
   pendingLevelups: 0,
   WIN_TIME: 1800,
+  mutatorId: null, mutatorEndsAt: 0, nextMutatorAt: 300, stormCd: 7,
   combo: 0, comboT: 0, comboShown: -1,
   hitstop: 0, hurtUntil: 0, banked: false, earned: 0,
   cloudRunSaved: false,
@@ -4728,6 +4784,7 @@ const gems = [];
 const projectiles = [];
 const beams = [];
 const rings = [];
+const stormMarkers = [];
 
 /* ============================================================
    DAMAGE NUMBERS (pooled HTML)
@@ -4995,15 +5052,16 @@ function syncEnemyInstances() {
   }
 }
 
-function hpScale(){ return 1 + G.t/60 * 0.38; }
-function dmgScale(){ return 1 + G.t/180 * 0.26; }
+function hpScale(){ return 1 + G.t/60 * 0.46; }
+function dmgScale(){ return 1 + G.t/180 * 0.34; }
 // elites & bosses get bespoke curves: approachable early, monstrous late
 function eliteHpAt(t){ return Math.round((165 + t * 0.95) * (0.62 + 0.34 * hpScale())); }
 function bossHpAt(t){ return Math.round((1850 + t * 2.7) * (0.58 + 0.28 * hpScale())); }
 
 function spawnEnemy(type, posOverride) {
+  const mutator = getActiveMutator();
   // the horde cap grows over the run so late-game escalation stays real
-  const cap = 260 + Math.min(120, Math.floor(G.t / 12));
+  const cap = 260 + Math.min(120, Math.floor(G.t / 12)) + (mutator?.id === 'glass' ? 35 : 0);
   if (enemies.length > cap && !ENEMY_TYPES[type].boss && !ENEMY_TYPES[type].elite) return;
   const def = ENEMY_TYPES[type];
   const pool = enemyPools[type];
@@ -5023,7 +5081,7 @@ function spawnEnemy(type, posOverride) {
   const e = {
     type, def, mesh, gy,
     tint: 0.9 + Math.random()*0.2,
-    hp: def.elite ? eliteHpAt(G.t) : def.boss ? bossHpAt(G.t) : def.hp * hpScale(),
+    hp: def.elite ? eliteHpAt(G.t) : def.boss ? bossHpAt(G.t) : def.hp * hpScale() * (mutator?.id === 'glass' ? 0.78 : 1),
     maxhp: 0,
     kb: new THREE.Vector3(),
     flash: 0, hitCd: {}, contactCd: 0, slowT: 0, shootCd: 1.6,
@@ -5053,11 +5111,12 @@ function killEnemy(e, idx) {
   burst(e.mesh.position, e.def.color, e.def.boss ? 26 : e.def.elite ? 16 : 7, 6);
   const p = e.mesh.position;
   if (e.def.boss) {
-    // bosses are worth the fight: gem shower, big gold, a vacuum, a snack, a free upgrade
+    // bosses are worth the fight, but shouldn't guarantee endless snowballing late
     for (let i = 0; i < 8; i++) dropGem(p, 10, true);
     for (let i = 0; i < 8; i++) dropGold(p);
     dropVacuum(p);
     pushPickup('food', 0, new THREE.Mesh(foodGeo, foodMat), p.x, p.z);
+    gainXP(18 + Math.floor(G.t / 90));
     G.pendingLevelups++;
     // hand the HP bar to any boss still alive
     G.boss = enemies.find(x => x.def.boss) || null;
@@ -5066,8 +5125,8 @@ function killEnemy(e, idx) {
   } else if (e.def.elite) {
     for (let i = 0; i < 4; i++) dropGem(p, 5, true);
     dropGold(p);
-    G.pendingLevelups++;
-    showDamage(p, 'CHEST!', '#ffd23e', 22);
+    gainXP(8 + Math.floor(G.t / 180));
+    showDamage(p, 'CHEST XP!', '#ffd23e', 22);
   } else {
     dropGem(p, e.def.xp);
     // gold rate tapers late so an endless-horde run can't trivialize the meta economy
@@ -5078,8 +5137,10 @@ function killEnemy(e, idx) {
 }
 
 function damageEnemy(e, amount, sourcePos, isCritAllowed = true) {
+  if (G.mutatorId === 'glass' && !e.def.elite && !e.def.boss) amount *= 1.18;
+  if (e.slowT > 0) amount *= P.slowVulnMult;
   let crit = false;
-  if (isCritAllowed && Math.random() < P.crit) { amount *= 2; crit = true; }
+  if (isCritAllowed && Math.random() < P.crit) { amount *= P.critMult; crit = true; }
   amount = Math.round(amount);
   e.hp -= amount;
   e.flash = 0.12;
@@ -5294,7 +5355,7 @@ function gainXP(v) {
   while (P.xp >= P.xpNext) {
     P.xp -= P.xpNext;
     P.level++;
-    P.xpNext = Math.floor(8 + P.level * 4.4 + P.level * P.level * 0.34);
+    P.xpNext = Math.floor(8 + P.level * 4.8 + P.level * P.level * 0.42);
     G.pendingLevelups++;
     Sfx.levelup();
   }
@@ -5307,32 +5368,32 @@ const WEAPONS = {
   orbs: {
     name: 'Bash Orbs', emoji: '🪩',
     desc: l => `${orbStats(l).n} orbs circle you, smacking<br>anything they touch. DMG ${orbStats(l).dmg}`,
-    max: 8, timer: 0,
+    max: 8, timer: 0, tags: ['orb', 'speed', 'defense'],
   },
   fireball: {
     name: 'Fireball', emoji: '🔥',
     desc: l => `Hurls ${fireStats(l).n} exploding fireball${fireStats(l).n>1?'s':''} at<br>the nearest enemy. DMG ${fireStats(l).dmg}`,
-    max: 8, timer: 0,
+    max: 8, timer: 0, tags: ['projectile', 'blast', 'tempo'],
   },
   lightning: {
     name: 'Sky Zapper', emoji: '⚡',
     desc: l => `Lightning strikes ${zapStats(l).n} random<br>${zapStats(l).n > 1 ? 'enemies' : 'enemy'}. DMG ${zapStats(l).dmg}`,
-    max: 8, timer: 0,
+    max: 8, timer: 0, tags: ['shock', 'crit', 'tempo'],
   },
   boomerang: {
-    name: 'Boomerang', emoji: '🪃',
+    name: 'Boomerang', emoji: '🪃', icon: './assets/boomerang-icon.png',
     desc: l => `Throws ${boomStats(l).n} piercing boomerang${boomStats(l).n>1?'s':''}<br>that fly out and return. DMG ${boomStats(l).dmg}`,
-    max: 8, timer: 0,
+    max: 8, timer: 0, tags: ['projectile', 'pierce', 'speed'],
   },
   frost: {
     name: 'Frost Nova', emoji: '❄️',
     desc: l => `Icy pulse: DMG ${frostStats(l).dmg} and slows<br>cubes 45% for ${frostStats(l).slow.toFixed(1)}s`,
-    max: 8, timer: 0,
+    max: 8, timer: 0, tags: ['freeze', 'zone', 'control'],
   },
   rail: {
     name: 'Cube Cannon', emoji: '🔷',
     desc: l => `Fires ${railStats(l).n} piercing bolt${railStats(l).n>1?'s':''} straight<br>through the horde. DMG ${railStats(l).dmg}`,
-    max: 8, timer: 0,
+    max: 8, timer: 0, tags: ['projectile', 'pierce', 'crit'],
   },
 };
 function hammerStats(l){ return { dmg: Math.round((14 + l*8) ), r: 3.4 + l*0.5, cd: 1.7 - l*0.12 }; }
@@ -5360,6 +5421,41 @@ const fireGeo = new THREE.SphereGeometry(0.35, 8, 8);
 const fireMat = new THREE.MeshBasicMaterial({ color: 0xffa040 });
 const boomGeo = new THREE.BoxGeometry(0.7, 0.12, 0.7);
 const boomMat = new THREE.MeshBasicMaterial({ color: 0xffe9a8 });
+const BOOMERANG_MODEL_URL = './assets/boomerang.glb';
+const boomerangLoader = new GLTFLoader();
+let boomerangProjectileTemplate = null;
+const boomerangProjectilePromise = new Promise(resolve => {
+  boomerangLoader.load(BOOMERANG_MODEL_URL, gltf => {
+    const root = gltf.scene || null;
+    if (!root) { resolve(null); return; }
+    const bounds = new THREE.Box3().setFromObject(root);
+    const size = bounds.getSize(new THREE.Vector3());
+    const center = bounds.getCenter(new THREE.Vector3());
+    const scale = 1 / Math.max(size.x, size.y, size.z, 0.001);
+    root.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
+    root.scale.setScalar(scale * 0.58);
+    root.rotation.x = Math.PI / 2;
+    root.traverse(obj => {
+      if (!obj.isMesh) return;
+      obj.castShadow = true;
+      obj.receiveShadow = true;
+      if (obj.material) {
+        obj.material = obj.material.clone();
+        obj.material.depthWrite = true;
+      }
+    });
+    boomerangProjectileTemplate = root;
+    resolve(root);
+  }, undefined, error => {
+    console.warn('Failed to load boomerang mesh, using procedural fallback:', error);
+    resolve(null);
+  });
+});
+
+function createBoomerangProjectileMesh() {
+  if (!boomerangProjectileTemplate) return new THREE.Mesh(boomGeo, boomMat);
+  return boomerangProjectileTemplate.clone(true);
+}
 const beamGeo = new THREE.CylinderGeometry(0.18, 0.5, 14, 6);
 const beamMat = new THREE.MeshBasicMaterial({ color: 0xcaf4ff, transparent: true });
 const ringGeo = new THREE.RingGeometry(0.9, 1.0, 40);
@@ -5387,12 +5483,12 @@ function fireWeapons(dt) {
 
     if (id === 'hammer') {
       const s = hammerStats(lvl);
-      w.timer = s.cd * P.cdMult;
+      w.timer = s.cd * effectiveCdMult();
       let hitAny = false;
       for (let i = enemies.length - 1; i >= 0; i--) {
         const e = enemies[i];
         const d = Math.hypot(e.mesh.position.x - P.pos.x, e.mesh.position.z - P.pos.z);
-        if (d < s.r + e.def.r && Math.abs(e.gy - P.pos.y) < 2.4) { damageEnemy(e, s.dmg * P.dmgMult, P.pos); hitAny = true; if (e.hp <= 0) killEnemy(e, i); }
+        if (d < s.r + e.def.r && Math.abs(e.gy - P.pos.y) < 2.4) { damageEnemy(e, s.dmg * effectiveDamageMult(['melee']), P.pos); hitAny = true; if (e.hp <= 0) killEnemy(e, i); }
       }
       breakPotsNear(P.pos.x, P.pos.z, s.r, P.pos.y);
       if (hitAny || enemies.length) {
@@ -5421,7 +5517,7 @@ function fireWeapons(dt) {
       const s = fireStats(lvl);
       const tgt = nearestEnemy();
       if (!tgt) { w.timer = 0.15; continue; }
-      w.timer = s.cd * P.cdMult;
+      w.timer = s.cd * effectiveCdMult();
       P.attackT = 0.32;
       for (let k = 0; k < s.n; k++) {
         const m = new THREE.Mesh(fireGeo, fireMat);
@@ -5429,19 +5525,19 @@ function fireWeapons(dt) {
         scene.add(m);
         const dir = _v.set(tgt.mesh.position.x - P.pos.x, 0, tgt.mesh.position.z - P.pos.z).normalize().clone();
         if (k > 0) dir.applyAxisAngle(new THREE.Vector3(0,1,0), (Math.random()-0.5)*0.5);
-        projectiles.push({ kind:'fire', m, dir, speed: 16, life: 2.2, dmg: s.dmg, boom: s.boom, trail: 0 });
+        projectiles.push({ kind:'fire', m, dir, speed: 16, life: 2.2, dmg: s.dmg, dmgMult: effectiveDamageMult(WEAPONS.fireball.tags), boom: s.boom, trail: 0 });
       }
     }
     else if (id === 'lightning') {
       const s = zapStats(lvl);
       const near = enemies.filter(e => e.mesh.position.distanceTo(P.pos) < 22);
       if (!near.length) { w.timer = 0.15; continue; }
-      w.timer = s.cd * P.cdMult;
+      w.timer = s.cd * effectiveCdMult();
       for (let k = 0; k < s.n && near.length; k++) {
         const e = near.splice(Math.floor(Math.random()*near.length), 1)[0];
         const idx = enemies.indexOf(e);
         if (idx < 0) continue;
-        damageEnemy(e, s.dmg * P.dmgMult, null);
+        damageEnemy(e, s.dmg * effectiveDamageMult(WEAPONS.lightning.tags), null);
         const b = new THREE.Mesh(beamGeo, beamMat.clone());
         b.position.copy(e.mesh.position); b.position.y = e.gy + 7;
         b.rotation.y = Math.random()*Math.PI;
@@ -5455,33 +5551,34 @@ function fireWeapons(dt) {
     else if (id === 'boomerang') {
       const s = boomStats(lvl);
       const tgt = nearestEnemy(30);
-      w.timer = s.cd * P.cdMult;
+      w.timer = s.cd * effectiveCdMult();
       P.attackT = 0.32;
       for (let k = 0; k < s.n; k++) {
-        const m = new THREE.Mesh(boomGeo, boomMat);
+        const m = createBoomerangProjectileMesh();
         m.position.set(P.pos.x, P.pos.y + 1.3, P.pos.z);
         scene.add(m);
         let dir;
         if (tgt) dir = new THREE.Vector3(tgt.mesh.position.x - P.pos.x, 0, tgt.mesh.position.z - P.pos.z).normalize();
         else dir = P.facing.clone();
         if (k > 0) dir.applyAxisAngle(new THREE.Vector3(0,1,0), Math.PI * 2 / 3);
-        projectiles.push({ kind:'boom', m, dir, speed: 17, life: 6, dmg: s.dmg, range: s.range, traveled: 0, returning: false, hitMap: new Set() });
+        projectiles.push({ kind:'boom', m, dir, speed: 17, life: 6, dmg: s.dmg, dmgMult: effectiveDamageMult(WEAPONS.boomerang.tags), range: s.range, traveled: 0, returning: false, hitMap: new Set() });
       }
     }
     else if (id === 'frost') {
       const s = frostStats(lvl);
+      const frostRadius = s.r + P.frostRadiusBonus;
       if (!enemies.length) { w.timer = 0.2; continue; }
-      w.timer = s.cd * P.cdMult;
+      w.timer = s.cd * effectiveCdMult();
       const ring = new THREE.Mesh(ringGeo, ringMatIce.clone());
       ring.rotation.x = -Math.PI/2; ring.position.set(P.pos.x, P.pos.y + 0.18, P.pos.z);
       scene.add(ring);
-      rings.push({ m: ring, life: 0.45, max: 0.45, r: s.r });
+      rings.push({ m: ring, life: 0.45, max: 0.45, r: frostRadius });
       for (let i = enemies.length - 1; i >= 0; i--) {
         const e = enemies[i];
         const d = Math.hypot(e.mesh.position.x - P.pos.x, e.mesh.position.z - P.pos.z);
-        if (d < s.r + e.def.r && Math.abs(e.gy - P.pos.y) < 2.4) {
+        if (d < frostRadius + e.def.r && Math.abs(e.gy - P.pos.y) < 2.4) {
           e.slowT = Math.max(e.slowT, s.slow);
-          damageEnemy(e, s.dmg * P.dmgMult, null);
+          damageEnemy(e, s.dmg * effectiveDamageMult(WEAPONS.frost.tags), null);
           if (e.hp <= 0) killEnemy(e, i);
         }
       }
@@ -5491,7 +5588,7 @@ function fireWeapons(dt) {
       const s = railStats(lvl);
       const tgt = nearestEnemy(30);
       if (!tgt) { w.timer = 0.15; continue; }
-      w.timer = s.cd * P.cdMult;
+      w.timer = s.cd * effectiveCdMult();
       P.attackT = 0.32;
       for (let k = 0; k < s.n; k++) {
         const m = new THREE.Mesh(railGeo, railMat);
@@ -5500,7 +5597,7 @@ function fireWeapons(dt) {
         if (k > 0) dir.negate(); // second bolt fires out the back
         m.rotation.y = Math.atan2(dir.x, dir.z);
         scene.add(m);
-        projectiles.push({ kind: 'rail', m, dir, speed: 30, life: s.range / 30, dmg: s.dmg, hitMap: new Set() });
+        projectiles.push({ kind: 'rail', m, dir, speed: 30, life: s.range / 30, dmg: s.dmg, dmgMult: effectiveDamageMult(WEAPONS.rail.tags), hitMap: new Set() });
       }
       Sfx.zap();
     }
@@ -5532,7 +5629,7 @@ function updateProjectiles(dt) {
             const e2 = enemies[q];
             const dx2 = p.m.position.x - e2.mesh.position.x, dz2 = p.m.position.z - e2.mesh.position.z;
             if (Math.hypot(dx2, dz2) < p.boom + e2.def.r && Math.abs(e2.gy - e.gy) < 3) {
-              damageEnemy(e2, p.dmg * P.dmgMult, p.m.position);
+              damageEnemy(e2, p.dmg * (p.dmgMult || 1), p.m.position);
               if (e2.hp <= 0) killEnemy(e2, q);
             }
           }
@@ -5562,7 +5659,7 @@ function updateProjectiles(dt) {
         const dx = p.m.position.x - e.mesh.position.x, dz = p.m.position.z - e.mesh.position.z;
         if (Math.hypot(dx, dz) < e.def.r + 0.7 && Math.abs(p.m.position.y - (e.gy + 0.9)) < 1.8) {
           p.hitMap.add(e);
-          damageEnemy(e, p.dmg * P.dmgMult, p.m.position);
+          damageEnemy(e, p.dmg * (p.dmgMult || 1), p.m.position);
           if (e.hp <= 0) killEnemy(e, j);
         }
       }
@@ -5579,7 +5676,7 @@ function updateProjectiles(dt) {
         const dx = p.m.position.x - e.mesh.position.x, dz = p.m.position.z - e.mesh.position.z;
         if (Math.hypot(dx, dz) < e.def.r + 0.7 && Math.abs(p.m.position.y - (e.gy + 0.9)) < 1.9) {
           p.hitMap.add(e);
-          damageEnemy(e, p.dmg * P.dmgMult, null);
+          damageEnemy(e, p.dmg * (p.dmgMult || 1), null);
           if (e.hp <= 0) killEnemy(e, j);
         }
       }
@@ -5592,7 +5689,7 @@ function updateProjectiles(dt) {
   const lvl = P.weapons.orbs || 0;
   if (lvl) {
     const s = orbStats(lvl);
-    orbAngle += dt * s.speed;
+    orbAngle += dt * s.speed * P.orbSpeedMult;
     for (let k = 0; k < orbMeshes.length; k++) {
       const a = orbAngle + (k / orbMeshes.length) * Math.PI * 2;
       const ox = P.pos.x + Math.cos(a) * s.r, oz = P.pos.z + Math.sin(a) * s.r;
@@ -5606,8 +5703,8 @@ function updateProjectiles(dt) {
         if (Math.abs(oy - (e.gy + 0.9)) > 1.9) continue;
         const dx = e.mesh.position.x - ox, dz = e.mesh.position.z - oz;
         if (dx*dx + dz*dz < (e.def.r + 0.5) ** 2) {
-          e.hitCd[key] = G.t + 0.5;
-          damageEnemy(e, s.dmg * P.dmgMult, orbMeshes[k].position);
+          e.hitCd[key] = G.t + P.orbHitCd;
+          damageEnemy(e, s.dmg * effectiveDamageMult(WEAPONS.orbs.tags), orbMeshes[k].position);
           if (e.hp <= 0) killEnemy(e, j);
         }
       }
@@ -5633,32 +5730,135 @@ function updateProjectiles(dt) {
    UPGRADES / LEVEL-UP CARDS
 ============================================================ */
 const PASSIVES = [
-  { id:'hp',     emoji:'❤️', name:'Big Heart',    desc:'+25 Max HP (and heal 25)', apply(){ P.maxhp += 25; P.hp += 25; } },
-  { id:'speed',  emoji:'👟', name:'Zoomies',      desc:'+8% move speed',           apply(){ P.speedMult += 0.08; } },
-  { id:'dmg',    emoji:'💪', name:'Protein Shake',desc:'+12% damage',              apply(){ P.dmgMult += 0.12; } },
-  { id:'cd',     emoji:'⏱️', name:'Caffeine',     desc:'-8% weapon cooldowns',     apply(){ P.cdMult *= 0.92; } },
-  { id:'magnet', emoji:'🧲', name:'Gem Magnet',   desc:'+35% pickup radius',       apply(){ P.magnet *= 1.35; } },
-  { id:'armor',  emoji:'🛡️', name:'Thick Skin',   desc:'-2 damage taken per hit',  apply(){ P.armor += 2; } },
-  { id:'regen',  emoji:'🌿', name:'Salad (gross)',desc:'+0.8 HP/sec regen',        apply(){ P.regen += 0.8; } },
-  { id:'crit',   emoji:'🎯', name:'Lucky Bash',   desc:'+6% crit chance (2x dmg)', apply(){ P.crit += 0.06; } },
-  { id:'sprint', emoji:'💨', name:'Afterburner',  desc:'+12% sprint speed',        apply(){ P.sprintMult *= 1.12; } },
-  { id:'lungs',  emoji:'🫁', name:'Big Lungs',    desc:'+30 max stamina',          apply(){ P.staminaMax += 30; P.stamina += 30; } },
-  { id:'wind',   emoji:'🌬️', name:'Second Wind',  desc:'+35% stamina regen',       apply(){ P.staminaRegen *= 1.35; } },
+  { id:'hp',     emoji:'❤️', name:'Big Heart',    desc:'+25 Max HP (and heal 25)', max:5, tags:['tank'], apply(){ P.maxhp += 25; P.hp = Math.min(P.maxhp, P.hp + 25); } },
+  { id:'speed',  emoji:'👟', name:'Zoomies',      desc:'+7% move speed',           max:5, tags:['speed'], apply(){ P.speedMult = Math.min(1.45, P.speedMult + 0.07); } },
+  { id:'dmg',    emoji:'💪', name:'Protein Shake',desc:'+10% damage',              max:5, tags:['tempo', 'damage'], apply(owned){ P.dmgMult += owned >= 3 ? 0.08 : 0.10; } },
+  { id:'cd',     emoji:'⏱️', name:'Caffeine',     desc:'-7% weapon cooldowns',     max:4, tags:['tempo'], apply(owned){ P.cdMult = Math.max(0.6, P.cdMult * (owned >= 2 ? 0.95 : 0.93)); } },
+  { id:'magnet', emoji:'🧲', name:'Gem Magnet',   desc:'+1.2 pickup radius',       max:4, tags:['economy'], apply(owned){ P.magnet = Math.min(8.5, P.magnet + (owned >= 2 ? 0.9 : 1.2)); } },
+  { id:'armor',  emoji:'🛡️', name:'Thick Skin',   desc:'-2 damage taken per hit',  max:5, tags:['tank', 'defense'], apply(){ P.armor = Math.min(12, P.armor + 2); } },
+  { id:'regen',  emoji:'🌿', name:'Salad (gross)',desc:'+0.7 HP/sec regen',        max:5, tags:['tank', 'regen'], apply(owned){ P.regen += owned >= 3 ? 0.55 : 0.7; } },
+  { id:'crit',   emoji:'🎯', name:'Lucky Bash',   desc:'+5% crit chance (2x dmg)', max:4, tags:['crit', 'projectile'], apply(){ P.crit = Math.min(0.32, P.crit + 0.05); } },
+  { id:'sprint', emoji:'💨', name:'Afterburner',  desc:'+9% sprint speed',         max:4, tags:['sprint', 'speed'], apply(){ P.sprintMult = Math.min(2.05, P.sprintMult + 0.09); } },
+  { id:'lungs',  emoji:'🫁', name:'Big Lungs',    desc:'+24 max stamina',          max:4, tags:['sprint', 'stamina'], apply(){ P.staminaMax = Math.min(220, P.staminaMax + 24); P.stamina = Math.min(P.staminaMax, P.stamina + 24); } },
+  { id:'wind',   emoji:'🌬️', name:'Second Wind',  desc:'+5.5 stamina regen',       max:4, tags:['sprint', 'tempo'], apply(owned){ P.staminaRegen = Math.min(38, P.staminaRegen + (owned >= 2 ? 4 : 5.5)); } },
 ];
+
+const RARE_CARDS = [
+  {
+    id:'orbitalOverdrive',
+    emoji:'🛰️',
+    name:'Orbital Overdrive',
+    desc:'Bash Orbs spin faster, hit 30% harder, and tap enemies much more often.',
+    tags:['orb', 'speed'],
+    showIf(){ return (P.weapons.orbs || 0) > 0; },
+    apply(){ P.orbDmgMult *= 1.3; P.orbSpeedMult *= 1.24; P.orbHitCd = Math.max(0.24, P.orbHitCd - 0.16); },
+  },
+  {
+    id:'cryoshock',
+    emoji:'🥶',
+    name:'Cryoshock',
+    desc:'Slowed enemies take 35% more damage, and Frost Nova reaches further.',
+    tags:['freeze', 'shock'],
+    showIf(buildTags){ return (P.weapons.frost || 0) > 0 || (buildTags.freeze || 0) > 0 || (buildTags.shock || 0) > 0; },
+    apply(){ P.slowVulnMult *= 1.35; P.frostRadiusBonus += 0.9; },
+  },
+  {
+    id:'deadeyeCircuit',
+    emoji:'🎯',
+    name:'Deadeye Circuit',
+    desc:'Projectile weapons deal 25% more damage and crit chance jumps by 8%.',
+    tags:['projectile', 'crit'],
+    showIf(buildTags){ return (buildTags.projectile || 0) > 0 || (buildTags.crit || 0) > 0; },
+    apply(){ P.projectileDmgMult *= 1.25; P.crit = Math.min(0.4, P.crit + 0.08); },
+  },
+  {
+    id:'afterimageDrive',
+    emoji:'💨',
+    name:'Afterimage Drive',
+    desc:'While sprinting, you deal 20% more damage and all weapons fire 20% faster.',
+    tags:['sprint', 'speed'],
+    showIf(buildTags){ return (buildTags.sprint || 0) > 0 || (buildTags.speed || 0) > 1; },
+    apply(){ P.sprintDmgMult *= 1.2; P.sprintCdMult *= 0.8; },
+  },
+];
+
+function buildTagScores() {
+  const scores = {};
+  const addTags = (tags = [], amount = 1) => {
+    for (const tag of tags) scores[tag] = (scores[tag] || 0) + amount;
+  };
+  for (const [id, lvl] of Object.entries(P.weapons)) addTags(WEAPONS[id]?.tags || [], 1 + lvl * 0.2);
+  for (const [id, count] of Object.entries(P.passives)) addTags(PASSIVES.find(ps => ps.id === id)?.tags || [], 0.7 + count * 0.2);
+  for (const id of Object.keys(P.rareCards || {})) addTags(RARE_CARDS.find(card => card.id === id)?.tags || [], 1.2);
+  return scores;
+}
+
+function getCardTags(card) {
+  if (card.kind === 'weapon') return WEAPONS[card.id]?.tags || [];
+  if (card.kind === 'passive') return card.ps.tags || [];
+  if (card.kind === 'rare') return card.rc.tags || [];
+  return [];
+}
+
+function describeCardTag(card) {
+  const base = card.kind === 'weapon' ? 'WEAPON' : card.kind === 'rare' ? 'RARE' : 'PASSIVE';
+  const tagLine = getCardTags(card).slice(0, 2).map(tag => tag.toUpperCase()).join(' · ');
+  return tagLine ? `${base} · ${tagLine}` : base;
+}
+
+function cardWeight(card, buildTags) {
+  const tags = getCardTags(card);
+  const synergyScore = tags.reduce((sum, tag) => sum + (buildTags[tag] || 0), 0);
+  let weight = card.kind === 'rare' ? 0.55 : 1;
+  if (card.kind === 'weapon') weight += (P.weapons[card.id] || 0) * 1.35;
+  if (card.kind === 'passive') weight += (P.passives[card.ps.id] || 0) * 0.45;
+  weight += synergyScore * (card.kind === 'rare' ? 0.6 : 0.32);
+  return Math.max(0.1, weight);
+}
+
+function pullWeightedCard(options, buildTags) {
+  const total = options.reduce((sum, card) => sum + cardWeight(card, buildTags), 0);
+  let roll = Math.random() * total;
+  for (let i = 0; i < options.length; i++) {
+    roll -= cardWeight(options[i], buildTags);
+    if (roll <= 0) return options.splice(i, 1)[0];
+  }
+  return options.pop();
+}
 
 function rollCards() {
   const opts = [];
+  const buildTags = buildTagScores();
   for (const id in WEAPONS) {
     const cur = P.weapons[id] || 0;
     if (cur >= WEAPONS[id].max) continue;
     if (!cur && Object.keys(P.weapons).length >= 4) continue; // max 4 weapons
     opts.push({ kind:'weapon', id, lvl: cur + 1 });
   }
-  for (const ps of PASSIVES) opts.push({ kind:'passive', ps });
+  for (const ps of PASSIVES) {
+    const owned = P.passives[ps.id] || 0;
+    if (owned >= ps.max) continue;
+    opts.push({ kind:'passive', ps });
+  }
+  const rarePool = [];
+  if (P.level >= 5) {
+    for (const rc of RARE_CARDS) {
+      if (P.rareCards[rc.id]) continue;
+      if (!rc.showIf(buildTags)) continue;
+      rarePool.push({ kind:'rare', rc });
+    }
+  }
   const picks = [];
-  while (picks.length < 3 && opts.length) {
-    const i = Math.floor(Math.random() * opts.length);
-    picks.push(opts.splice(i, 1)[0]);
+  let rarePicked = false;
+  while (picks.length < 3 && (opts.length || (!rarePicked && rarePool.length))) {
+    const useRare = !rarePicked && rarePool.length && (Math.random() < Math.min(0.18 + P.level * 0.012, 0.34) || (picks.length === 2 && !opts.length));
+    if (useRare) {
+      picks.push(pullWeightedCard(rarePool, buildTags));
+      rarePicked = true;
+      continue;
+    }
+    if (!opts.length) break;
+    picks.push(pullWeightedCard(opts, buildTags));
   }
   return picks;
 }
@@ -5669,11 +5869,23 @@ function serializeLevelupCard(card) {
     return {
       kind: 'weapon',
       id: card.id,
+      icon: w.icon || '',
       emoji: w.emoji,
       name: w.name,
       levelLabel: card.lvl === 1 ? 'NEW!' : 'LV ' + (card.lvl - 1) + ' → ' + card.lvl,
       desc: w.desc(card.lvl),
-      tag: 'WEAPON',
+      tag: describeCardTag(card),
+    };
+  }
+  if (card.kind === 'rare') {
+    return {
+      kind: 'rare',
+      id: card.rc.id,
+      emoji: card.rc.emoji,
+      name: card.rc.name,
+      levelLabel: 'ONE-TIME BUILD SPIKE',
+      desc: card.rc.desc,
+      tag: describeCardTag(card),
     };
   }
   const owned = P.passives[card.ps.id] || 0;
@@ -5682,9 +5894,9 @@ function serializeLevelupCard(card) {
     id: card.ps.id,
     emoji: card.ps.emoji,
     name: card.ps.name,
-    levelLabel: owned ? 'owned ×' + owned : '',
+    levelLabel: owned ? 'owned ×' + owned + ' / ' + card.ps.max : 'max ' + card.ps.max,
     desc: card.ps.desc,
-    tag: 'PASSIVE',
+    tag: describeCardTag(card),
   };
 }
 function applyLevelupCard(index) {
@@ -5693,9 +5905,12 @@ function applyLevelupCard(index) {
   if (c.kind === 'weapon') {
     P.weapons[c.id] = c.lvl;
     syncOrbs();
+  } else if (c.kind === 'rare') {
+    c.rc.apply();
+    P.rareCards[c.rc.id] = true;
   } else {
     const owned = P.passives[c.ps.id] || 0;
-    c.ps.apply();
+    c.ps.apply(owned);
     P.passives[c.ps.id] = owned + 1;
   }
   pickCard();
@@ -5712,17 +5927,21 @@ function showLevelup() {
   currentLevelupCards = rollCards();
   for (const [index, c] of currentLevelupCards.entries()) {
     const div = document.createElement('div');
-    div.className = 'upCard';
+    div.className = 'upCard' + (c.kind === 'rare' ? ' rare' : '');
     if (c.kind === 'weapon') {
       const w = WEAPONS[c.id];
-      div.innerHTML = `<div class="upEmoji">${w.emoji}</div><div class="upName">${w.name}</div>
+      div.innerHTML = `<div class="upEmoji">${iconMarkup(w, w.emoji)}</div><div class="upName">${w.name}</div>
         <div class="upLvl">${c.lvl === 1 ? 'NEW!' : 'LV ' + (c.lvl-1) + ' → ' + c.lvl}</div>
-        <div class="upDesc">${w.desc(c.lvl)}</div><div class="upTag">WEAPON</div>`;
+        <div class="upDesc">${w.desc(c.lvl)}</div><div class="upTag">${describeCardTag(c)}</div>`;
+      div.onclick = () => applyLevelupCard(index);
+    } else if (c.kind === 'rare') {
+      div.innerHTML = `<div class="upEmoji">${c.rc.emoji}</div><div class="upName">${c.rc.name}</div>
+        <div class="upLvl">ONE-TIME BUILD SPIKE</div><div class="upDesc">${c.rc.desc}</div><div class="upTag">${describeCardTag(c)}</div>`;
       div.onclick = () => applyLevelupCard(index);
     } else {
       const owned = P.passives[c.ps.id] || 0;
       div.innerHTML = `<div class="upEmoji">${c.ps.emoji}</div><div class="upName">${c.ps.name}</div>
-        <div class="upLvl">${owned ? 'owned ×' + owned : '&nbsp;'}</div><div class="upDesc">${c.ps.desc}</div><div class="upTag">PASSIVE</div>`;
+        <div class="upLvl">${owned ? 'owned ×' + owned + ' / ' + c.ps.max : 'max ' + c.ps.max}</div><div class="upDesc">${c.ps.desc}</div><div class="upTag">${describeCardTag(c)}</div>`;
       div.onclick = () => applyLevelupCard(index);
     }
     row.appendChild(div);
@@ -5754,7 +5973,7 @@ function refreshWeaponTray() {
   if (featuredId) {
     const featuredWeapon = WEAPONS[featuredId];
     const featuredLevel = P.weapons[featuredId];
-    heroIcon.textContent = featuredWeapon.emoji;
+    heroIcon.innerHTML = iconMarkup(featuredWeapon, featuredWeapon.emoji);
     heroName.textContent = featuredWeapon.name;
     heroPips.innerHTML = '';
     for (let i = 0; i < featuredWeapon.max; i++) {
@@ -5771,6 +5990,7 @@ function refreshWeaponTray() {
   const slots = [];
   for (const id of weaponIds) {
     slots.push({
+      icon: WEAPONS[id].icon || '',
       emoji: WEAPONS[id].emoji,
       level: P.weapons[id],
       title: `${WEAPONS[id].name} Lv ${P.weapons[id]}`,
@@ -5793,7 +6013,7 @@ function refreshWeaponTray() {
     d.className = 'wslot' + (slot ? (slot.active ? ' active' : '') : ' empty');
     d.title = slot ? slot.title : 'Locked slot';
     d.innerHTML = slot
-      ? `<span class="slotIcon">${slot.emoji}</span><span class="slotLevel">x${slot.level}</span><span class="slotIndex">${i + 1}</span>`
+      ? `<span class="slotIcon">${iconMarkup(slot, slot.emoji)}</span><span class="slotLevel">x${slot.level}</span><span class="slotIndex">${i + 1}</span>`
       : `<span class="slotIcon">🔒</span><span class="slotIndex">${i + 1}</span>`;
     tray.appendChild(d);
   }
@@ -5959,6 +6179,20 @@ renderer.domElement.addEventListener('contextmenu', e => e.preventDefault());
 const BOSS_TIMES = [300, 600, 900, 1200, 1500];
 const BOSS_NAMES = ['MEGACUBE', 'GIGACUBE', 'TERACUBE', 'PETACUBE', 'OMEGACUBE'];
 const BOSS_STYLES = ['charger', 'volley', 'quake', 'summoner', 'omega'];
+const RUN_MUTATORS = [
+  { id: 'berserk', icon: '😡', name: 'BERSERK WAVE', desc: 'Runners surge, brutes crash in, elites arrive early.' },
+  { id: 'storm', icon: '⛈️', name: 'STORM FRONT', desc: 'Arc strikes mark the ground and punish camping.' },
+  { id: 'glass', icon: '💥', name: 'GLASS HORDE', desc: 'More enemies flood in, but they shatter faster.' },
+];
+
+function getActiveMutator() {
+  return RUN_MUTATORS.find(m => m.id === G.mutatorId) || null;
+}
+
+function pickNextMutatorId() {
+  const options = RUN_MUTATORS.filter(m => m.id !== G.mutatorId);
+  return (options[Math.floor(Math.random() * options.length)] || RUN_MUTATORS[0]).id;
+}
 
 function showBanner(text, elite = false) {
   const b = document.getElementById('banner');
@@ -5968,26 +6202,91 @@ function showBanner(text, elite = false) {
   b.classList.add('show');
 }
 
+function activateMutator(mutatorId = pickNextMutatorId()) {
+  const mutator = RUN_MUTATORS.find(m => m.id === mutatorId);
+  if (!mutator) return;
+  G.mutatorId = mutator.id;
+  G.mutatorEndsAt = Math.min(G.WIN_TIME, G.nextMutatorAt);
+  G.stormCd = 4.5;
+  showBanner(mutator.name);
+  showDamage(P.pos, mutator.icon + ' ' + mutator.name, '#ffe08a', 21);
+  emitHudState(true);
+}
+
+function scheduleStormStrike(count = 3) {
+  for (let i = 0; i < count; i++) {
+    const ang = Math.random() * Math.PI * 2;
+    const dist = 2.4 + Math.random() * 7.5;
+    const x = THREE.MathUtils.clamp(P.pos.x + Math.cos(ang) * dist, -WORLD + 2, WORLD - 2);
+    const z = THREE.MathUtils.clamp(P.pos.z + Math.sin(ang) * dist, -WORLD + 2, WORLD - 2);
+    const ring = new THREE.Mesh(ringGeo, ringMat2.clone());
+    ring.material.color.setHex(0xffd23e);
+    ring.rotation.x = -Math.PI / 2;
+    ring.position.set(x, terrainH(x, z) + 0.16, z);
+    scene.add(ring);
+    stormMarkers.push({ x, z, r: 2.25, timer: 1.0, m: ring });
+  }
+}
+
+function updateMutators(dt) {
+  if (G.nextMutatorAt > 0 && G.t >= G.nextMutatorAt) {
+    G.nextMutatorAt += 300;
+    activateMutator();
+  }
+
+  const mutator = getActiveMutator();
+  if (mutator?.id === 'storm') {
+    G.stormCd -= dt;
+    if (G.stormCd <= 0) {
+      G.stormCd = Math.max(5.2, 9.5 - G.t * 0.0012);
+      scheduleStormStrike(3 + (G.t >= 1200 ? 1 : 0));
+      showDamage(P.pos, 'STORM FRONT', '#ffe08a', 18);
+    }
+  }
+
+  for (let i = stormMarkers.length - 1; i >= 0; i--) {
+    const marker = stormMarkers[i];
+    marker.timer -= dt;
+    const t = 1 - Math.max(0, marker.timer);
+    marker.m.scale.setScalar(0.45 + t * marker.r * 0.9);
+    marker.m.material.opacity = 0.95 - t * 0.4;
+    marker.m.position.y = terrainH(marker.x, marker.z) + 0.16;
+    if (marker.timer > 0) continue;
+
+    const strikePos = new THREE.Vector3(marker.x, terrainH(marker.x, marker.z) + 0.5, marker.z);
+    burst(strikePos, 0xffdf88, 16, 8, 5);
+    showDamage(strikePos, 'ZAP!', '#fff1a5', 20);
+    G.shake = Math.max(G.shake, 0.18);
+    if (Math.hypot(P.pos.x - marker.x, P.pos.z - marker.z) < marker.r && Math.abs(P.pos.y - strikePos.y) < 2.4) {
+      hurtPlayer(11 + G.t / 120);
+      if (G.state !== 'play') return;
+    }
+    scene.remove(marker.m);
+    stormMarkers.splice(i, 1);
+  }
+}
+
 function director(dt) {
+  const mutator = getActiveMutator();
   G.spawnAcc += dt;
-  // 30-minute pacing: pressure builds slowly and never quite lets up
-  const interval = Math.max(0.24, 1.68 - G.t * 0.001);
+  // 30-minute pacing: pressure builds slowly, then turns the screws in late game
+  const interval = Math.max(0.2, (mutator?.id === 'glass' ? 0.78 : mutator?.id === 'berserk' ? 0.9 : 1) * (1.64 - G.t * 0.00115));
   while (G.spawnAcc >= interval) {
     G.spawnAcc -= interval;
-    const n = 1 + Math.floor(G.t / 300);
+    const n = 1 + Math.floor(G.t / 240) + (mutator?.id === 'glass' ? 1 : 0);
     for (let i = 0; i < n; i++) {
       const r = Math.random();
       let type = 'grunt';
-      if (G.t > 55 && r < 0.22) type = 'runner';
-      if (G.t > 420 && r >= 0.64 && r < 0.74) type = 'spitter';
-      if (G.t > 150 && r > (G.t > 900 ? 0.8 : 0.87)) type = 'brute'; // beefier mix late
+      if (G.t > 55 && r < (mutator?.id === 'berserk' ? 0.32 : 0.22)) type = 'runner';
+      if (G.t > 360 && r >= 0.6 && r < (G.t > 900 ? 0.8 : 0.72)) type = 'spitter';
+      if (G.t > 150 && r > (mutator?.id === 'berserk' ? (G.t > 900 ? 0.68 : 0.79) : (G.t > 900 ? 0.74 : 0.84))) type = 'brute'; // beefier mix late
       spawnEnemy(type);
     }
   }
   if (G.t > 75) {
     G.eliteTimer -= dt;
     if (G.eliteTimer <= 0) {
-      G.eliteTimer = 105;
+      G.eliteTimer = mutator?.id === 'berserk' ? 82 : 105;
       spawnEnemy('elite');
       showBanner('ELITE CUBE INCOMING', true);
     }
@@ -6016,6 +6315,7 @@ const grid = new Map();
 function gridKey(x, z){ return ((x+200)|0) * 1000 + ((z+200)|0); }
 
 function updateEnemies(dt) {
+  const mutator = getActiveMutator();
   grid.clear();
   for (const e of enemies) {
     const k = gridKey(e.mesh.position.x/2, e.mesh.position.z/2);
@@ -6079,10 +6379,12 @@ function updateEnemies(dt) {
         }
       }
     }
-    // late-game, runners and bosses outpace a walking player — sprint is the answer
+    // late-game enemies get faster across the board so durable builds still get pressured
     const chase = e.def.boss ? 1 + G.t/700*0.42
-                : e.type === 'runner' ? 1 + Math.min(0.32, G.t/2100*0.32) : 1;
-    let spd = e.def.speed * chase * (e.slowT > 0 ? 0.55 : 1);
+                : e.type === 'runner' ? 1 + Math.min(0.4, G.t/1800*0.4)
+                : e.def.ranged ? 1 + Math.min(0.26, G.t/1800*0.26)
+                : 1 + Math.min(0.18, G.t/2400*0.18);
+    let spd = e.def.speed * chase * (e.slowT > 0 ? 0.55 : 1) * (mutator?.id === 'berserk' && !e.def.ranged ? 1.18 : 1);
     if (e.def.boss && e.chargeT > 0) spd *= e.bossStyle === 'omega' ? 2.1 : 1.85;
     if (e.def.ranged) {
       // spitters hang back at range and lob shots
@@ -6231,6 +6533,7 @@ function resetGame() {
   for (const b of beams) scene.remove(b.m); beams.length = 0;
   for (const r of rings) scene.remove(r.m); rings.length = 0;
   for (const s of eShots) scene.remove(s.m); eShots.length = 0;
+  for (const marker of stormMarkers) scene.remove(marker.m); stormMarkers.length = 0;
   for (const p of particles) p.life = 0;
   for (const s of dmgPool) { s.life = 0; s.el.style.display = 'none'; }
   orbMeshes.forEach(m => orbGroup.remove(m)); orbMeshes = [];
@@ -6251,15 +6554,18 @@ function resetGame() {
   P.invuln = 0; P.animT = 0; P.attackT = 0; P.squash = 0; P.hurtT = 0; P.landT = 0;
   P.dmgMult = 1 + mu.dmg * 0.05; P.cdMult = 1; P.magnet = 3.5 * (1 + mu.magnet * 0.08);
   P.armor = 0; P.regen = mu.regen * 0.15; P.crit = 0.05; P.speedMult = 1 + mu.speed * 0.03;
+  P.critMult = 2; P.projectileDmgMult = 1; P.orbDmgMult = 1; P.orbSpeedMult = 1; P.orbHitCd = 0.5;
+  P.slowVulnMult = 1; P.sprintDmgMult = 1; P.sprintCdMult = 1; P.frostRadiusBonus = 0;
   P.staminaMax = 100 + mu.stamina * 12; P.stamina = P.staminaMax; P.staminaRegen = 20;
   P.sprintMult = mode.sprintMult || 1.58; P.winded = false; P.sprinting = false; P.dustT = 0; P.oobT = 0;
-  P.weapons = {}; P.weapons[mode.weapon] = 1; P.passives = {};
+  P.weapons = {}; P.weapons[mode.weapon] = 1; P.passives = {}; P.rareCards = {};
   for (const id in WEAPONS) WEAPONS[id].timer = 0;
   syncOrbs();
 
   G.t = 0; G.kills = 0; G.gold = 0; G.gemsBank = 0;
   G.spawnAcc = 0; G.eliteTimer = 75; G.bossSpawned = {}; G.boss = null;
   G.pendingLevelups = 0; G.shake = 0;
+  G.mutatorId = null; G.mutatorEndsAt = 0; G.nextMutatorAt = 300; G.stormCd = 7;
   G.combo = 0; G.comboT = 0; G.comboShown = -1;
   G.hitstop = 0; G.hurtUntil = 0; G.banked = false; G.earned = 0;
   G.cloudRunSaved = false;
@@ -6319,14 +6625,14 @@ function endStatsHTML() {
       </div>
     </div>
     <div class="endSummaryItem">
-      <div class="endSummaryIcon">🧱</div>
+      <div class="endSummaryIcon"><img src="${KILLS_ICON_URL}" alt="Kills"></div>
       <div class="endSummaryBody">
         <div class="endSummaryLabel">Cubes Bashed</div>
         <div class="endSummaryValue alt">${G.kills}</div>
       </div>
     </div>
     <div class="endSummaryItem">
-      <div class="endSummaryIcon">🪙</div>
+      <div class="endSummaryIcon"><img src="${COINS_ICON_URL}" alt="Coins"></div>
       <div class="endSummaryBody">
         <div class="endSummaryLabel">Coins</div>
         <div class="endSummaryValue positive">+${G.earned}</div>
@@ -6452,7 +6758,7 @@ function buyMetaUpgrade(metaId) {
   refreshMenuCoins();
 }
 function renderShop() {
-  document.getElementById('shopCoins').textContent = `🪙 ${save.coins} coins`;
+  document.getElementById('shopCoins').innerHTML = `<img src="${COINS_ICON_URL}" alt="Coins" style="width:26px;height:26px;vertical-align:-5px;margin-right:8px"> ${save.coins} coins`;
   const grid = document.getElementById('shopGrid');
   grid.innerHTML = '';
   for (const meta of META) {
@@ -6461,10 +6767,10 @@ function renderShop() {
     const maxed = lvl >= meta.max;
     const div = document.createElement('div');
     div.className = 'metaCard';
-    div.innerHTML = `<div class="upEmoji">${meta.emoji}</div><div class="upName">${meta.name}</div>
+    div.innerHTML = `<div class="upEmoji">${metaIconMarkup(meta)}</div><div class="upName">${meta.name}</div>
       <div class="mdesc">${meta.desc}</div>
       <div class="pips">${'●'.repeat(lvl)}<span class="off">${'●'.repeat(meta.max - lvl)}</span></div>
-      <button class="buyBtn" ${maxed || save.coins < cost ? 'disabled' : ''}>${maxed ? 'MAXED' : cost + ' 🪙'}</button>`;
+      <button class="buyBtn" ${maxed || save.coins < cost ? 'disabled' : ''}>${maxed ? 'MAXED' : cost + ' <img src="' + COINS_ICON_URL + '" alt="Coins" style="width:16px;height:16px;vertical-align:-3px;margin-left:2px">'}</button>`;
     if (!maxed && save.coins >= cost) {
       div.querySelector('.buyBtn').onclick = () => buyMetaUpgrade(meta.id);
     }
@@ -6637,6 +6943,9 @@ window.BB = { G, P, save, META, gainXP, spawnEnemy, composer, renderer, terrainH
    MAIN LOOP
 ============================================================ */
 const hudTimer = document.getElementById('timer');
+const hudMutator = document.getElementById('mutatorBadge');
+const hudMutatorTitle = document.getElementById('mutatorBadgeTitle');
+const hudMutatorDesc = document.getElementById('mutatorBadgeDesc');
 const hudStats = document.getElementById('stats');
 const hudXp = document.getElementById('xpbar');
 const hudLvl = document.getElementById('lvlBadge');
@@ -6666,6 +6975,13 @@ function buildHudPayload() {
     staminaPct: Math.max(0, Math.min(100, P.staminaMax ? (P.stamina / P.staminaMax * 100) : 0)),
     winded: P.winded,
     combo: G.combo >= 5 ? G.combo : 0,
+    mutator: getActiveMutator() ? {
+      id: getActiveMutator().id,
+      icon: getActiveMutator().icon,
+      name: getActiveMutator().name,
+      desc: getActiveMutator().desc,
+      endsAt: Math.max(G.t, G.mutatorEndsAt),
+    } : null,
     boss: G.boss ? {
       name: G.boss.bossName || 'BOSS',
       hpPct: Math.max(0, Math.min(100, G.boss.maxhp ? (G.boss.hp / G.boss.maxhp * 100) : 0)),
@@ -6852,7 +7168,10 @@ function tick(now) {
     } else P.oobT = 0;
 
     /* --- systems --- */
-    if (G.state === 'play') { director(dt); updateEnemies(dt); }
+    if (G.state === 'play') {
+      updateMutators(dt);
+      if (G.state === 'play') { director(dt); updateEnemies(dt); }
+    }
     if (G.state === 'play') updateEShots(dt);
     if (G.state === 'play') {  // may have died above
       fireWeapons(dt);
@@ -6865,20 +7184,31 @@ function tick(now) {
 
     /* --- HUD (DOM writes only on change) --- */
     const tSec = Math.floor(G.t);
+    const activeMutator = getActiveMutator();
     if (tSec !== G._lastSec) { G._lastSec = tSec; hudTimer.textContent = fmtTime(G.t); }
-    if (G.kills !== G._lastKills || G.gold !== G._lastGold || tSec !== G._lastStatsSec) {
+    if ((activeMutator?.id || '') !== (G._lastMutatorId || '')) {
+      G._lastMutatorId = activeMutator?.id || '';
+      hudMutator.classList.toggle('show', !!activeMutator);
+      if (activeMutator) {
+        hudMutatorTitle.textContent = activeMutator.icon + ' ' + activeMutator.name;
+        hudMutatorDesc.textContent = activeMutator.desc;
+      }
+    }
+    if (G.kills !== G._lastKills || G.gold !== G._lastGold || tSec !== G._lastStatsSec || (activeMutator?.id || '') !== (G._lastStatsMutatorId || '')) {
       G._lastKills = G.kills; G._lastGold = G.gold;
       G._lastStatsSec = tSec;
+      G._lastStatsMutatorId = activeMutator?.id || '';
+      hudStats.style.gridTemplateColumns = activeMutator ? 'repeat(4,minmax(112px,1fr))' : 'repeat(3,minmax(112px,1fr))';
       hudStats.innerHTML = `
         <div class="hudStat">
-          <div class="hudStatIcon">☠️</div>
+          <div class="hudStatIcon">${hudStatIconMarkup(KILLS_ICON_URL, 'Kills', '☠️')}</div>
           <div class="hudStatBody">
             <div class="hudStatLabel">Kills</div>
             <div class="hudStatValue">${G.kills}</div>
           </div>
         </div>
         <div class="hudStat">
-          <div class="hudStatIcon">🪙</div>
+          <div class="hudStatIcon">${hudStatIconMarkup(COINS_ICON_URL, 'Coins', '🪙')}</div>
           <div class="hudStatBody">
             <div class="hudStatLabel">Coins</div>
             <div class="hudStatValue">${G.gold}</div>
@@ -6890,7 +7220,14 @@ function tick(now) {
             <div class="hudStatLabel">Survived</div>
             <div class="hudStatValue">${fmtTime(G.t)}</div>
           </div>
-        </div>`;
+        </div>
+        ${activeMutator ? `<div class="hudStat">
+          <div class="hudStatIcon">${activeMutator.icon}</div>
+          <div class="hudStatBody">
+            <div class="hudStatLabel">Mutator</div>
+            <div class="hudStatValue" style="font-size:18px">${activeMutator.name}</div>
+          </div>
+        </div>` : ''}`;
     }
     hudXp.style.width = (P.xp / P.xpNext * 100) + '%';
     if (P.level !== G._lastLvl) { G._lastLvl = P.level; hudLvl.textContent = 'LV ' + P.level; }
