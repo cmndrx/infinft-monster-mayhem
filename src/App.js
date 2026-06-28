@@ -41,7 +41,9 @@ async function ensureUserGameProfile(user, overrides = {}) {
   const now = firebase.firestore.FieldValue.serverTimestamp();
   const deleteField = firebase.firestore.FieldValue.delete();
   const userSnap = await userRef.get();
+  const gameProfileSnap = await gameProfileRef.get();
   const existingUserData = userSnap.exists ? userSnap.data() || {} : {};
+  const existingGameProfileData = gameProfileSnap.exists ? gameProfileSnap.data() || {} : {};
 
   const email = (user.email || overrides.email || "").toLowerCase().trim();
   const existingUsername = (existingUserData.username || "").trim();
@@ -62,28 +64,49 @@ async function ensureUserGameProfile(user, overrides = {}) {
 
   await userRef.set(userPayload, { merge: true });
 
+  const existingUpgrades =
+    existingGameProfileData.upgrades && typeof existingGameProfileData.upgrades === "object"
+      ? existingGameProfileData.upgrades
+      : {};
+  const existingSettings =
+    existingGameProfileData.settings && typeof existingGameProfileData.settings === "object"
+      ? existingGameProfileData.settings
+      : {};
+
   await gameProfileRef.set(
     {
       gameTitle: GAME_TITLE,
       username: deleteField,
       displayName: deleteField,
       email: deleteField,
-      coins: 0,
-      upgrades: DEFAULT_GAME_UPGRADES,
-      energy: 5,
-      maxEnergy: 5,
-      energyUpdatedAtMs: Date.now(),
-      selectedMode: "zippy",
-      equippedCharacter: "duck",
-      bestRunSeconds: 0,
-      bestKills: 0,
-      totalRuns: 0,
-      totalKills: 0,
-      totalWins: 0,
-      totalCoinsBanked: 0,
+      coins: typeof existingGameProfileData.coins === "number" ? existingGameProfileData.coins : 0,
+      upgrades: {
+        ...DEFAULT_GAME_UPGRADES,
+        ...existingUpgrades,
+      },
+      energy: typeof existingGameProfileData.energy === "number" ? existingGameProfileData.energy : 5,
+      maxEnergy: typeof existingGameProfileData.maxEnergy === "number" ? existingGameProfileData.maxEnergy : 5,
+      energyUpdatedAtMs:
+        typeof existingGameProfileData.energyUpdatedAtMs === "number"
+          ? existingGameProfileData.energyUpdatedAtMs
+          : Date.now(),
+      selectedMode: existingGameProfileData.selectedMode || "zippy",
+      equippedCharacter: existingGameProfileData.equippedCharacter || "duck",
+      bestRunSeconds:
+        typeof existingGameProfileData.bestRunSeconds === "number" ? existingGameProfileData.bestRunSeconds : 0,
+      bestKills: typeof existingGameProfileData.bestKills === "number" ? existingGameProfileData.bestKills : 0,
+      totalRuns: typeof existingGameProfileData.totalRuns === "number" ? existingGameProfileData.totalRuns : 0,
+      totalKills: typeof existingGameProfileData.totalKills === "number" ? existingGameProfileData.totalKills : 0,
+      totalWins: typeof existingGameProfileData.totalWins === "number" ? existingGameProfileData.totalWins : 0,
+      totalCoinsBanked:
+        typeof existingGameProfileData.totalCoinsBanked === "number"
+          ? existingGameProfileData.totalCoinsBanked
+          : 0,
       settings: {
-        sfxEnabled: true,
-        musicEnabled: true,
+        sfxEnabled:
+          typeof existingSettings.sfxEnabled === "boolean" ? existingSettings.sfxEnabled : true,
+        musicEnabled:
+          typeof existingSettings.musicEnabled === "boolean" ? existingSettings.musicEnabled : true,
       },
       profileVersion: 2,
       createdAt: deleteField,
@@ -93,8 +116,8 @@ async function ensureUserGameProfile(user, overrides = {}) {
     { merge: true }
   );
 
-  const gameProfileSnap = await gameProfileRef.get();
-  return gameProfileSnap.exists ? gameProfileSnap.data() : null;
+  const refreshedGameProfileSnap = await gameProfileRef.get();
+  return refreshedGameProfileSnap.exists ? refreshedGameProfileSnap.data() : null;
 }
 
 function AuthCard({

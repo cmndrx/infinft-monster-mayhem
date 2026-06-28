@@ -2796,27 +2796,45 @@ function getLocalProgressPayload() {
 }
 
 function applyRemoteProfileToLocal(profile = {}) {
-  const hasRemoteProgress = typeof profile.coins === 'number' || typeof profile.upgrades === 'object';
+  const hasRemoteProgress =
+    typeof profile.coins === 'number' ||
+    !!(profile.upgrades && typeof profile.upgrades === 'object') ||
+    Number.isFinite(Number(profile.energy)) ||
+    Number.isFinite(Number(profile.maxEnergy)) ||
+    typeof profile.selectedMode === 'string' ||
+    typeof profile.equippedCharacter === 'string' ||
+    typeof profile.selectedAvatar === 'string' ||
+    typeof profile.totalRuns === 'number' ||
+    typeof profile.totalKills === 'number' ||
+    typeof profile.totalWins === 'number' ||
+    typeof profile.bestRunSeconds === 'number' ||
+    typeof profile.bestKills === 'number';
   if (!hasRemoteProgress) return false;
 
-  save.coins = Math.max(0, Math.floor(profile.coins || 0));
-  const remoteUpgrades = profile.upgrades || {};
-  for (const meta of META) {
-    save.upgrades[meta.id] = Math.max(0, Math.min(meta.max, Math.floor(remoteUpgrades[meta.id] || 0)));
+  if (typeof profile.coins === 'number') {
+    save.coins = Math.max(0, Math.floor(profile.coins || 0));
+  }
+  if (profile.upgrades && typeof profile.upgrades === 'object') {
+    const remoteUpgrades = profile.upgrades || {};
+    for (const meta of META) {
+      save.upgrades[meta.id] = Math.max(0, Math.min(meta.max, Math.floor(remoteUpgrades[meta.id] || 0)));
+    }
   }
   const remoteMaxEnergy = Number(profile.maxEnergy);
   const remoteEnergy = Number(profile.energy);
-  const normalizedEnergy = calculateRechargedEnergy({
-    ...profile,
-    maxEnergy: Number.isFinite(remoteMaxEnergy) ? remoteMaxEnergy : ENERGY_MAX,
-    energy: Number.isFinite(remoteEnergy) ? remoteEnergy : undefined,
-  });
-  cloudState.profile = {
-    ...(cloudState.profile || {}),
-    maxEnergy: normalizedEnergy.maxEnergy,
-    energy: normalizedEnergy.energy,
-    energyUpdatedAtMs: normalizedEnergy.energyUpdatedAtMs,
-  };
+  if (Number.isFinite(remoteMaxEnergy) || Number.isFinite(remoteEnergy)) {
+    const normalizedEnergy = calculateRechargedEnergy({
+      ...profile,
+      maxEnergy: Number.isFinite(remoteMaxEnergy) ? remoteMaxEnergy : ENERGY_MAX,
+      energy: Number.isFinite(remoteEnergy) ? remoteEnergy : undefined,
+    });
+    cloudState.profile = {
+      ...(cloudState.profile || {}),
+      maxEnergy: normalizedEnergy.maxEnergy,
+      energy: normalizedEnergy.energy,
+      energyUpdatedAtMs: normalizedEnergy.energyUpdatedAtMs,
+    };
+  }
   if (profile.selectedMode) applyChosenModeById(profile.selectedMode, { silent: true });
   if (profile.equippedCharacter || profile.selectedAvatar) {
     applyChosenCharacterById(profile.equippedCharacter || profile.selectedAvatar, { silent: true });
@@ -3188,11 +3206,14 @@ async function initializeCloudProgress() {
         const profileRef = getCloudProfileRef(user.uid);
         const [userSnap, profileSnap] = await Promise.all([userRef.get(), profileRef.get()]);
         cloudState.account = userSnap.exists ? userSnap.data() : null;
-        const profile = profileSnap.exists ? profileSnap.data() : {};
+        const profileExists = profileSnap.exists;
+        const profile = profileExists ? profileSnap.data() : {};
         cloudState.profile = profile;
         const appliedRemote = applyRemoteProfileToLocal(profile);
-        if (!appliedRemote) {
+        if (!profileExists) {
           await syncCloudProfile('initial-local-migration');
+        } else if (!appliedRemote) {
+          console.warn('Monster Mayhem profile exists but has no progress fields to hydrate; skipping zero-value migration.');
         }
         await rechargeCloudEnergy('energy-recharge-login');
         startEnergyRechargePolling();
