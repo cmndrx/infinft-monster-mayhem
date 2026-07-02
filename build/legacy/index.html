@@ -1487,10 +1487,12 @@ const GAME_STORE_RECEIPTS_SUBCOLLECTION = 'storeReceipts';
 const GAME_LEADERBOARD_COLLECTION = 'infinft_monster_mayhem_leaderboard';
 const LEGACY_FIREBASE_CONFIG_KEY = 'infinft:mm:firebase-config';
 const LEGACY_COMMERCE_CONFIG_KEY = 'infinft:mm:commerce-config';
+const DEV_HOST_MARKERS = ['infinft-monster-mayhem-dev'];
+const DEV_ACCESS_ROLES = ['admin', 'play_tester'];
 const PENDING_RUNS_KEY = 'infinft:mm:pending-runs';
 const STORE_PENDING_CHECKOUT_KEY = 'infinft:mm:pending-store-checkout';
 const ENERGY_MAX = 5;
-const ENERGY_RECHARGE_INTERVAL_MS = 3 * 60 * 60 * 1000;
+const ENERGY_RECHARGE_INTERVAL_MS = 1 * 60 * 60 * 1000;
 const RUN_TOKEN_ENTRY_COST = 100;
 const DEFAULT_COMMERCE_API_BASE_URL = 'https://us-central1-infinft-card-game.cloudfunctions.net/app';
 const DEFAULT_STRIPE_TEST_KEY2 = 'pk_test_51RTZpsR8JsbQ82ZJ3tElYXLccFna1xVrghkQI75cHzDAl63fHbzkoNsqSPEAZCBAKEwB2Q4rTC0fWQ2UGtvdeQch004qtrCxwo';
@@ -1543,6 +1545,59 @@ const energyGateState = {
   busy: false,
 };
 try { localStorage.removeItem(STORE_PENDING_CHECKOUT_KEY); } catch (_) {}
+
+function isDevAccessRestrictedHost() {
+  const hostname = window.location?.hostname?.toLowerCase?.() || '';
+  return DEV_HOST_MARKERS.some(marker => hostname.includes(marker));
+}
+
+function normalizeRoleValue(value) {
+  if (typeof value !== 'string') return '';
+  return value.trim().toLowerCase().replace(/[\s-]+/g, '_');
+}
+
+function collectRoleNames(source = {}) {
+  const roles = new Set();
+  const addRole = value => {
+    const normalized = normalizeRoleValue(value);
+    if (normalized) roles.add(normalized);
+  };
+
+  if (!source || typeof source !== 'object') return roles;
+
+  addRole(source.role);
+  addRole(source.userRole);
+  addRole(source.accessRole);
+
+  if (Array.isArray(source.roles)) {
+    source.roles.forEach(addRole);
+  } else if (source.roles && typeof source.roles === 'object') {
+    Object.entries(source.roles).forEach(([roleName, enabled]) => {
+      if (enabled) addRole(roleName);
+    });
+  }
+
+  if (source.admin === true || source.isAdmin === true) addRole('admin');
+  if (source.play_tester === true || source.playTester === true || source.isPlayTester === true) {
+    addRole('play_tester');
+  }
+
+  return roles;
+}
+
+function userHasDevAccess(account = {}, claims = {}) {
+  if (!isDevAccessRestrictedHost()) return true;
+  const roleNames = new Set([
+    ...collectRoleNames(account),
+    ...collectRoleNames(claims),
+  ]);
+  return DEV_ACCESS_ROLES.some(role => roleNames.has(role));
+}
+
+function redirectUnauthorizedDevUser() {
+  if (!isDevAccessRestrictedHost()) return;
+  window.location.replace(`${window.location.origin}/`);
+}
 
 /* ============================================================
    AUDIO — tiny procedural synth
@@ -3198,16 +3253,35 @@ async function initializeCloudProgress() {
         bootState.cloudReady = true;
         renderAccountUi();
         refreshStartAvailability();
+        redirectUnauthorizedDevUser();
         return;
       }
 
       try {
         const userRef = getCloudUserRef(user.uid);
         const profileRef = getCloudProfileRef(user.uid);
-        const [userSnap, profileSnap] = await Promise.all([userRef.get(), profileRef.get()]);
+        const [tokenResult, userSnap, profileSnap] = await Promise.all([
+          user.getIdTokenResult(),
+          userRef.get(),
+          profileRef.get(),
+        ]);
         cloudState.account = userSnap.exists ? userSnap.data() : null;
+<<<<<<< Updated upstream
         const profileExists = profileSnap.exists;
         const profile = profileExists ? profileSnap.data() : {};
+=======
+        if (!userHasDevAccess(cloudState.account, tokenResult?.claims || {})) {
+          stopEnergyRechargePolling();
+          cloudState.profile = null;
+          cloudState.profileReady = true;
+          bootState.cloudReady = true;
+          renderAccountUi();
+          refreshStartAvailability();
+          redirectUnauthorizedDevUser();
+          return;
+        }
+        const profile = profileSnap.exists ? profileSnap.data() : {};
+>>>>>>> Stashed changes
         cloudState.profile = profile;
         const appliedRemote = applyRemoteProfileToLocal(profile);
         if (!profileExists) {

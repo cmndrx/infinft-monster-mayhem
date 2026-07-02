@@ -7,6 +7,8 @@ const GAME_TITLE = "infiNFT Monster Mayhem";
 const GAME_PROFILE_DOC = "profile";
 const LEGACY_FIREBASE_CONFIG_KEY = "infinft:mm:firebase-config";
 const LEGACY_COMMERCE_CONFIG_KEY = "infinft:mm:commerce-config";
+const DEV_HOST_MARKERS = ["infinft-monster-mayhem-dev"];
+const DEV_ACCESS_ROLES = ["admin", "play_tester"];
 const DEFAULT_GAME_UPGRADES = {
   dmg: 0,
   hp: 0,
@@ -33,6 +35,61 @@ function normalizeUsername(value, fallbackEmail = "") {
     .replace(/^_+|_+$/g, "");
 
   return base || "monster_hunter";
+}
+
+function isDevAccessRestrictedHost() {
+  if (typeof window === "undefined") return false;
+  const hostname = window.location?.hostname?.toLowerCase() || "";
+  return DEV_HOST_MARKERS.some((marker) => hostname.includes(marker));
+}
+
+function normalizeRoleValue(value) {
+  if (typeof value !== "string") return "";
+  return value.trim().toLowerCase().replace(/[\s-]+/g, "_");
+}
+
+function collectRoleNames(source = {}) {
+  const roles = new Set();
+  const addRole = (value) => {
+    const normalized = normalizeRoleValue(value);
+    if (normalized) roles.add(normalized);
+  };
+
+  if (!source || typeof source !== "object") return roles;
+
+  addRole(source.role);
+  addRole(source.userRole);
+  addRole(source.accessRole);
+
+  if (Array.isArray(source.roles)) {
+    source.roles.forEach(addRole);
+  } else if (source.roles && typeof source.roles === "object") {
+    Object.entries(source.roles).forEach(([roleName, enabled]) => {
+      if (enabled) addRole(roleName);
+    });
+  }
+
+  if (source.admin === true || source.isAdmin === true) addRole("admin");
+  if (
+    source.play_tester === true ||
+    source.playTester === true ||
+    source.isPlayTester === true
+  ) {
+    addRole("play_tester");
+  }
+
+  return roles;
+}
+
+function hasDevSiteAccess(account = {}, claims = {}) {
+  if (!isDevAccessRestrictedHost()) return true;
+
+  const roleNames = new Set([
+    ...collectRoleNames(account),
+    ...collectRoleNames(claims),
+  ]);
+
+  return DEV_ACCESS_ROLES.some((role) => roleNames.has(role));
 }
 
 async function ensureUserGameProfile(user, overrides = {}) {
@@ -296,6 +353,7 @@ function App() {
   const [authReady, setAuthReady] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [, setGameProfile] = useState(null);
+  const [devAccessGranted, setDevAccessGranted] = useState(null);
   const [mode, setMode] = useState("login");
   const [form, setForm] = useState(EMPTY_FORM);
   const [loading, setLoading] = useState(false);
@@ -307,6 +365,10 @@ function App() {
 
   const firebaseMissing = useMemo(() => {
     return !process.env.REACT_APP_API_KEY || !process.env.REACT_APP_PROJECT_ID;
+  }, []);
+
+  const devAccessRestrictedHost = useMemo(() => {
+    return isDevAccessRestrictedHost();
   }, []);
 
   useEffect(() => {
@@ -344,16 +406,27 @@ function App() {
 
       if (!user) {
         setGameProfile(null);
+        setDevAccessGranted(null);
         setAuthModalOpen(false);
         setAuthReady(true);
         return;
       }
 
       try {
-        const profile = await ensureUserGameProfile(user);
-        setGameProfile(profile);
+        const tokenResult = await user.getIdTokenResult();
+        const { account, profile } = await ensureUserGameProfile(user);
+        const hasAccess = hasDevSiteAccess(account, tokenResult?.claims || {});
+
+        setDevAccessGranted(hasAccess);
+
+        if (hasAccess) {
+          setGameProfile(profile);
+        } else {
+          setGameProfile(null);
+        }
       } catch (profileError) {
         console.error("Failed to load game profile:", profileError);
+        setDevAccessGranted(null);
         setError("Signed in, but we could not load your Monster Mayhem profile.");
       } finally {
         setAuthReady(true);
@@ -364,12 +437,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!authReady || !currentUser) {
+    if (
+      !authReady ||
+      !currentUser ||
+      (devAccessRestrictedHost && devAccessGranted !== true)
+    ) {
       return;
     }
 
     window.location.href = "/legacy/index.html";
-  }, [authReady, currentUser]);
+  }, [authReady, currentUser, devAccessGranted, devAccessRestrictedHost]);
 
   const handleFieldChange = (event) => {
     const { name, value } = event.target;
@@ -469,6 +546,20 @@ function App() {
     handleLogin();
   };
 
+  const handleSignOut = async () => {
+    setLoading(true);
+    setError("");
+    setInfo("");
+
+    try {
+      await auth.signOut();
+    } catch (signOutError) {
+      setError(signOutError?.message || "Unable to sign out right now.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const openAuthModal = (nextMode) => {
     setMode(nextMode);
     setError("");
@@ -493,6 +584,19 @@ function App() {
             <p>
               This app needs the `REACT_APP_*` Firebase environment variables before auth can run.
             </p>
+          </div>
+        ) : currentUser && devAccessRestrictedHost && devAccessGranted === false ? (
+          <div className="status-card error">
+            <h2>Developer Access Required</h2>
+            <p>
+              This dev deployment is limited to accounts with the `admin` or `play_tester`
+              role.
+            </p>
+            <div className="landing-actions">
+              <button className="auth-secondary compact" onClick={handleSignOut} type="button">
+                Sign Out
+              </button>
+            </div>
           </div>
         ) : currentUser ? (
           <div className="status-card">
