@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@stripe/react-stripe-js": "^6.7.0",
+    "@stripe/stripe-js": "^9.9.0",
     "dotenv": "^17.4.2",
     "firebase": "^12.14.0",
     "react": "^19.1.1",
@@ -15,11 +17,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && node scripts/validate-static-assets.js public build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy:dev": "react-scripts build && firebase deploy --only hosting:dev",
-    "deploy:prod": "react-scripts build && firebase deploy --only hosting:prod"
+    "deploy:dev": "npm run build && firebase deploy --only hosting:dev",
+    "deploy:prod": "npm run build && firebase deploy --only hosting:prod"
   },
   "eslintConfig": {
     "extends": [

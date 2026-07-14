@@ -1,0 +1,1751 @@
+/* Golf Galaxy auth layout mirrored exactly; colors remapped to Monster Mayhem. */
+/* ---------- auth modal ---------- */
+
+.auth-page.overlay {
+  z-index: 20;
+  padding: 0;
+  overflow: auto;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(97, 119, 255, 0.2), transparent 28%),
+    radial-gradient(circle at 17% 72%, rgba(202, 78, 255, 0.18), transparent 30%),
+    linear-gradient(180deg, rgba(7, 11, 25, 0.94) 0%, rgba(13, 16, 36, 0.9) 48%, rgba(7, 5, 19, 0.96) 100%);
+}
+
+.auth-page__body {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+}
+
+.auth-page__body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 58px 58px;
+  mask-image: radial-gradient(circle at 50% 48%, black, transparent 72%);
+}
+
+.auth-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 520px);
+  height: 602px;
+  padding: 38px;
+  border-radius: 28px;
+  border: 1px solid rgba(188, 111, 255, 0.68);
+  background:
+    radial-gradient(circle at 86% 10%, rgba(105, 67, 255, 0.24), transparent 32%),
+    radial-gradient(circle at 12% 74%, rgba(206, 74, 255, 0.14), transparent 34%),
+    linear-gradient(145deg, rgba(16, 18, 39, 0.94), rgba(8, 9, 23, 0.98));
+  color: #f8f5ff;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 34px 110px rgba(0, 0, 0, 0.66),
+    0 0 78px rgba(156, 70, 255, 0.2);
+  overflow: hidden;
+  animation: auth-rise 0.45s ease both;
+}
+
+.auth-card::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  pointer-events: none;
+  border-radius: 27px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 28%, rgba(207, 92, 255, 0.1));
+  opacity: 0.72;
+}
+
+.auth-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-card__badge {
+  width: max-content;
+  margin: 0 auto 14px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(204, 128, 255, 0.5);
+  background: rgba(133, 72, 255, 0.16);
+  color: #dfb5ff;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.auth-card__badge--modal {
+  margin: 0 0 14px;
+}
+
+.auth-card__title {
+  color: #ffffff;
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 950;
+  line-height: 0.95;
+  margin-bottom: 12px;
+}
+
+.auth-card__subtitle {
+  max-width: 380px;
+  margin: 0 auto 26px;
+  color: rgba(232, 224, 255, 0.76);
+  text-align: center;
+  line-height: 1.65;
+}
+
+.auth-tabs {
+  min-height: 48px;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  border: 1px solid rgba(186, 124, 255, 0.32);
+  border-radius: 18px;
+  background: rgba(3, 6, 18, 0.58);
+}
+
+.auth-tabs button {
+  min-height: 38px;
+  border: 0;
+  border-radius: 14px;
+  color: rgba(229, 219, 255, 0.68);
+  background: transparent;
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.auth-tabs button.is-selected {
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 28% 22%, rgba(230, 143, 255, 0.38), transparent 30%),
+    linear-gradient(135deg, #774dff, #9b46ff);
+  box-shadow: 0 12px 28px rgba(112, 63, 255, 0.32);
+}
+
+.auth-card__form {
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 372px;
+  text-align: center;
+}
+
+.auth-form__heading {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 0 0 18px;
+}
+
+.auth-form__alert {
+  position: absolute;
+  top: 47px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 12px 14px;
+  text-align: left;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  line-height: 1.45;
+}
+
+.auth-form__alert.error {
+  color: #ffc2cd;
+  background: rgba(255, 91, 110, 0.14);
+}
+
+.auth-form__alert.success {
+  color: #b9ffd5;
+  background: rgba(117, 240, 176, 0.12);
+}
+
+.auth-field {
+  display: grid;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.auth-field span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.auth-field input {
+  min-height: 54px;
+  width: 100%;
+  padding: 0 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(191, 150, 255, 0.26);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.055);
+  outline: none;
+}
+
+.auth-field input::placeholder {
+  color: rgba(229, 219, 255, 0.42);
+}
+
+.auth-field input:focus {
+  border-color: rgba(219, 130, 255, 0.9);
+  box-shadow: 0 0 0 3px rgba(166, 82, 255, 0.18);
+}
+
+.auth-password-rules {
+  margin: 0 0 16px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(185, 128, 255, 0.22);
+  background: rgba(5, 8, 20, 0.46);
+  text-align: left;
+}
+
+.auth-password-rules span {
+  display: block;
+  font-weight: 700;
+  font-size: 0.78rem;
+  line-height: 1.8;
+}
+
+.auth-password-rules .is-valid {
+  color: #b7d548;
+}
+
+.auth-password-rules .is-invalid {
+  color: #ff806b;
+}
+
+.auth-form__submit {
+  min-height: 52px;
+  border: 0;
+  border-radius: 16px;
+  color: #17100a;
+  background: linear-gradient(135deg, #ffe66b, #ffbc25);
+  font: inherit;
+  font-weight: 950;
+  cursor: pointer;
+  box-shadow:
+    0 18px 34px rgba(255, 188, 37, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36);
+}
+
+.auth-form__submit:disabled {
+  color: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  cursor: default;
+}
+
+.auth-form__switch {
+  margin: 16px 0 0;
+  color: rgba(232, 224, 255, 0.72);
+  text-align: center;
+}
+
+.auth-form__link {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  color: #ffe28c;
+  background: transparent;
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.auth-reset-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(119, 82, 203, 0.16), transparent 34%),
+    rgba(1, 3, 12, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.auth-reset-modal__card {
+  width: min(92vw, 430px);
+  padding: 30px;
+  border-radius: 24px;
+  outline: none;
+  border: 1px solid rgba(180, 98, 255, 0.72);
+  background:
+    radial-gradient(circle at 86% 18%, rgba(119, 82, 203, 0.25), transparent 30%),
+    linear-gradient(145deg, rgba(15, 18, 39, 0.98), rgba(9, 10, 24, 0.98));
+  color: #f8f5ff;
+  box-shadow:
+    0 30px 110px rgba(0, 0, 0, 0.68),
+    0 0 72px rgba(151, 66, 255, 0.24);
+}
+
+.auth-reset-modal__title {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 950;
+  margin: 0 0 10px;
+}
+
+.auth-reset-modal__copy {
+  margin: 0 0 20px;
+  color: rgba(232, 224, 255, 0.76);
+  line-height: 1.65;
+}
+
+.checkout-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 204, 90, 0.14), transparent 34%),
+    rgba(1, 3, 12, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.checkout-modal__panel {
+  position: relative;
+  width: min(100%, 680px);
+  max-height: min(880px, calc(100vh - 40px));
+  overflow: auto;
+  padding: 22px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 211, 112, 0.34);
+  background: linear-gradient(180deg, rgba(16, 12, 34, 0.98), rgba(7, 6, 18, 0.98));
+  box-shadow:
+    0 34px 110px rgba(0, 0, 0, 0.68),
+    0 0 72px rgba(255, 190, 61, 0.16);
+}
+
+.checkout-modal__close {
+  position: sticky;
+  top: 0;
+  left: 100%;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  margin-left: auto;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  color: #ffe5a3;
+  background: rgba(255, 255, 255, 0.06);
+  font: inherit;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.checkout-modal__notice {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 150, 167, 0.26);
+  color: #ffc8d2;
+  background: rgba(255, 91, 110, 0.14);
+  line-height: 1.5;
+}
+
+.checkout-modal__embed {
+  min-height: 620px;
+}
+
+@keyframes auth-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-page__body {
+    align-items: flex-start;
+    padding: 24px 14px 108px;
+  }
+
+  .auth-card {
+    height: auto;
+    min-height: 602px;
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  .auth-card::before {
+    border-radius: 21px;
+  }
+
+  .auth-card__title {
+    font-size: 2.2rem;
+  }
+
+  .auth-tabs button {
+    font-size: 0.82rem;
+  }
+}
+
+.subscription-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  overflow-y: auto;
+}
+
+.subscription-modal__panel {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  padding: clamp(56px, 8vh, 84px) clamp(18px, 4vw, 40px) 72px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(119, 82, 203, 0.2), transparent 38%),
+    radial-gradient(circle at 96% 100%, rgba(214, 138, 179, 0.14), transparent 40%),
+    linear-gradient(160deg, rgba(73, 35, 126, 0.99), rgba(25, 16, 52, 0.99));
+}
+
+.subscription-modal__content {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.subscription-modal__corner {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.subscription-modal__auth-link {
+  padding: 6px 2px;
+  border: 0;
+  background: none;
+  color: rgba(236, 226, 255, 0.6);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 0.16s ease;
+}
+
+.subscription-modal__auth-link:hover {
+  color: #f7f0ff;
+}
+
+.subscription-modal__auth-link.is-active {
+  color: #ffd56b;
+}
+
+.subscription-modal__signin {
+  width: min(440px, 100%);
+  margin: 0 auto;
+}
+
+.subscription-modal__header {
+  max-width: 760px;
+  margin: 0 auto 22px;
+  text-align: center;
+}
+
+.subscription-modal__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: #f2c6dc;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.subscription-modal__header h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.9rem, 3.7vw, 2.9rem);
+  line-height: 1.02;
+  color: #fff8ff;
+}
+
+.subscription-modal__header p {
+  margin: 0;
+  color: rgba(236, 226, 255, 0.72);
+  line-height: 1.65;
+}
+
+.subscription-modal__body {
+  width: min(980px, 100%);
+  margin: 0 auto;
+}
+
+.subscription-modal__paid-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 18px;
+}
+
+.subscription-modal__paid-prompt {
+  color: rgba(255, 248, 255, 0.9);
+  font-size: 0.85rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.subscription-modal__lane-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.subscription-modal__tier {
+  display: flex;
+  min-height: 414px;
+  flex-direction: column;
+  padding: 18px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(circle at 78% 0%, rgba(255, 207, 92, 0.16), transparent 34%),
+    linear-gradient(180deg, rgba(20, 15, 44, 0.92), rgba(8, 7, 22, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 24px 70px rgba(0, 0, 0, 0.28);
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.subscription-modal__tier.is-selected,
+.subscription-modal__tier:hover {
+  border-color: rgba(255, 211, 112, 0.58);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 26px 78px rgba(0, 0, 0, 0.34),
+    0 0 42px rgba(255, 190, 61, 0.12);
+  transform: translateY(-2px);
+}
+
+.subscription-modal__tier-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.subscription-modal__plan-badge {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  min-height: 24px;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  color: #1b1104;
+  background: linear-gradient(135deg, #ffe48b, #ffbd35);
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.subscription-modal__tier h4 {
+  margin: 12px 0 0;
+  color: #fff9ff;
+  font-size: 1.38rem;
+  line-height: 1.05;
+}
+
+.subscription-modal__tier-price {
+  display: grid;
+  justify-items: end;
+  color: rgba(236, 226, 255, 0.64);
+  line-height: 1.1;
+}
+
+.subscription-modal__tier-price strong {
+  color: #ffffff;
+  font-size: 1.35rem;
+}
+
+.subscription-modal__tier-price span {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.subscription-modal__tier p {
+  min-height: 46px;
+  margin: 18px 0 16px;
+  color: rgba(236, 226, 255, 0.74);
+  line-height: 1.45;
+}
+
+.subscription-modal__tier ul {
+  display: grid;
+  gap: 10px;
+  min-height: 112px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.subscription-modal__tier li,
+.subscription-modal__auth-summary-perk {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  color: rgba(255, 250, 255, 0.84);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.subscription-modal__perk-mark {
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  border-radius: 50%;
+  color: #1b1203;
+  background: linear-gradient(135deg, #ffe48b, #ffbd35);
+  font-size: 0.72rem;
+  font-weight: 950;
+}
+
+.subscription-modal__cta {
+  display: inline-flex;
+  width: 100%;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 211, 112, 0.52);
+  border-radius: 16px;
+  color: #ffe6a2;
+  background: rgba(255, 210, 104, 0.08);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+}
+
+.subscription-modal__cta:hover {
+  border-color: rgba(255, 227, 138, 0.84);
+  background: rgba(255, 210, 104, 0.14);
+  transform: translateY(-1px);
+}
+
+.subscription-modal__cta.is-featured {
+  color: #1a1104;
+  border-color: transparent;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.34), transparent 36%),
+    linear-gradient(135deg, #ffe26e, #ffb72f);
+  box-shadow: 0 16px 34px rgba(255, 185, 47, 0.24);
+}
+
+.subscription-modal__auth {
+  display: grid;
+  width: min(900px, 100%);
+  grid-template-columns: minmax(0, 0.82fr) minmax(360px, 440px);
+  gap: 22px;
+  align-items: start;
+  margin: 0 auto;
+}
+
+.subscription-modal__auth-summary {
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(circle at 82% 8%, rgba(255, 211, 112, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(58, 34, 103, 0.9), rgba(34, 23, 63, 0.92));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.subscription-modal__auth-summary-toggle {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 18px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.subscription-modal__auth-summary-copy {
+  display: grid;
+  gap: 10px;
+}
+
+.subscription-modal__auth-summary-copy strong {
+  color: #ffffff;
+  font-size: 1.45rem;
+  line-height: 1.05;
+}
+
+.subscription-modal__auth-summary-copy p {
+  margin: 0;
+  color: rgba(236, 226, 255, 0.7);
+  line-height: 1.45;
+}
+
+.subscription-modal__auth-summary-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  color: #ffe29a;
+  background: rgba(255, 210, 104, 0.1);
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.subscription-modal__auth-summary-details {
+  display: grid;
+  gap: 10px;
+  padding: 0 18px 18px;
+}
+
+.subscription-modal__finish {
+  display: grid;
+  width: min(440px, 100%);
+  justify-items: center;
+  gap: 14px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 211, 112, 0.36);
+  background: linear-gradient(180deg, rgba(58, 34, 103, 0.92), rgba(34, 23, 63, 0.94));
+  text-align: center;
+}
+
+.subscription-modal__finish-mark {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 50%;
+  color: #1b1203;
+  background: linear-gradient(135deg, #ffe48b, #ffbd35);
+  font-size: 1.4rem;
+  font-weight: 950;
+}
+
+.subscription-modal__finish strong {
+  color: #ffffff;
+  font-size: 1.35rem;
+}
+
+.subscription-modal__finish p {
+  margin: 0;
+  color: rgba(236, 226, 255, 0.76);
+  line-height: 1.5;
+}
+
+.subscription-modal__loading {
+  width: max-content;
+  max-width: calc(100vw - 40px);
+  margin: 18px auto 0;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: rgba(255, 232, 166, 0.82);
+  background: rgba(255, 210, 104, 0.08);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.subscription-modal__auth-card {
+  padding: 20px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(58, 34, 103, 0.9), rgba(34, 23, 63, 0.92));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.subscription-modal__free-copy {
+  display: grid;
+  gap: 6px;
+  text-align: center;
+}
+
+.subscription-modal__free-copy strong {
+  color: #fff6ea;
+  font-size: 1rem;
+}
+
+.subscription-modal__auth-form {
+  margin-top: 20px;
+}
+
+.subscription-modal__auth-form .auth-form {
+  max-width: 100%;
+  text-align: left;
+}
+
+.subscription-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.subscription-modal__dismiss {
+  border: 0;
+  background: transparent;
+  color: rgba(236, 226, 255, 0.66);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.subscription-modal__dismiss:hover {
+  color: #fff8ff;
+}
+
+.auth-page__support {
+  position: absolute;
+  left: 24px;
+  bottom: 22px;
+  z-index: 1;
+}
+
+.auth-page__powered {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(233, 235, 243, 0.54);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.16s ease;
+}
+
+.auth-page__powered:hover,
+.auth-page__powered:focus-visible {
+  color: rgba(255, 248, 255, 0.84);
+}
+
+.auth-page__powered-logo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.golf-auth-modal .auth-form {
+  width: 100%;
+  text-align: left;
+}
+
+.golf-auth-modal .auth-form__alert {
+  position: static;
+  margin: 0 0 16px;
+}
+
+.golf-auth-modal .auth-field {
+  position: relative;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.golf-auth-modal .auth-field span {
+  position: absolute;
+  top: -7px;
+  left: 13px;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  padding: 0 6px;
+  overflow: visible;
+  clip: auto;
+  color: rgba(233, 235, 243, 0.72);
+  background: linear-gradient(180deg, rgba(58, 34, 103, 0.96), rgba(49, 29, 87, 0.96));
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.golf-auth-modal .auth-field small {
+  display: block;
+  margin: 5px 2px 0;
+  color: rgba(233, 235, 243, 0.62);
+  font-size: 0.73rem;
+}
+
+.golf-auth-modal .auth-field input {
+  min-height: 54px;
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.golf-auth-modal .auth-field input:hover {
+  border-color: rgba(255, 214, 118, 0.5);
+}
+
+.golf-auth-modal .auth-field input:focus {
+  border-color: rgba(255, 214, 118, 0.8);
+  box-shadow: 0 0 0 3px rgba(255, 204, 90, 0.12);
+}
+
+.golf-auth-modal .auth-form__submit {
+  width: 100%;
+  min-height: 54px;
+  margin-top: 2px;
+  color: #1a1204;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.38), transparent 34%),
+    linear-gradient(135deg, #ffd268, #ffbc35);
+  box-shadow:
+    0 18px 34px rgba(255, 188, 37, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36);
+}
+
+.golf-auth-modal .auth-form__link {
+  color: #ffe28c;
+}
+
+.golf-auth-modal .auth-password-rules.is-compact {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 12px;
+  padding: 8px 0;
+  margin-bottom: 14px;
+  border: 0;
+  background: transparent;
+}
+
+.golf-auth-modal .auth-password-rules.is-compact span {
+  line-height: 1.25;
+}
+
+.golf-auth-modal .auth-password-rules .is-valid {
+  color: #b7d548;
+}
+
+.golf-auth-modal .auth-password-rules .is-invalid {
+  color: #ff806b;
+}
+
+@media (max-width: 680px) {
+  .subscription-modal__panel {
+    padding: 72px 14px 42px;
+  }
+
+  .subscription-modal__corner {
+    top: 14px;
+    right: 16px;
+    gap: 12px;
+  }
+
+  .subscription-modal__auth-link {
+    font-size: 0.8rem;
+  }
+
+  .subscription-modal__header h2 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .subscription-modal__lane-tiers,
+  .subscription-modal__auth {
+    grid-template-columns: 1fr;
+  }
+
+  .subscription-modal__tier {
+    min-height: auto;
+  }
+
+  .subscription-modal__tier p,
+  .subscription-modal__tier ul {
+    min-height: 0;
+  }
+
+  .subscription-modal__auth {
+    gap: 16px;
+  }
+
+  .checkout-modal {
+    padding: 12px;
+  }
+
+  .checkout-modal__panel {
+    max-height: calc(100vh - 24px);
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .auth-page__support {
+    left: 16px;
+    bottom: 16px;
+  }
+
+  .golf-auth-modal .auth-password-rules.is-compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Studios membership modal parity ---------- */
+
+
+.golf-auth-modal.subscription-modal {
+  background: #2c1554;
+}
+
+.golf-auth-modal .subscription-modal__panel {
+  min-height: 100%;
+  padding: clamp(64px, 7.5vh, 72px) clamp(18px, 4vw, 40px) 72px;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(119, 82, 203, 0.25), transparent 34%),
+    radial-gradient(circle at 100% 100%, rgba(214, 138, 179, 0.16), transparent 38%),
+    linear-gradient(160deg, rgba(73, 35, 126, 0.99), rgba(25, 16, 52, 0.99));
+}
+
+.golf-auth-modal .subscription-modal__content {
+  width: min(1120px, 100%);
+}
+
+.golf-auth-modal .subscription-modal__corner {
+  top: 18px;
+  right: 22px;
+}
+
+.golf-auth-modal .subscription-modal__close {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff8ff;
+  background: rgba(34, 23, 63, 0.8);
+  font: inherit;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.golf-auth-modal .subscription-modal__header {
+  max-width: 760px;
+  margin-bottom: 22px;
+}
+
+.golf-auth-modal .subscription-modal__eyebrow,
+.golf-auth-modal .subscription-modal__plan-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.golf-auth-modal .subscription-modal__header h2 {
+  font-size: clamp(2.15rem, 3.7vw, 2.9rem);
+}
+
+.golf-auth-modal .subscription-modal__steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.golf-auth-modal .subscription-modal__step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(229, 219, 255, 0.5);
+}
+
+.golf-auth-modal .subscription-modal__step + .subscription-modal__step::before {
+  content: "";
+  width: 32px;
+  height: 1px;
+  margin-right: 10px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.golf-auth-modal .subscription-modal__step span {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.golf-auth-modal .subscription-modal__step small {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.golf-auth-modal .subscription-modal__step.is-active,
+.golf-auth-modal .subscription-modal__step.is-complete {
+  color: #fff8ff;
+}
+
+.golf-auth-modal .subscription-modal__step.is-complete span,
+.golf-auth-modal .subscription-modal__step.is-active span {
+  border-color: rgba(255, 224, 132, 0.42);
+  color: #ffe8aa;
+  background: rgba(255, 213, 107, 0.12);
+}
+
+.golf-auth-modal .subscription-modal__body {
+  display: grid;
+  width: 100%;
+  gap: 18px;
+  justify-items: center;
+  margin: 0 auto;
+}
+
+.golf-auth-modal .subscription-modal__lane-switch {
+  display: inline-flex;
+  width: max-content;
+  justify-self: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid rgba(150, 96, 255, 0.28);
+  background: rgba(10, 8, 24, 0.72);
+}
+
+.golf-auth-modal .subscription-modal__lane-switch-option {
+  display: inline-flex;
+  min-width: 112px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(239, 228, 255, 0.66);
+  background: transparent;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.golf-auth-modal .subscription-modal__lane-switch-option:hover {
+  color: #f7f0ff;
+}
+
+.golf-auth-modal .subscription-modal__lane-switch-option.is-active {
+  color: #1a1030;
+  background: linear-gradient(120deg, #ffe270, #ffb347);
+  box-shadow: 0 8px 24px rgba(255, 190, 42, 0.28);
+}
+
+.golf-auth-modal .subscription-modal__free {
+  display: grid;
+  width: min(460px, 100%);
+  gap: 14px;
+  justify-self: center;
+}
+
+.golf-auth-modal .subscription-modal__auth-summary,
+.golf-auth-modal .subscription-modal__auth-card,
+.golf-auth-modal .subscription-modal__finish {
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(58, 34, 103, 0.9), rgba(34, 23, 63, 0.92));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.golf-auth-modal .subscription-modal__auth-card {
+  width: 100%;
+  padding: 20px;
+}
+
+.golf-auth-modal .subscription-modal__free-copy {
+  display: grid;
+  gap: 6px;
+  text-align: center;
+}
+
+.golf-auth-modal .subscription-modal__free-copy strong {
+  color: #fff6ea;
+  font-size: 1rem;
+}
+
+.golf-auth-modal .subscription-modal__auth-form {
+  margin-top: 20px;
+}
+
+.golf-auth-modal .auth-form--stage {
+  display: flex;
+  flex-direction: column;
+}
+
+.golf-auth-modal .auth-field {
+  position: relative;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.golf-auth-modal .auth-field span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.golf-auth-modal .auth-field input {
+  min-height: 55px;
+  width: 100%;
+  padding: 0 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(191, 150, 255, 0.32);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.055);
+  font: inherit;
+  outline: none;
+}
+
+.golf-auth-modal .auth-field input::placeholder {
+  color: rgba(229, 219, 255, 0.58);
+}
+
+.golf-auth-modal .auth-field small {
+  display: block;
+  margin: 6px 0 0;
+  color: rgba(233, 235, 243, 0.62);
+  font-size: 0.73rem;
+  font-weight: 700;
+}
+
+.golf-auth-modal .auth-password-rules.is-compact {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 34px;
+  margin: 4px 0 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.golf-auth-modal .auth-password-rules.is-compact span {
+  font-size: 0.72rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.golf-auth-modal .auth-password-rules .is-invalid {
+  color: #ff806b;
+}
+
+.golf-auth-modal .auth-password-rules .is-valid {
+  color: #b7d548;
+}
+
+.golf-auth-modal .auth-form__submit {
+  min-height: 54px;
+  border-radius: 16px;
+}
+
+.golf-auth-modal .subscription-modal__paid-header {
+  display: grid;
+  width: 100%;
+  gap: 8px;
+}
+
+.golf-auth-modal .subscription-modal__paid-prompt {
+  display: block;
+  color: #fff6ea;
+  font-size: 1rem;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.golf-auth-modal .subscription-modal__lane-tiers {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.golf-auth-modal .subscription-modal__tier {
+  display: grid;
+  min-height: 220px;
+  align-content: start;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: none;
+  transform: none;
+}
+
+.golf-auth-modal .subscription-modal__tier:hover,
+.golf-auth-modal .subscription-modal__tier.is-selected {
+  border-color: rgba(255, 213, 107, 0.5);
+  box-shadow: 0 0 26px rgba(255, 190, 42, 0.12);
+  transform: none;
+}
+
+.golf-auth-modal .subscription-modal__tier-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.golf-auth-modal .subscription-modal__plan-badge {
+  min-height: auto;
+  padding: 0;
+  border-radius: 0;
+  color: rgba(231, 217, 255, 0.64);
+  background: transparent;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+}
+
+.golf-auth-modal .subscription-modal__tier h4 {
+  margin: 6px 0 0;
+  color: #fff6ea;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.golf-auth-modal .subscription-modal__tier-price {
+  display: flex;
+  align-items: baseline;
+  justify-items: initial;
+  gap: 8px;
+}
+
+.golf-auth-modal .subscription-modal__tier-price strong {
+  color: #ffffff;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.golf-auth-modal .subscription-modal__tier-price span {
+  color: rgba(239, 228, 255, 0.62);
+  font-size: 0.92rem;
+  font-weight: 800;
+  text-transform: none;
+}
+
+.golf-auth-modal .subscription-modal__tier p {
+  min-height: 0;
+  margin: 0;
+  color: rgba(239, 228, 255, 0.72);
+  line-height: 1.6;
+}
+
+.golf-auth-modal .subscription-modal__tier ul {
+  display: grid;
+  min-height: 0;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.golf-auth-modal .subscription-modal__tier li,
+.golf-auth-modal .subscription-modal__auth-summary-perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: rgba(246, 238, 255, 0.88);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.golf-auth-modal .subscription-modal__perk-mark {
+  display: inline;
+  width: auto;
+  height: auto;
+  margin-top: 1px;
+  border-radius: 0;
+  color: #ffd56b;
+  background: transparent;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.golf-auth-modal .subscription-modal__cta {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+  padding: 0 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f7f0ff;
+  background: rgba(14, 15, 32, 0.72);
+  font-size: 0.92rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.golf-auth-modal .subscription-modal__cta:hover {
+  border-color: rgba(205, 169, 255, 0.7);
+  background: rgba(14, 15, 32, 0.82);
+  transform: translateY(-1px);
+}
+
+.golf-auth-modal .subscription-modal__cta.is-featured {
+  border-color: rgba(255, 224, 132, 0.86);
+  color: #140b04;
+  background: linear-gradient(180deg, #ffe270 0%, #ffc123 100%);
+  box-shadow: 0 0 24px rgba(255, 190, 42, 0.24);
+}
+
+.golf-auth-modal .subscription-modal__auth {
+  display: grid;
+  width: min(780px, 100%);
+  grid-template-columns: minmax(260px, 300px) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  margin: 0 auto;
+}
+
+.golf-auth-modal .subscription-modal__footer {
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.golf-auth-modal .subscription-modal__dismiss {
+  color: rgba(239, 228, 255, 0.62);
+  font-weight: 800;
+}
+
+.golf-auth-modal .subscription-modal__compare {
+  color: #f2c6dc;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.golf-auth-modal .subscription-modal__compare:hover {
+  color: #fff3bf;
+}
+
+.golf-auth-modal .auth-page__support {
+  position: absolute;
+  left: 24px;
+  bottom: 22px;
+}
+
+@media (max-width: 980px) {
+  .golf-auth-modal .subscription-modal__auth,
+  .golf-auth-modal .subscription-modal__lane-tiers {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .golf-auth-modal .subscription-modal__panel {
+    padding: 72px 16px 64px;
+  }
+
+  .golf-auth-modal .subscription-modal__corner {
+    top: 12px;
+    right: 12px;
+    gap: 10px;
+  }
+
+  .golf-auth-modal .subscription-modal__step small {
+    display: none;
+  }
+
+  .golf-auth-modal .subscription-modal__step.is-active small {
+    display: inline;
+  }
+
+  .golf-auth-modal .subscription-modal__lane-switch {
+    width: 100%;
+  }
+
+  .golf-auth-modal .subscription-modal__lane-switch-option {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+  }
+
+  .golf-auth-modal .subscription-modal__footer {
+    flex-direction: column;
+  }
+
+  .golf-auth-modal .subscription-modal__footer > * {
+    width: 100%;
+    text-align: center;
+  }
+
+  .golf-auth-modal .subscription-modal__cta {
+    width: 100%;
+  }
+}
+
+/* ---------- Monster Mayhem sunrise palette ---------- */
+
+.golf-auth-modal.subscription-modal {
+  --mayhem-violet: #6840b0;
+  --mayhem-lavender: #9965b4;
+  --mayhem-rose: #d69ab6;
+  --mayhem-peach: #efc28f;
+  --mayhem-sun: #ffe7a3;
+  --mayhem-lime: #cfe06d;
+  --mayhem-card: rgba(70, 39, 116, 0.82);
+  --mayhem-card-deep: rgba(42, 25, 76, 0.9);
+  background: var(--mayhem-violet);
+}
+
+.golf-auth-modal .subscription-modal__panel {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 82% 31%, rgba(255, 240, 180, 0.96), rgba(255, 240, 180, 0) 23%),
+    linear-gradient(180deg, var(--mayhem-violet) 0%, var(--mayhem-lavender) 34%, var(--mayhem-peach) 72%, var(--mayhem-lime) 100%);
+  background-attachment: fixed;
+}
+
+.golf-auth-modal .subscription-modal__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.14;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.38) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, black, black 68%, transparent 96%);
+}
+
+.golf-auth-modal .subscription-modal__content {
+  position: relative;
+  z-index: 1;
+}
+
+.golf-auth-modal .auth-page__support {
+  position: absolute;
+  z-index: 1;
+}
+
+.golf-auth-modal .subscription-modal__eyebrow,
+.golf-auth-modal .subscription-modal__header h2,
+.golf-auth-modal .subscription-modal__free-copy strong,
+.golf-auth-modal .subscription-modal__paid-prompt,
+.golf-auth-modal .subscription-modal__tier h4,
+.golf-auth-modal .subscription-modal__tier-price strong,
+.golf-auth-modal .subscription-modal__auth-summary-copy strong,
+.golf-auth-modal .subscription-modal__finish strong {
+  color: #fff2aa;
+  text-shadow: 0 3px 0 rgba(112, 65, 8, 0.34), 0 10px 24px rgba(68, 33, 13, 0.18);
+}
+
+.golf-auth-modal .subscription-modal__eyebrow {
+  color: #fff3bf;
+}
+
+.golf-auth-modal .subscription-modal__header p,
+.golf-auth-modal .subscription-modal__tier p,
+.golf-auth-modal .subscription-modal__tier li,
+.golf-auth-modal .subscription-modal__auth-summary-copy p,
+.golf-auth-modal .subscription-modal__auth-summary-perk,
+.golf-auth-modal .subscription-modal__finish p {
+  color: #fff8df;
+  text-shadow: 0 2px 10px rgba(67, 34, 14, 0.2);
+}
+
+.golf-auth-modal .subscription-modal__auth-link {
+  color: rgba(255, 248, 223, 0.72);
+}
+
+.golf-auth-modal .subscription-modal__auth-link:hover,
+.golf-auth-modal .subscription-modal__auth-link.is-active {
+  color: #fff2aa;
+}
+
+.golf-auth-modal .subscription-modal__step {
+  color: rgba(255, 248, 223, 0.62);
+}
+
+.golf-auth-modal .subscription-modal__step.is-active,
+.golf-auth-modal .subscription-modal__step.is-complete {
+  color: #fff8df;
+}
+
+.golf-auth-modal .subscription-modal__step.is-complete span,
+.golf-auth-modal .subscription-modal__step.is-active span {
+  border-color: rgba(255, 242, 170, 0.7);
+  color: #4b2b15;
+  background: #ffe28c;
+}
+
+.golf-auth-modal .subscription-modal__lane-switch {
+  border-color: rgba(255, 242, 170, 0.46);
+  background: rgba(52, 29, 91, 0.86);
+  box-shadow: 0 12px 32px rgba(72, 39, 25, 0.2);
+}
+
+.golf-auth-modal .subscription-modal__lane-switch-option {
+  color: rgba(255, 248, 223, 0.7);
+}
+
+.golf-auth-modal .subscription-modal__lane-switch-option:hover {
+  color: #fff8df;
+}
+
+.golf-auth-modal .subscription-modal__lane-switch-option.is-active,
+.golf-auth-modal .subscription-modal__plan-badge,
+.golf-auth-modal .subscription-modal__perk-mark,
+.golf-auth-modal .subscription-modal__finish-mark {
+  color: #3f2813;
+  background: linear-gradient(180deg, #ffe28c 0%, #ffb32b 100%);
+}
+
+.golf-auth-modal .subscription-modal__auth-card,
+.golf-auth-modal .subscription-modal__auth-summary,
+.golf-auth-modal .subscription-modal__finish,
+.golf-auth-modal .subscription-modal__tier {
+  border-color: rgba(255, 242, 170, 0.32);
+  background:
+    radial-gradient(circle at 86% 4%, rgba(255, 226, 140, 0.16), transparent 34%),
+    linear-gradient(180deg, var(--mayhem-card), var(--mayhem-card-deep));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 24px 64px rgba(70, 35, 18, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.golf-auth-modal .subscription-modal__tier:hover,
+.golf-auth-modal .subscription-modal__tier.is-selected {
+  border-color: rgba(255, 231, 154, 0.82);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 26px 68px rgba(70, 35, 18, 0.24),
+    0 0 42px rgba(255, 226, 140, 0.2);
+}
+
+.golf-auth-modal .auth-field input {
+  color: #fffdf2;
+  border-color: rgba(255, 242, 190, 0.34);
+  background: rgba(255, 248, 228, 0.12);
+}
+
+.golf-auth-modal .auth-field input::placeholder {
+  color: rgba(255, 248, 228, 0.58);
+}
+
+.golf-auth-modal .auth-field input:hover,
+.golf-auth-modal .auth-field input:focus {
+  border-color: rgba(255, 231, 154, 0.88);
+}
+
+.golf-auth-modal .auth-field input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 226, 140, 0.2);
+}
+
+.golf-auth-modal .auth-field small,
+.golf-auth-modal .auth-form__switch,
+.golf-auth-modal .subscription-modal__dismiss {
+  color: rgba(255, 248, 223, 0.76);
+}
+
+.golf-auth-modal .auth-form__link,
+.golf-auth-modal .subscription-modal__compare {
+  color: #fff2aa;
+}
+
+.golf-auth-modal .auth-form__submit,
+.golf-auth-modal .subscription-modal__cta.is-featured {
+  color: #3d2814;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.4), transparent 34%),
+    linear-gradient(180deg, #ffe28c 0%, #ffb32b 100%);
+  box-shadow: 0 16px 34px rgba(133, 77, 0, 0.25);
+}
+
+.golf-auth-modal .subscription-modal__cta:not(.is-featured) {
+  color: #fff2aa;
+  border-color: rgba(255, 226, 140, 0.58);
+  background: rgba(88, 52, 144, 0.54);
+}
+
+.golf-auth-modal .subscription-modal__loading {
+  color: #fff2aa;
+  background: rgba(70, 39, 116, 0.66);
+}
+
+.golf-auth-modal .auth-page__powered {
+  color: rgba(74, 44, 31, 0.68);
+  text-shadow: 0 1px 5px rgba(255, 248, 223, 0.45);
+}
+
+.golf-auth-modal .auth-page__powered:hover,
+.golf-auth-modal .auth-page__powered:focus-visible {
+  color: #3f2813;
+}
+
+.golf-auth-modal .auth-reset-modal {
+  background: rgba(62, 34, 100, 0.52);
+}
+
+.golf-auth-modal .auth-reset-modal__card {
+  border-color: rgba(255, 242, 170, 0.58);
+  background:
+    radial-gradient(circle at 86% 8%, rgba(255, 226, 140, 0.2), transparent 34%),
+    linear-gradient(180deg, var(--mayhem-card), var(--mayhem-card-deep));
+}
+
+.golf-auth-modal .auth-reset-modal__title,
+.golf-auth-modal .auth-card__badge {
+  color: #fff2aa;
+}
+
+.golf-auth-modal .auth-reset-modal__copy {
+  color: #fff8df;
+}
