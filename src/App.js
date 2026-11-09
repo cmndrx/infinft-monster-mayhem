@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useMemo, useState } from "react";
 import firebase, { auth, db, firebaseConfig } from "./config/firbaseConfig";
 import AuthFlow from "./components/AuthFlow";
+import { setAnalyticsUser } from "./lib/platformAnalytics";
 import {
   getLeaderboardRecoveryPatch,
   hasRecoveryValues,
@@ -185,6 +186,7 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      setAnalyticsUser(user);
       setCurrentUser(user || null);
       setError("");
 

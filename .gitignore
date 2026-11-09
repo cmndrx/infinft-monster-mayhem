@@ -15,3 +15,8 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+
+# Tracking release artifacts and shared local dependencies
+/node_modules
+/.tracking-build/
+/public/infinft-platform-analytics.js

@@ -1,6 +1,6 @@
 {
   "name": "infinft-basher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@stripe/react-stripe-js": "^6.7.0",
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && node scripts/validate-static-assets.js public build",
+    "build": "node scripts/prepare-platform-analytics.js && react-scripts build && node scripts/validate-static-assets.js public build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy:dev": "npm run build && firebase deploy --only hosting:dev",
